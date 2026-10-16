@@ -5,7 +5,8 @@ const assert = require("node:assert/strict");
 for (const m of ["task", "turn", "trace", "guard", "constitution", "sbl-knowledge", "screens"]) require(`../core/${m}.js`);
 const stored = new Map(); // what the background worker holds, per (this one) tab
 let puts = 0;
-globalThis.chrome = { runtime: { sendMessage: async (m) => {
+// id: this stub IS the extension context (bg() keys on runtime.id, not on sendMessage, which a plain page also exposes).
+globalThis.chrome = { runtime: { id: "fake-extension", sendMessage: async (m) => {
   if (m.op === "put") { puts++; stored.set("t", JSON.parse(JSON.stringify(m.task))); return { ok: true }; }
   if (m.op === "clear") { stored.delete("t"); return { ok: true }; }
   return { ok: true, task: stored.get("t") ? JSON.parse(JSON.stringify(stored.get("t"))) : null };

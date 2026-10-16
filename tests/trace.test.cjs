@@ -8,7 +8,8 @@ const path = require("node:path");
 for (const m of ["task", "turn", "trace", "guard", "constitution", "sbl-knowledge", "screens"]) require(`../core/${m}.js`);
 const Trace = require("../core/trace.js");
 const stored = new Map();
-globalThis.chrome = { runtime: { sendMessage: async (m) => (m.op === "put" ? (stored.set("t", JSON.parse(JSON.stringify(m.task))), { ok: true }) : m.op === "clear" ? (stored.delete("t"), { ok: true }) : { ok: true, task: stored.get("t") || null }) } };
+// id: this stub IS the extension context (bg() keys on runtime.id, not on sendMessage, which a plain page also exposes).
+globalThis.chrome = { runtime: { id: "fake-extension", sendMessage: async (m) => (m.op === "put" ? (stored.set("t", JSON.parse(JSON.stringify(m.task))), { ok: true }) : m.op === "clear" ? (stored.delete("t"), { ok: true }) : { ok: true, task: stored.get("t") || null }) } };
 Object.assign(globalThis, { document: Object.assign(new EventTarget(), { readyState: "complete", body: { innerText: "" }, getElementsByTagName: () => [], querySelectorAll: () => [] }),
   location: { href: "https://sbl.so/pricing/", pathname: "/pricing/" }, addEventListener() {}, MutationObserver: class { observe() {} disconnect() {} } });
 const agents = [];

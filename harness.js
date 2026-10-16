@@ -16,7 +16,15 @@
     // is only a fallback; the hydrated store knows when the other origin has finished.
     const bg = (msg) => {
       if (gone && msg.op !== "get") return Promise.resolve(null);
-      if (globalThis.chrome?.runtime?.sendMessage) return chrome.runtime.sendMessage({ type: "task", ...msg }).catch(() => null);
+      // `.id`, never `.sendMessage`: Chrome exposes chrome.runtime.sendMessage to an ORDINARY PAGE whenever any installed
+      // extension declares externally_connectable for that origin, while leaving runtime.id undefined. The script-tag build
+      // then took the extension path, and sendMessage threw "must specify an Extension ID" — synchronously, so the .catch()
+      // below could not absorb it. That throw escaped save(), and navigate() never reached its location.assign(): the agent
+      // said it was moving the page and never did. Every other guard in the bundle (content.js, core/trace.js) tests .id.
+      if (globalThis.chrome?.runtime?.id) {
+        try { return chrome.runtime.sendMessage({ type: "task", ...msg }).catch(() => null); }
+        catch { /* "Extension context invalidated" after a reload throws here too: fall through to the local store */ }
+      }
       const store = globalThis.SBLStore?.local;
       try {
         if (msg.op === "put") {

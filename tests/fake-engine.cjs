@@ -3,7 +3,8 @@
 // the abort signal is checked before a tool starts and after it returns, but a running tool is not interrupted; a tool that is not on offer
 // cannot be called; maxSteps allows maxSteps+1 iterations. The "model" is a script: a list of { name, args } actions (or hang / fail / crash).
 const stored = new Map(), built = [];
-globalThis.chrome = { runtime: { sendMessage: async (m) => {
+// id: this stub IS the extension context (bg() keys on runtime.id, not on sendMessage, which a plain page also exposes).
+globalThis.chrome = { runtime: { id: "fake-extension", sendMessage: async (m) => {
   if (m.op === "put") { stored.set("t", JSON.parse(JSON.stringify(m.task))); return { ok: true }; }
   if (m.op === "clear") { stored.delete("t"); return { ok: true }; }
   return { ok: true, task: stored.get("t") ? JSON.parse(JSON.stringify(stored.get("t"))) : null };
