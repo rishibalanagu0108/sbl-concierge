@@ -39,7 +39,10 @@
       const title = clip(pg.title, TITLE_CLIP), words = clip(pg.description, 200).split(" ").slice(0, 8).join(" ");
       pages.set(path, { path, title, type: pg.type || "", sections });
       const shown = [...new Set(sections.filter((s) => s.level <= HEAD_LEVEL).map((s) => s.heading.slice(0, HEAD_CLIP)))].slice(0, HEAD_SHOWN);
-      lines.push(`${path} — ${title}${words && !norm(title).startsWith(norm(words)) ? ` — ${words}` : ""}${shown.map((h) => `\n  # ${h}`).join("")}`);
+      // The kind is shown, not just stored: without it "a real example from a customer like me" cannot tell a
+      // `customer story` from `/agency/`, a `use case` page whose headings also promise results. ~300 tokens on a cached prefix.
+      const kind = clip(pg.type, 40);
+      lines.push(`${path}${kind ? ` — ${kind}` : ""} — ${title}${words && !norm(title).startsWith(norm(words)) ? ` — ${words}` : ""}${shown.map((h) => `\n  # ${h}`).join("")}`);
     }
     const out = { pages, text: lines.join("\n") };
     cache.set(siteMap, out);
@@ -96,7 +99,7 @@ Rules:
   };
 
   // Stable across calls (cached by the provider): rules, knowledge, the page index.
-  const prefix = (knowledge, siteMap) => `${RULES}\n\n# SBL KNOWLEDGE\n${knowledge}\n\n# PAGE INDEX (path — title — description, then section headings)\n${indexOf(siteMap).text}`;
+  const prefix = (knowledge, siteMap) => `${RULES}\n\n# SBL KNOWLEDGE\n${knowledge}\n\n# PAGE INDEX (path — kind — title — description, then section headings)\n${indexOf(siteMap).text}`;
 
   // Changes per call: the page they are on (with its section text), the conversation, the customer file, the message.
   function tail(req, siteMap) {
