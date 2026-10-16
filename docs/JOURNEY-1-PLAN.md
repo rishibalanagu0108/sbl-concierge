@@ -21,7 +21,9 @@ It counts as complete only when all of these hold:
    the highlight on the thing the line is about, the dock not covering it.
 5. Captured with **Antigravity enabled** (the extension that supplies the navigation trigger), with
    browser version and load method recorded.
-6. A full suite against `base0` with **no row worse beyond the noise floor**.
+6. Each retained candidate evidenced separately: holdout x3 plus dev, replay and faults, compared
+   against `base0` **and** the previous candidate, with gates, provisional judging, real-browser
+   proof, and per-set token totals. No row worse beyond the noise floor.
 
 Partial completion is reportable. Staged completion is not.
 
@@ -115,20 +117,55 @@ Steps 1-2 are useful without a key. Steps 3-5 are not startable without one.
 
 ## Measurement
 
+Two behaviour-changing commits are retained on this branch, so they are **two candidates, evidenced
+separately** — not one combined run. Maintainer instruction: where a task requires changes to be
+tested separately, preserve that separation, and cost control must not remove checks or let the old
+baseline stand in as post-fix evidence.
+
+| Candidate | Contains | Compare against |
+|---|---|---|
+| `j1a` | `267f53d` guard fix only | `base0` |
+| `j1b` | `267f53d` + `52ea3ef` index kind | `base0` **and** `j1a` |
+
+Each candidate needs the full set, not just holdout:
+
 ```bash
-node tools/experience/run.mjs --set holdout --runs 3 --concurrency 2 --out var/experience/j1
-node tools/experience/run.mjs --set dev     --runs 1 --out var/experience/j1
-node tools/experience/run.mjs --set replay  --runs 1 --out var/experience/j1
-node tools/experience/run.mjs --set faults  --runs 1 --out var/experience/j1
-node tools/experience/score.mjs var/experience/j1/holdout --compare var/experience/base0/holdout
+C=j1a   # then repeat for j1b
+node tools/experience/run.mjs --set holdout --runs 3 --concurrency 2 --out var/experience/$C
+cp var/experience/$C/summary.json var/experience/$C/summary-holdout.json
+node tools/experience/run.mjs --set dev    --runs 1 --out var/experience/$C
+cp var/experience/$C/summary.json var/experience/$C/summary-dev.json
+node tools/experience/run.mjs --set replay --runs 1 --out var/experience/$C
+cp var/experience/$C/summary.json var/experience/$C/summary-replay.json
+node tools/experience/run.mjs --set faults --runs 1 --out var/experience/$C
+cp var/experience/$C/summary.json var/experience/$C/summary-faults.json
+
+node tools/experience/score.mjs var/experience/$C/holdout --compare var/experience/base0/holdout
+# j1b additionally:
+node tools/experience/score.mjs var/experience/j1b/holdout --compare var/experience/j1a/holdout
+
+ln -sfn $PWD/var/experience/$C var/experience/latest
+node tools/experience/gate.mjs <name>          # inspect gate.mjs for supported names
+node tools/experience/judge.mjs var/experience/$C --set holdout
 ```
 
-Copy `summary.json` to `summary-<set>.json` after each set; the next set overwrites it. One full pass
-is about 2.1M prompt tokens and 22 minutes — run it at this candidate boundary, not per change, and
-flag anything larger in advance.
+Report for each candidate: every scorecard row (not only the failing ones), the gate output, the
+provisional judge rows, and the per-set **prompt / cached / completion** totals read from each
+`summary-<set>.json`. Zero failed jobs is not a pass. Provisional judge labels are not a gate.
+
+`base0` is the unchanged-checkout reference and stays filed separately from anything post-fix. Raw
+tc9/tc24 inputs are not in the snapshot, so no tc9 comparison may be claimed.
+
+**Cost, to flag before running.** One full set pass measured 2,119,471 prompt tokens (1,835,600
+cached) and 15,786 completion, taking 22 minutes. Two candidates is roughly **4.2M prompt tokens and
+~45 minutes**, plus judge calls on top (`base0` judging was not run). The maintainer asked for
+unusually costly work to be flagged in advance — send that number before starting, not after.
+
+Targeted local runs (a single persona, `--set dev --persona <id>`) are fine while developing and do
+not substitute for the evidence above on a retained candidate.
 
 `E1.p50` will miss its 1500 ms target on this hardware (`base0` measured 1820 across all four sets).
-That is pre-existing and not journey 1's to fix; report it, do not chase it.
+Pre-existing, not journey 1's to fix; report it, do not chase it.
 
 ## Loom outline
 
