@@ -632,6 +632,7 @@ test("the rules require proof to be named, not implied", () => {
   assert.match(Router.RULES, /Proof is named, not implied/);
   assert.match(Router.RULES, /MUST name that story's own client or industry/);
   assert.match(Router.RULES, /never a bare "a real example"/);
+  assert.match(Router.RULES, /never the two blended into one phrase/);
 });
 
 test("the index shows each page's kind, so proof requests can tell a customer story from a use-case page", () => {
