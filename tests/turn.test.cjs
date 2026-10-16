@@ -327,6 +327,37 @@ test("running is never stale: a run that fails to start, a run winding down, and
   assert.equal(b.h.isRunning(), false);
 });
 
+test("the page load is not the turn's time: a slow load does not spend the show budget and strand the visitor", async () => {
+  // Live on sbl.so: "Show me the features" said its line, navigated to /linkedin/, and the visitor was met on
+  // arrival with "Sorry, I got stuck partway through that." A show turn has 20 s; Turn.revive keeps startedAt,
+  // so unloading, fetching, parsing and booting the next page were all charged to the turn, and the deadline
+  // fired the moment it resumed. The agent cannot act during a page load, so that time is not its own.
+  const a = build();
+  scripts.push([say("Taking you there.", "show"), scr(1), { hang: true }]);
+  a.h.hear("show me the features");
+  await tick(60);
+  const saved = JSON.parse(JSON.stringify(stored.get("t")));
+  assert.equal(saved.turn.then, "show");
+
+  // The turn opened 18 s ago and the navigate was written 14 s ago: a 14 s page load of a 20 s budget.
+  const now = Date.now();
+  saved.turn.startedAt = now - 18_000;
+  saved.updatedAt = now - 14_000;
+  saved.visitorAt = now - 18_000; // still inside the task TTL
+
+  const b = build();
+  stored.set("t", saved);
+  scripts.push([say("Here are the features.", "end")]);
+  await b.h.boot();
+  await tick(900);
+
+  const page = agents[0]?.seen?.[0]?.page || "";
+  const secs = Number((page.match(/(\d+)s\./) || [])[1]);
+  // Without the credit only ~2 s of the 20 s remain and the deadline fires on arrival; with it, ~16 s.
+  assert.ok(secs >= 10, `the resumed turn should keep most of its budget, got ${secs}s from: ${page}`);
+  assert.ok(!b.said.some((l) => /got stuck partway/.test(l)), `stranded the visitor after a slow load: ${JSON.stringify(b.said)}`);
+});
+
 test("a turn that navigates resumes as the SAME turn on the next page, with what is left of its budget", async () => {
   const a = build();
   scripts.push([say("Taking you there.", "show"), scr(1), { hang: true }]);

@@ -1018,12 +1018,18 @@
       trace.seed(task.trace); // same turn id on the resumed page, even across the origin hop
       visit = Turn.mergeVisit(visit, Turn.reviveVisit(task.visit));
       if (!Task.shouldResume(task)) return; // waiting on the visitor, out of steps or resumes: it waits
-      const humanSince = task.status === "waiting_human" ? task.updatedAt : 0; // the page changed because the visitor did their step: that wait was theirs
+      // Neither the page load nor the visitor's own step is the turn's time. Turn.revive keeps startedAt, so
+      // without this a show turn spends its 20 s unloading, fetching, parsing and booting the next page --
+      // none of it work the agent can do -- and the deadline fires on arrival, which the visitor sees as
+      // "Sorry, I got stuck partway through that." right after the page moved. task.updatedAt is the last
+      // write before location.assign, so the gap to now is exactly that dead time. Credited like the
+      // visitor's time already is (waitOn); the waiting_human case is the same expression, so it is covered.
+      const awaySince = Number(task.updatedAt) || 0;
       Task.resumed(task); task.status = "active"; await save(turnRun);
       if (running) return;
       emit("resume", location.pathname);
       const mine = turn = Turn.revive(task.turn) || Turn.create(++gen, Date.now()); // the SAME turn, with what it has left
-      if (humanSince) mine.waited = (mine.waited || 0) + Math.max(0, Date.now() - humanSince);
+      if (awaySince) mine.waited = (mine.waited || 0) + Math.max(0, Date.now() - awaySince);
       gen = Math.max(gen, mine.id);
       if (typeof task.noteHeard === "string" && task.noteHeard) mine.heard = clip(task.noteHeard, 800); // the words and lines of this turn survive the load, so it is noted where it ends
       armTimers(mine, !task.routed);
