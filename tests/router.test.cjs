@@ -630,8 +630,8 @@ test("the rules require proof to be named, not implied", () => {
   // is about recruitment. The existing honest-miss rule only covers "nothing close exists", so a near match was
   // shown and then described as an exact one.
   assert.match(Router.RULES, /Proof is named, not implied/);
-  assert.match(Router.RULES, /Never describe a story as being from the visitor's industry unless its title says so/);
-  assert.match(Router.RULES, /no story for theirs/);
+  assert.match(Router.RULES, /MUST name that story's own client or industry/);
+  assert.match(Router.RULES, /never a bare "a real example"/);
 });
 
 test("the index shows each page's kind, so proof requests can tell a customer story from a use-case page", () => {
