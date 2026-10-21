@@ -161,3 +161,62 @@ E5.overMax remains 1.
 Whether any journey actually passes. Every per-journey expectation is prose and
 `judge.mjs` has not been run. The agent is safe and visible. Whether it is any good is
 not yet measured.
+
+---
+
+# Judged quality (`journey-core-1`, gpt-5.6-luna)
+
+32/32 say steps judged. 32 API calls, 76,665 in / 6,330 out.
+
+| Row | pass | fail | n-a | pass rate |
+|---|---|---|---|---|
+| E3.asked asked_vs_done | 11 | 16 | 5 | 40.7% |
+| E4.match show_match | 3 | 8 | 21 | 27.3% |
+| useful | 19 | 13 | 0 | 59.4% |
+
+**Do not read 40.7% as "the agent is 40% good."** 17 journeys carry at least one judged
+failure, and classifying each by its root cause gives:
+
+| Cause | Journeys | |
+|---|---|---|
+| **Not logged in** | 9 | J-176 J-178 J-184 J-214 J-222 J-228 J-232 J-240 J-249 |
+| **Upstream 504/502** | 7 | J-151 J-153 J-185 J-246 J-251 J-254 J-262 |
+| **Agent behaviour** | 1 | J-011 |
+
+## Cause 1: the dashboard journeys run signed out
+
+Every dashboard journey ends on a login screen. The driver opens a fresh browser context
+with no SBL session, so the agent is asked to create a campaign, delete one, top up
+credits or open a conversation while unauthenticated. It navigates, hits login, and stops.
+
+The judge is right that the task was not done. It is wrong to read that as the agent
+failing: the task was impossible in that browser. Judged verdicts on these nine say
+nothing about agent quality until the runner can sign in.
+
+Fixing it needs an authenticated context for the approved CX-TEST workspace only.
+Workspace 706 access must be verified before any dashboard writes, and 126 stays out of
+scope, so this is a question for the maintainer before it is a task.
+
+## Cause 2: the model gateway returned 504
+
+The run recorded 8x HTTP 504 and 1x 502 against the model endpoint, plus 4 failed calls.
+`harness.js:58` turns a failed call into "My assistant is temporarily unavailable, so I
+cannot do this right now." Seven journeys were judged on that sentence.
+
+That is correct product behaviour under an upstream outage - an honest failure rather
+than an invented answer - and it is the right thing to say. It is simply not a measurement
+of whether the agent can do the task. These need re-running when the provider is healthy.
+
+## Cause 3: one real behaviour failure
+
+**J-011** "asked to be left alone". The agent said it would close the chat and the dock
+stayed open. Said it did something it did not do, which is never-rule 7. Worth confirming
+by hand before fixing: the judge may be reading "close the chat" as a literal dock action
+the product does not implement.
+
+## What this actually tells us
+
+The judged rows are currently a measurement of the test environment. Two fixes - an
+authenticated context and a healthy provider - have to land before any judged number
+describes the agent. Until then the only trustworthy statements are the safety counts,
+which are clean, and one behaviour defect worth a closer look.
