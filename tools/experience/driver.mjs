@@ -44,6 +44,18 @@ export function agentLines(lines, seen = 0) {
   const a = lines.slice(seen).filter((l) => l.who === "agent" && (seen > 0 || !l.restored));
   return { real: a.filter((l) => !l.preview), any: a.length > 0 };
 }
+/** How many lines on screen at a step's start are history, not this step's output.
+ *  fresh (a page load): the transcript is rebuilt, so nothing counts as history.
+ *  the visit's first step: no history exists yet, so only lines the dock marks
+ *    `restored` are history - anything else is something the agent said on its own
+ *    (the first-visit welcome fires on a timer during page load).
+ *  later steps: everything already shown is history. */
+export function historyCount(lines = [], { fresh = false, first = false } = {}) {
+  if (fresh) return 0;
+  if (first) return lines.filter((l) => l.restored).length;
+  return lines.length;
+}
+
 export async function httpStatus(url, timeoutMs = 10_000) {
   if (!url || !/^https?:/.test(url)) return null;
   for (const method of ["HEAD", "GET"]) {
@@ -142,10 +154,7 @@ export class Visitor {
     // during page load). Counting it as history made the agent look silent on every
     // wait-only journey - it greeted, and the harness sliced the greeting away. Only lines
     // the dock marks as restored are real history at that point.
-    const base = before0?.lines || [];
-    const seen = extra.fresh ? 0
-      : this.stepsRun === 0 ? base.filter((l) => l.restored).length
-      : base.length;
+    const seen = historyCount(before0?.lines || [], { fresh: Boolean(extra.fresh), first: this.stepsRun === 0 });
     this.stepsRun++;
     if (extra.before) await extra.before();
     const lines = []; let wordsAt = null, lastLineAt = Date.now(), lastBusyAt = 0, s = null, timedOut = false;

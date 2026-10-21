@@ -105,3 +105,37 @@ test("rect overlap and union geometry", async () => {
   assert.deepStrictEqual(unionRect([r(0, 0, 10, 10), null, r(20, 5, 10, 10)]), r(0, 0, 30, 15));
   assert.strictEqual(unionRect([null]), null);
 });
+
+test("historyCount: the visit's first step has no history but restored lines", async () => {
+  const { historyCount } = await D();
+  const welcome = { who: "agent", text: "Hey, what are you looking to improve?", restored: false };
+  const replayed = { who: "agent", text: "earlier line", restored: true };
+
+  // The bug this encodes: the first-visit welcome fires during page load, so it is already
+  // on screen when the first step takes its baseline. Counting it as history sliced it away
+  // from every step and made the agent look silent on every wait-only journey.
+  assert.strictEqual(historyCount([welcome], { first: true }), 0, "welcome is not history");
+  assert.strictEqual(historyCount([welcome], { first: false }), 1, "later steps: already shown is history");
+
+  // A returning visitor's replayed transcript IS history, even on the first step.
+  assert.strictEqual(historyCount([replayed, welcome], { first: true }), 1);
+
+  // A page load rebuilds the transcript, so nothing counts as history.
+  assert.strictEqual(historyCount([replayed, welcome], { first: true, fresh: true }), 0);
+  assert.strictEqual(historyCount([replayed, welcome], { first: false, fresh: true }), 0);
+
+  assert.strictEqual(historyCount([], { first: true }), 0);
+  assert.strictEqual(historyCount(undefined, { first: true }), 0);
+});
+
+test("agentLines keeps an unrestored line the first step saw, and drops replayed history", async () => {
+  const { agentLines, historyCount } = await D();
+  const lines = [
+    { who: "agent", text: "replayed", restored: true, preview: false },
+    { who: "agent", text: "welcome", restored: false, preview: false },
+  ];
+  const seen = historyCount(lines, { first: true });
+  const { real, any } = agentLines(lines, seen);
+  assert.strictEqual(any, true);
+  assert.deepStrictEqual(real.map((l) => l.text), ["welcome"]);
+});
