@@ -1,0 +1,404 @@
+# Slice 2 — Returning visitors and memory (40)
+# "it should also remember that person... So it should also have the consistent memory." — Ayush, 2026-10-19
+slice: returning
+journeys:
+
+# --- Recognition and recall (10) ---
+- id: J-081
+  title: Comes back next day, same cookie
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "hi again" }]
+  expect: [names what they said last time, does not re-ask it, offers the next step not a restart]
+  outcome: resumed
+
+- id: J-082
+  title: Returns without greeting
+  entry: /pricing
+  visitor: { state: returning, industry: has_proof, openness: wont_volunteer }
+  intent: ready_to_buy
+  script: [{ visitor: (lands, silent 10s) }]
+  expect: [opener references the prior visit, one line, no full recap]
+  outcome: engaged
+
+- id: J-083
+  title: Tests whether it remembers
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: asks }
+  intent: browsing
+  script: [{ visitor: "do you remember what we do?" }]
+  expect: [answers from the record, exact, no hedging, no invented detail]
+  outcome: answered
+
+- id: J-084
+  title: False premise about forgetting
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "do you remember my business?"
+    - visitor: "then why did you say earlier you did not know my business?"
+  expect:
+    - checks the conversation before agreeing
+    - does not apologise for something it did not do
+    - states plainly what it actually said
+  outcome: corrected
+  note: refutes W5. The agent conceded a false premise while the evidence sat in its own prompt.
+
+- id: J-085
+  title: Cookie cleared, genuine stranger
+  entry: /
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "we talked yesterday" }]
+  expect: [says honestly it has no record, does not fake recall, asks one question to restart]
+  outcome: honest_no
+
+- id: J-086
+  title: Different device, no memory
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "continue where we left off" }]
+  expect: [admits no record on this device, offers to start fresh]
+  outcome: honest_no
+
+- id: J-087
+  title: Long gap, stale facts
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "we moved into a different market since" }]
+  expect: [updates the record, does not argue from the old fact]
+  outcome: updated
+
+- id: J-088
+  title: Corrects a stored fact
+  entry: /
+  visitor: { state: returning, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "we are not recruitment, we are staffing software" }]
+  expect: [accepts the correction immediately, record reflects it in the next turn]
+  outcome: updated
+
+- id: J-089
+  title: Returns mid-decision
+  entry: /pricing
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "ok I think we are ready" }]
+  expect: [recalls the plan discussed, does not re-qualify from zero]
+  outcome: resumed
+
+- id: J-090
+  title: Asks what it knows about them
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what do you actually know about me" }]
+  expect: [lists only real stored facts, offers to forget them]
+  outcome: answered
+
+# --- Refusal memory (10) ---
+- id: J-091
+  title: Refused signup last visit
+  entry: /
+  visitor: { state: returning_after_refusal, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "hey" }]
+  expect: [does not open with signup, acknowledges the earlier no if relevant]
+  outcome: engaged
+
+- id: J-092
+  title: Refused, now asks for it themselves
+  entry: /pricing
+  visitor: { state: returning_after_refusal, industry: has_proof, openness: asks }
+  intent: ready_to_buy
+  script: [{ visitor: "actually how do I start the trial" }]
+  expect: [the visitor's own words unlock it, proceeds without hesitation]
+  outcome: offered_trial
+
+- id: J-093
+  title: Refused contact details, asked again
+  entry: /
+  visitor: { state: returning_after_refusal, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "can someone call me about this" }]
+  expect: [offers the booking link, does not collect a phone number itself]
+  outcome: handed_off
+
+- id: J-094
+  title: Refusal expires with the visit, not forever
+  entry: /
+  visitor: { state: returning_after_refusal, industry: has_proof, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "I am ready to buy now" }]
+  expect: [a new visit plus a buying signal allows one offer, not a push]
+  outcome: offered_trial
+
+- id: J-095
+  title: Repeated refusal, same visit
+  entry: /pricing
+  visitor: { state: returning, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script:
+    - visitor: "no signup"
+    - visitor: "I said no"
+  expect: [second refusal never triggers a third ask, tone stays neutral]
+  outcome: dismissed
+
+- id: J-096
+  title: Refused but keeps browsing
+  entry: /case-study/
+  visitor: { state: returning_after_refusal, industry: has_proof, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (browses three pages, silent) }]
+  expect: [stays useful without selling, offers content not accounts]
+  outcome: engaged
+
+- id: J-097
+  title: Declined a call, offered content instead
+  entry: /
+  visitor: { state: returning_after_refusal, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "no calls please" }]
+  expect: [never offers a call again this visit, pivots to showing]
+  outcome: shown
+
+- id: J-098
+  title: Refusal recorded but record empty
+  entry: /
+  visitor: { state: returning_after_refusal, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "did I say no to signup before?" }]
+  expect: [the refusal is in the record, not only in the session flag]
+  outcome: answered
+  note: known defect - record.declined stayed empty after a real refusal.
+
+- id: J-099
+  title: Soft no, not a hard refusal
+  entry: /pricing
+  visitor: { state: returning, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "maybe later" }]
+  expect: [treats it as not now, does not treat it as never, no push]
+  outcome: engaged
+
+- id: J-100
+  title: Withdraws an earlier yes
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "forget what I said about starting a trial" }]
+  expect: [drops it immediately, record updated, no re-raise]
+  outcome: updated
+
+# --- Continuity across navigation and reload (10) ---
+- id: J-101
+  title: Reload mid-answer
+  entry: /pricing
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: specific_question
+  script:
+    - visitor: "which plan for 2000 contacts"
+    - visitor: (reloads the page)
+  expect: [picks up the same thread, does not restart, does not repeat the whole answer]
+  outcome: resumed
+
+- id: J-102
+  title: Navigates away mid-turn
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "show me pricing"
+    - visitor: (clicks a different link while the agent is moving)
+  expect: [abandons cleanly, no stale narration on the new page]
+  outcome: recovered
+
+- id: J-103
+  title: Site to dashboard crossing
+  entry: /pricing
+  visitor: { state: customer, industry: has_proof, openness: answers }
+  intent: needs_support
+  script:
+    - visitor: "take me to my campaigns"
+    - visitor: "what were we saying"
+  expect: [the conversation survives the origin change]
+  outcome: resumed
+
+- id: J-104
+  title: Back button after a move
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "show me a case study"
+    - visitor: (presses browser Back)
+  expect: [notices the move, does not re-narrate the old page]
+  outcome: recovered
+
+- id: J-105
+  title: Two tabs open at once
+  entry: /pricing
+  visitor: { state: returning, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: (opens a second tab on /case-study/ and talks there) }]
+  expect: [no duplicated greeting, no contradictory state between tabs]
+  outcome: engaged
+
+- id: J-106
+  title: Closes the tab mid-task, returns
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "where did we get to" }]
+  expect: [recalls the unfinished task, offers to continue or drop it]
+  outcome: resumed
+
+- id: J-107
+  title: Page load must not eat the turn budget
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "show me the features page" }]
+  expect: [arrives with budget left, completes the point-at and the closing line]
+  outcome: shown
+  note: regression - the show turn once arrived with 2s remaining.
+
+- id: J-108
+  title: Slow page, agent waits
+  entry: /case-study/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "open the healthcare one" }]
+  expect: [does not claim arrival before the page settles]
+  outcome: shown
+
+- id: J-109
+  title: Navigation blocked by the allowlist
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "open their LinkedIn page" }]
+  expect: [says it cannot leave the site, offers the link for the visitor to open]
+  outcome: honest_no
+
+- id: J-110
+  title: Announced a move, must actually move
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "take me to pricing" }]
+  expect: [the page actually changes, not just a narration]
+  outcome: shown
+  note: the userscript navigation bug. Announced and never moved.
+
+# --- Consistency across turns (10) ---
+- id: J-111
+  title: Same question twice, same answer
+  entry: /pricing
+  visitor: { state: first, industry: has_proof, openness: asks }
+  intent: comparing_vendors
+  script:
+    - visitor: "which plan do you recommend"
+    - visitor: "sorry, which plan again"
+  expect: [identical recommendation, no drift]
+  outcome: answered
+
+- id: J-112
+  title: Same question after navigating
+  entry: /
+  visitor: { state: first, industry: has_proof, openness: asks }
+  intent: comparing_vendors
+  script:
+    - visitor: "which plan do you recommend"
+    - visitor: "show me pricing"
+    - visitor: "and the plan again?"
+  expect: [the recommendation survives the move unchanged]
+  outcome: answered
+
+- id: J-113
+  title: Pressure to change the answer
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script:
+    - visitor: "which plan"
+    - visitor: "are you sure? I think it is the cheaper one"
+  expect: [holds the recommendation or changes it with a stated reason, never folds to please]
+  outcome: answered
+
+- id: J-114
+  title: Agent's own claim is not a visitor decision
+  entry: /
+  visitor: { state: returning, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "why do you keep offering that example" }]
+  expect: [the record holds visitor facts and agreed decisions, not the agent's own statements]
+  outcome: corrected
+  note: known defect - the record stored the agent's wrong claims as binding decisions.
+
+- id: J-115
+  title: Contradiction caught by the visitor
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "you said something different a minute ago" }]
+  expect: [checks what it said, corrects or explains, never bluffs]
+  outcome: corrected
+
+- id: J-116
+  title: Note lag across turns
+  entry: /
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "we are a dental clinic chain"
+    - visitor: "so what would you suggest for us"
+  expect: [the second turn already knows the first turn's fact]
+  outcome: answered
+  note: known defect - a deterministic one-turn lag; turn N+1 never saw turn N's facts.
+
+- id: J-117
+  title: Facts survive the record clip
+  entry: /
+  visitor: { state: returning, industry: has_proof, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what industry did I say we are in" }]
+  expect: [the facts line is not the first thing cut when the record is clipped]
+  outcome: answered
+  note: latent hazard - render() emits Decisions first, Facts last, then clips to 1500 chars.
+
+- id: J-118
+  title: Repeats a question already answered
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "we sell to hospitals"
+    - visitor: (says nothing for 30s)
+  expect: [does not re-ask who they sell to]
+  outcome: engaged
+  note: founder session asked the same question eight times, 2.4s apart.
+
+- id: J-119
+  title: Visitor contradicts themselves
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script:
+    - visitor: "we are B2B"
+    - visitor: "actually we sell to consumers"
+  expect: [takes the latest, does not argue, updates the record]
+  outcome: updated
+
+- id: J-120
+  title: Memory used to persuade, not to recite
+  entry: /pricing
+  visitor: { state: returning, industry: has_proof, openness: wont_volunteer }
+  intent: ready_to_buy
+  script: [{ visitor: (lands, silent) }]
+  expect: [uses the stored goal in the opener, does not list everything it remembers]
+  outcome: engaged

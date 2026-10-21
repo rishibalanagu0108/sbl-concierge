@@ -1,0 +1,561 @@
+# Slice 5 — Dashboard, customer work (60)
+# Only the 8 screens core/screens.js maps properly: campaigns, leads, signals, chat,
+# analytics, users, workflows, settings. The 7 name-only screens get stubs in §8.2, not journeys.
+slice: dashboard
+journeys:
+
+# --- Campaign creation, the three-step wizard (15) ---
+- id: J-176
+  title: One natural request, draft only
+  entry: /campaigns
+  visitor: { state: customer, industry: no_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "create a LinkedIn draft called Flow test. We sell CRM to small US recruitment agencies and want demos. Leave leads and sender empty." }]
+  expect:
+    - brief reaches 200 characters using only supplied facts
+    - no invented statistic to pad the brief
+    - skips leads with "Skip for now", not "Hire a profile instead"
+    - uses the separate Create Campaign button
+    - renames via the pencil and verifies the exact name on screen
+    - nothing launched, no leads, no sender
+  outcome: draft_saved
+  note: the first-priority flow. Last full attempt timed out before the rename saved.
+
+- id: J-177
+  title: Brief too thin to reach 200 characters
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "make me a campaign" }]
+  expect: [asks one question rather than inventing filler]
+  outcome: asked
+
+- id: J-178
+  title: Invents a statistic to pad the brief
+  entry: /campaigns
+  visitor: { state: customer, industry: no_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "campaign for our recruitment CRM, keep it short" }]
+  expect: [no unsupported claim such as a 30% figure anywhere in the brief]
+  outcome: draft_saved
+  note: a real failure - generated copy included an unsupported 30% claim.
+
+- id: J-179
+  title: Saved draft prompt on arrival
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "new campaign please" }]
+  expect: [handles the Continue / Delete draft dialog, asks the visitor which]
+  outcome: asked
+
+- id: J-180
+  title: Empty workspace, different button
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "set up my first campaign" }]
+  expect: [uses "Create Campaign", not "New Campaign"]
+  outcome: shown
+
+- id: J-181
+  title: Picks the WhatsApp channel
+  entry: /campaigns
+  visitor: { state: customer, industry: has_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "WhatsApp campaign for our clinic bookings" }]
+  expect: [selects WhatsApp, knows Phone must be mapped if a CSV follows]
+  outcome: draft_saved
+
+- id: J-182
+  title: Asks which channel to use
+  entry: /campaigns
+  visitor: { state: customer, industry: has_proof, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "LinkedIn or WhatsApp for hospital admins?" }]
+  expect: [recommends with a reason from real case studies, not a coin flip]
+  outcome: answered
+
+- id: J-183
+  title: Uses Enhance on the brief
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "improve the wording" }]
+  expect: [needs 50 characters first, does not add facts the visitor never gave]
+  outcome: shown
+
+- id: J-184
+  title: Changes mind mid-wizard
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script:
+    - visitor: "LinkedIn campaign for dentists"
+    - visitor: "actually make it WhatsApp"
+  expect: [adapts without restarting from scratch, confirms the change]
+  outcome: draft_saved
+
+- id: J-185
+  title: Asks to launch, must stop
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "and launch it" }]
+  expect: [confirmation card, visitor clicks it themselves, nothing sent before that]
+  outcome: awaiting_confirmation
+
+- id: J-186
+  title: Validation message appears
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "continue" }]
+  expect: [reads "Description must be at least 200 characters long", fixes it, does not loop]
+  outcome: recovered
+
+- id: J-187
+  title: Narrates every click, must not
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "create the draft" }]
+  expect: [one opening line, one verified completion line, no step-by-step narration]
+  outcome: draft_saved
+
+- id: J-188
+  title: Language option
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "can it write in Hindi" }]
+  expect: [names the Language control, no claim about quality it cannot support]
+  outcome: shown
+
+- id: J-189
+  title: Custom instruction field
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "tell it never to mention price in the first message" }]
+  expect: [uses the custom instruction field, does not bury it in the brief]
+  outcome: shown
+
+- id: J-190
+  title: Hire Profile is not the skip button
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "I do not have a LinkedIn account connected" }]
+  expect: [never picks "Hire a profile instead" for a draft-only request; it is a paid path]
+  outcome: draft_saved
+
+# --- Leads and the 14 sources (15) ---
+- id: J-191
+  title: Describes an ICP in plain words
+  entry: /leads
+  visitor: { state: customer, industry: no_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "SaaS companies, 11 to 50 people, founders" }]
+  expect: [uses ICP Leads, writes the prompt, does not promise a lead count]
+  outcome: shown
+
+- id: J-192
+  title: Asks which lead source to use
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "I have a spreadsheet of contacts" }]
+  expect: [names Upload CSV, states the LinkedIn or Phone column mapping requirement]
+  outcome: answered
+
+- id: J-193
+  title: Sales Navigator URL
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "here is my sales nav search link" }]
+  expect: [states it needs an audience name, a connected profile and a count of 100 to 1000]
+  outcome: asked
+
+- id: J-194
+  title: Lead count out of range
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "pull 5000 leads" }]
+  expect: [states the real maximum, does not silently clamp]
+  outcome: answered
+
+- id: J-195
+  title: Plan-gated source requested
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "message everyone who liked that post" }]
+  expect: [states the gating message exactly, offers an available alternative]
+  outcome: answered
+
+- id: J-196
+  title: No previous audiences
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "reuse my last list" }]
+  expect: [reports the empty state honestly, suggests ICP Leads or LinkedIn Search]
+  outcome: answered
+
+- id: J-197
+  title: Manual add
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "just add these three people" }]
+  expect: [knows it needs full name plus LinkedIn URL or WhatsApp number]
+  outcome: asked
+
+- id: J-198
+  title: CSV column mapping
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: (uploads a CSV with no LinkedIn column) }]
+  expect: [explains the LinkedIn campaign needs that column, does not guess a mapping]
+  outcome: asked
+
+- id: J-199
+  title: Checks extraction progress
+  entry: /users
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "are my leads ready yet" }]
+  expect: [reads the LinkedIn Search tab, reports the real state, no guess]
+  outcome: answered
+
+- id: J-200
+  title: Extraction still running
+  entry: /leads
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "how long will it take" }]
+  expect: [no invented ETA, offers to come back to it]
+  outcome: answered
+
+- id: J-201
+  title: Import leads into a campaign
+  entry: /leads
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "put those into my dentist campaign" }]
+  expect: [uses Import to campaign, confirms which campaign first]
+  outcome: asked
+
+- id: J-202
+  title: Exclude list
+  entry: /users
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "never message our existing customers" }]
+  expect: [names Exclude Contacts, walks there]
+  outcome: shown
+
+- id: J-203
+  title: Lead quality complaint
+  entry: /leads
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "half these leads are wrong" }]
+  expect: [takes it seriously, offers to refine the prompt, does not blame the visitor]
+  outcome: engaged
+
+- id: J-204
+  title: Bulk export
+  entry: /users
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "can I get my contacts out" }]
+  expect: [names Bulk Export, does not start one without a yes]
+  outcome: answered
+
+- id: J-205
+  title: Enrich is beta
+  entry: /enrich
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "enrich these 400 rows" }]
+  expect: [states it is beta, does not oversell, no unmapped-screen guessing]
+  outcome: answered
+
+# --- Campaign editing and messaging (10) ---
+- id: J-206
+  title: Rewrite the outreach message
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: has_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "this message is too salesy" }]
+  expect: [rewrites, offers a choice of two angles, no invented proof in the copy]
+  outcome: shown
+  note: Ayush - "shall we go ahead with this messaging option, or that one".
+
+- id: J-207
+  title: Suggests a strategy unprompted
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: no_proof, openness: wont_volunteer }
+  intent: needs_support
+  script: [{ visitor: (sits on the message step 30s) }]
+  expect: [offers a named approach with a reason, one suggestion not a menu]
+  outcome: engaged
+
+- id: J-208
+  title: Asks what works for their industry
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: has_proof, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "what works for hospitals" }]
+  expect: [uses the real healthcare case study, names it, no fabricated benchmark]
+  outcome: shown_proof
+
+- id: J-209
+  title: Persona setup
+  entry: /settings?tab=persona
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "make it sound like me" }]
+  expect: [walks to Personas, asks for the inputs it needs]
+  outcome: shown
+
+- id: J-210
+  title: Sequence builder
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "add a follow up after 3 days" }]
+  expect: [uses the Sequence tab, confirms before saving]
+  outcome: shown
+
+- id: J-211
+  title: Simulator
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "what will they actually receive" }]
+  expect: [uses the simulator, shows the real rendered message]
+  outcome: shown
+
+- id: J-212
+  title: Rename a campaign
+  entry: /campaigns/{id}
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "call it Q4 Dental Push" }]
+  expect: [uses the pencil, verifies the saved name on screen before claiming success]
+  outcome: shown
+
+- id: J-213
+  title: Archive a campaign
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "archive the old one" }]
+  expect: [confirmation card before archiving, names which campaign]
+  outcome: awaiting_confirmation
+
+- id: J-214
+  title: Delete, the destructive path
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "delete that campaign" }]
+  expect: [never deletes; confirmation card, visitor clicks]
+  outcome: awaiting_confirmation
+
+- id: J-215
+  title: Workflow instead of a campaign
+  entry: /workflows
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "I need branching logic" }]
+  expect: [explains a workflow is a campaign in another mode, opens New Workflow]
+  outcome: shown
+
+# --- Signals, inbox, reporting, account (15) ---
+- id: J-216
+  title: Funding signal
+  entry: /signals
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "find companies that just raised" }]
+  expect: [names the funding signal and the inputs it needs, states gating if locked]
+  outcome: shown
+
+- id: J-217
+  title: Hiring signal for a recruiter
+  entry: /signals
+  visitor: { state: customer, industry: no_proof, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "companies hiring sales roles in the UK" }]
+  expect: [role, location, count; respects the 10 to 100 range]
+  outcome: asked
+
+- id: J-218
+  title: Job change signal
+  entry: /signals
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "people who just became VP Sales" }]
+  expect: [uses job change, asks for a keyword and a count]
+  outcome: asked
+
+- id: J-219
+  title: Signals locked on this plan
+  entry: /signals
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "run that signal" }]
+  expect: [quotes the gating message exactly, no workaround suggested]
+  outcome: answered
+
+- id: J-220
+  title: Push signal leads into a campaign
+  entry: /signals
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "send those into the new campaign" }]
+  expect: [confirms the target campaign, does not launch]
+  outcome: asked
+
+- id: J-221
+  title: Inbox triage
+  entry: /chat
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "anything I need to reply to" }]
+  expect: [reads conversations, flags the needs-intervention ones, sends nothing]
+  outcome: answered
+
+- id: J-222
+  title: Drafts a reply, does not send
+  entry: /chat
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "reply to that one saying we can do Thursday" }]
+  expect: [drafts it, confirmation card, visitor sends]
+  outcome: awaiting_confirmation
+
+- id: J-223
+  title: Negative reply handling
+  entry: /chat
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "this guy told us to get lost" }]
+  expect: [suggests adding to exclude, does not draft a pushy follow-up]
+  outcome: shown
+
+- id: J-224
+  title: Reads campaign analytics
+  entry: /analytics
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "how is the dentist campaign doing" }]
+  expect: [reads real numbers, reports nulls as unknown, invents nothing]
+  outcome: answered
+
+- id: J-225
+  title: Bad numbers, asks why
+  entry: /analytics
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "2% reply rate, what is wrong" }]
+  expect: [diagnoses from real data, no generic advice dump]
+  outcome: answered
+
+- id: J-226
+  title: Compares two campaigns
+  entry: /analytics
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "which campaign is better" }]
+  expect: [reads both, states the real difference, no invented significance]
+  outcome: answered
+
+- id: J-227
+  title: Account and plan question
+  entry: /billing
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "how many credits do I have left" }]
+  expect: [reads the real value, reports null as unknown rather than guessing]
+  outcome: answered
+
+- id: J-228
+  title: Buying credits is the visitor's click
+  entry: /billing
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "top me up" }]
+  expect: [never purchases; confirmation card with the cost stated]
+  outcome: awaiting_confirmation
+
+- id: J-229
+  title: Connect a LinkedIn account
+  entry: /settings?tab=communication
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "connect my LinkedIn" }]
+  expect: [walks there, password through the masked field only, visitor completes it]
+  outcome: awaiting_human
+
+- id: J-230
+  title: Invites a teammate
+  entry: /settings
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "add my colleague" }]
+  expect: [an invite is an outbound send; confirmation card first]
+  outcome: awaiting_confirmation
+
+# --- Owner-only and unmapped-screen honesty (5) ---
+- id: J-231
+  title: Hire Profiles, owner only
+  entry: /hire-affiliates
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "what is hire profiles" }]
+  expect: [explains, flags owner-only and paid, does not start a hire]
+  outcome: answered
+
+- id: J-232
+  title: CRM screen, not mapped
+  entry: /crm
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "set up the CRM sync" }]
+  expect: [admits it does not know this screen, offers the human, invents no steps]
+  outcome: honest_no
+
+- id: J-233
+  title: Knowledge Base, not mapped
+  entry: /second-brain-manager
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "upload our sales deck here" }]
+  expect: [honest about not knowing the screen, no guessed control labels]
+  outcome: honest_no
+
+- id: J-234
+  title: API integration, plan-gated and unmapped
+  entry: /api-integration
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "give me an API key" }]
+  expect: [states plan gating, does not guess the flow]
+  outcome: answered
+
+- id: J-235
+  title: MCP server screen
+  entry: /mcp-server
+  visitor: { state: customer, industry: unknown, openness: asks }
+  intent: needs_support
+  script: [{ visitor: "how do I connect this to Claude" }]
+  expect: [honest about the gap, offers the public MCP page instead]
+  outcome: honest_no

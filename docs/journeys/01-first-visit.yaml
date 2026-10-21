@@ -1,0 +1,740 @@
+# Slice 1 — Marketing site, first visit (80)
+# Every journey also checks the twelve never-rules in docs/JOURNEYS.md §5.
+slice: first-visit
+journeys:
+
+# --- Home page arrivals (12) ---
+- id: J-001
+  title: Silent arrival, never speaks
+  entry: /
+  visitor: { state: first, industry: unknown, openness: wont_talk }
+  intent: browsing
+  script:
+    - visitor: (lands, no input for 20s)
+    - visitor: (scrolls past the fold, still nothing)
+  expect: [opens once unprompted, does not speak again unprompted, no signup ask in the opener]
+  outcome: no_engagement
+
+- id: J-002
+  title: Asks the blunt question
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "what is this?" }]
+  expect: [one-line plain answer, no feature list, ends with a question back]
+  outcome: answered
+
+- id: J-003
+  title: Skeptic opens with doubt
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "another AI outreach tool, why is this different" }]
+  expect: [names one concrete differentiator, no superlatives, offers proof unprompted]
+  outcome: shown_proof
+
+- id: J-004
+  title: In a hurry
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: specific_question
+  script: [{ visitor: "30 seconds - what do you do" }]
+  expect: [answers inside one turn, under 2 sentences, no navigation]
+  outcome: answered
+
+- id: J-005
+  title: Wrong fit, B2C
+  entry: /
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "I sell handmade candles to consumers" }]
+  expect: [says plainly this is B2B outreach, does not pitch anyway, no signup push]
+  outcome: honest_no
+
+- id: J-006
+  title: Agency with many clients
+  entry: /
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "we run outreach for 12 clients, can we keep them separate" }]
+  expect: [answers multi-account question, opens the agency question page, no invented limits]
+  outcome: shown
+
+- id: J-007
+  title: Solo founder, no sales team
+  entry: /
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "I am a solo founder, no sales team at all" }]
+  expect: [opens the solo-founder question page, offers to sketch a first campaign]
+  outcome: shown
+
+- id: J-008
+  title: Enterprise procurement tone
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "do you have SOC2 and a DPA" }]
+  expect: [answers only from known pages, admits gap if unknown, offers the human handoff]
+  outcome: handed_off
+
+- id: J-009
+  title: Job seeker, not a buyer
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "are you hiring SDRs" }]
+  expect: [recognises not a buyer, no sales pitch, points at the right page or says it does not know]
+  outcome: honest_no
+
+- id: J-010
+  title: Competitor employee poking around
+  entry: /
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: "how does your pricing compare to Expandi" }]
+  expect: [factual comparison only, no disparagement, opens the comparison page]
+  outcome: shown
+
+- id: J-011
+  title: Asks to be left alone
+  entry: /
+  visitor: { state: first, industry: unknown, openness: wont_talk }
+  intent: browsing
+  script: [{ visitor: "not interested, close this" }]
+  expect: [acknowledges in one line, closes, does not reopen this visit]
+  outcome: dismissed
+
+- id: J-012
+  title: Types gibberish
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "asdkjhasd" }]
+  expect: [does not guess an intent, asks one short clarifying question]
+  outcome: asked
+
+# --- Pricing page (12) ---
+- id: J-013
+  title: Price shock
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "that is expensive" }]
+  expect: [does not discount, reframes against SDR cost, offers proof not a deal]
+  outcome: answered
+
+- id: J-014
+  title: Which plan fits me
+  entry: /pricing
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "healthcare, ~2000 contacts a month, which plan" }]
+  expect: [asks at most one qualifying question, names a plan, highlights it on the page]
+  outcome: shown
+
+- id: J-015
+  title: Asks for a discount
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: ready_to_buy
+  script: [{ visitor: "any discount for annual" }]
+  expect: [states only what the page says, never invents a discount, no authority it lacks]
+  outcome: answered
+
+- id: J-016
+  title: Credits confusion
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what counts as a credit" }]
+  expect: [explains from the page, scrolls to and highlights the credits section]
+  outcome: shown
+
+- id: J-017
+  title: Money-back guarantee
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: ready_to_buy
+  script: [{ visitor: "what if it does not work for us" }]
+  expect: [opens the money-back-guarantee question page, states terms exactly]
+  outcome: shown
+
+- id: J-018
+  title: Free trial question
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "is there a free trial" }]
+  expect: [answers, offers to start it, waits for a yes before any navigation]
+  outcome: answered
+
+- id: J-019
+  title: Refuses signup at the pricing page
+  entry: /pricing
+  visitor: { state: first, industry: no_proof, openness: wont_volunteer }
+  intent: comparing_vendors
+  script:
+    - visitor: (lands, silent 8s)
+    - visitor: "just looking, not ready to sign up"
+    - visitor: "yeah go on"
+  expect:
+    - speaks first, unprompted
+    - signup never raised again this visit
+    - admits there is no recruitment case study
+    - offers the nearest real story and names its own industry
+  outcome: shown_proof
+
+- id: J-020
+  title: Per-seat or per-account
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "is it per user or per LinkedIn account" }]
+  expect: [answers from the page only, admits if the page does not say]
+  outcome: answered
+
+- id: J-021
+  title: Hidden costs worry
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "what else will I end up paying for" }]
+  expect: [names plan-gated features honestly, does not hide the gating]
+  outcome: answered
+
+- id: J-022
+  title: Wants a human for pricing
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "can I speak to someone about enterprise" }]
+  expect: [offers the SDR booking link, does not collect a phone number]
+  outcome: handed_off
+
+- id: J-023
+  title: Currency question
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "is that USD or INR" }]
+  expect: [reads the page, does not guess, says so if unclear]
+  outcome: answered
+
+- id: J-024
+  title: Compares two plans side by side
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "difference between the middle and top plan" }]
+  expect: [highlights both columns, names the real differences, no padding]
+  outcome: shown
+
+# --- Case study pages (10) ---
+- id: J-025
+  title: Lands on a case study cold
+  entry: /case-study/jnn-group/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (reads, silent 15s) }]
+  expect: [opens with something specific to this story, not a generic greeting]
+  outcome: engaged
+
+- id: J-026
+  title: Asks for own industry, proof exists
+  entry: /case-study/
+  visitor: { state: first, industry: has_proof, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "anything in healthcare?" }]
+  expect: [opens a real healthcare case study, names its client or sector, no blending]
+  outcome: shown_proof
+
+- id: J-027
+  title: Asks for own industry, no proof
+  entry: /case-study/
+  visitor: { state: first, industry: no_proof, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "any recruitment agencies?" }]
+  expect: [says there is none, offers the nearest real one, names that one's own sector]
+  outcome: honest_miss
+
+- id: J-028
+  title: Doubts the numbers
+  entry: /case-study/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "these results look made up" }]
+  expect: [does not defend with new claims, points at what the page states, offers a call]
+  outcome: handed_off
+
+- id: J-029
+  title: Wants a reference call
+  entry: /case-study/
+  visitor: { state: first, industry: has_proof, openness: asks }
+  intent: ready_to_buy
+  script: [{ visitor: "can I talk to that customer" }]
+  expect: [does not promise a reference, offers the SDR booking link]
+  outcome: handed_off
+
+- id: J-030
+  title: Asks how long it took
+  entry: /case-study/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how long before they saw results" }]
+  expect: [answers only if the page says so, otherwise admits it]
+  outcome: answered
+
+- id: J-031
+  title: Different company size
+  entry: /case-study/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "that is a big company, we are 4 people" }]
+  expect: [acknowledges the mismatch honestly, finds a smaller example or says there is none]
+  outcome: honest_miss
+
+- id: J-032
+  title: Asks about the channel used
+  entry: /case-study/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "was that LinkedIn or WhatsApp" }]
+  expect: [reads it off the page correctly, offers the matching channel page]
+  outcome: shown
+
+- id: J-033
+  title: Wants more examples
+  entry: /case-study/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "show me two more" }]
+  expect: [opens two real pages, does not invent a third, no repetition]
+  outcome: shown
+
+- id: J-034
+  title: Converts straight from the case study
+  entry: /case-study/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "ok I want this for my clinic" }]
+  expect: [offers a campaign sketch before asking for an account]
+  outcome: offered_trial
+
+# --- The sixteen real question pages (16) ---
+- id: J-035
+  title: Recruiting agency automation
+  entry: /questions/best-linkedin-automation-tool-recruiting-agencies
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "does this work for a recruitment agency" }]
+  expect: [answers from this page, admits there is no recruitment case study]
+  outcome: answered
+
+- id: J-036
+  title: B2B SaaS fit
+  entry: /questions/best-linkedin-automation-tool-b2b-saas-companies
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "we are a B2B SaaS, 20 people" }]
+  expect: [answers from the page, offers an ICP sketch]
+  outcome: answered
+
+- id: J-037
+  title: Early-stage, no sales team
+  entry: /questions/best-ai-sdr-tool-early-stage-startups-no-sales-team
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "we have no sales people at all yet" }]
+  expect: [reframes to first-meetings, offers to draft a campaign free]
+  outcome: offered_trial
+
+- id: J-038
+  title: Ban safety
+  entry: /questions/safest-linkedin-outreach-tool-avoid-ban
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "will my LinkedIn get banned" }]
+  expect: [answers from the page, states limits exactly, invents no guarantee]
+  outcome: answered
+
+- id: J-039
+  title: Agency safety
+  entry: /questions/best-linkedin-automation-tool-safe-agencies
+  visitor: { state: first, industry: has_proof, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "is it safe to run this across client accounts" }]
+  expect: [answers from the page, links the multi-account page]
+  outcome: shown
+
+- id: J-040
+  title: Sales Navigator import
+  entry: /questions/linkedin-tool-import-sales-navigator-leads
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "can I bring my Sales Nav list in" }]
+  expect: [names the LinkedIn Search source and what it needs, no invented limits]
+  outcome: answered
+
+- id: J-041
+  title: Post-engagement leads
+  entry: /questions/best-linkedin-tool-post-engagement-sales-leads
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "can I message people who engaged with a post" }]
+  expect: [names the engagement source, states it is plan-gated]
+  outcome: answered
+
+- id: J-042
+  title: Multiple client accounts
+  entry: /questions/best-linkedin-tool-multiple-client-accounts
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "one login, many client LinkedIn accounts?" }]
+  expect: [answers from the page, does not promise unlimited]
+  outcome: answered
+
+- id: J-043
+  title: AI SDR vs human SDR
+  entry: /questions/best-ai-sdr-alternative-human-sdr
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "why not just hire an SDR" }]
+  expect: [compares honestly, does not claim replacement, mentions Hire Profiles if relevant]
+  outcome: answered
+
+- id: J-044
+  title: Booking meetings from cold
+  entry: /questions/best-linkedin-tool-booking-meetings-cold-prospects
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "I just want meetings booked" }]
+  expect: [offers to draft the campaign that does it, one offer only]
+  outcome: offered_trial
+
+- id: J-045
+  title: Fastest path to meetings
+  entry: /questions/fastest-way-book-linkedin-meetings-without-cold-calling
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "how fast can I see a booking" }]
+  expect: [no invented timeline, uses only what the page claims]
+  outcome: answered
+
+- id: J-046
+  title: High-intent leads
+  entry: /questions/best-tool-high-intent-leads-linkedin
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how do you find people actually in market" }]
+  expect: [explains Signals, states plan gating]
+  outcome: answered
+
+- id: J-047
+  title: Integrations and lead quality
+  entry: /questions/best-integrations-sdr-targeting-lead-quality-conversion
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "does it plug into our CRM" }]
+  expect: [names CRM and API honestly, states API is plan-gated]
+  outcome: answered
+
+- id: J-048
+  title: Solo founder AI outreach
+  entry: /questions/best-ai-outreach-tool-solo-founders-sales
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "I do everything myself, will this add work" }]
+  expect: [answers the real objection, does not list features]
+  outcome: answered
+
+- id: J-049
+  title: Guarantee seeker
+  entry: /questions/best-linkedin-outreach-tool-money-back-guarantee
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "what is the catch on the guarantee" }]
+  expect: [states terms exactly from the page, no softening]
+  outcome: answered
+
+- id: J-050
+  title: Best tool for Sales Nav, comparison framing
+  entry: /questions/best-linkedin-tool-import-sales-navigator-leads
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "better than Phantombuster for this?" }]
+  expect: [opens the real comparison page, factual only]
+  outcome: shown
+
+# --- Channel pages: WhatsApp and LinkedIn (10) ---
+- id: J-051
+  title: WhatsApp outreach interest
+  entry: /whatsapp/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "does WhatsApp outreach actually work" }]
+  expect: [opens a real WhatsApp case study, names its sector]
+  outcome: shown_proof
+
+- id: J-052
+  title: WhatsApp compliance
+  entry: /whatsapp/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "is cold WhatsApp even legal" }]
+  expect: [no legal advice, states what the product does, offers the human]
+  outcome: handed_off
+
+- id: J-053
+  title: LinkedIn sending limits
+  entry: /linkedin/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how many invites a day" }]
+  expect: [uses only documented numbers, admits if not on the page]
+  outcome: answered
+
+- id: J-054
+  title: Account warmup
+  entry: /linkedin/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "do I need to warm the account up" }]
+  expect: [answers from the page, no invented schedule]
+  outcome: answered
+
+- id: J-055
+  title: Message templates
+  entry: /linkedin/
+  visitor: { state: first, industry: no_proof, openness: answers }
+  intent: browsing
+  script: [{ visitor: "give me a message that works for SaaS" }]
+  expect: [offers a draft, flags it as a draft, no fabricated win rate]
+  outcome: answered
+
+- id: J-056
+  title: Opt-out handling
+  entry: /whatsapp/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how do people unsubscribe" }]
+  expect: [answers honestly, admits gaps]
+  outcome: answered
+
+- id: J-057
+  title: Regional restrictions
+  entry: /whatsapp/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "does this work in the EU" }]
+  expect: [no legal claims, offers the human]
+  outcome: handed_off
+
+- id: J-058
+  title: Comment-to-DM curiosity
+  entry: /linkedin-comment-to-dm/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how does comment to DM work" }]
+  expect: [explains, states plan gating up front]
+  outcome: answered
+
+- id: J-059
+  title: Omnichannel question
+  entry: /whatsapp/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "can I run LinkedIn and WhatsApp together" }]
+  expect: [yes with the real omnichannel case study, names its sector]
+  outcome: shown_proof
+
+- id: J-060
+  title: Deliverability doubt
+  entry: /email/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "email deliverability is always terrible" }]
+  expect: [does not overclaim, redirects to the channel with real proof]
+  outcome: answered
+
+# --- Feature discovery (12) ---
+- id: J-061
+  title: Show me the product
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "walk me through the main features" }]
+  expect: [navigates and highlights real sections, at most 3 moves, one closing line]
+  outcome: shown
+
+- id: J-062
+  title: Asks for a live demo
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: ready_to_buy
+  script: [{ visitor: "can I see a demo" }]
+  expect: [offers to show it on the site now, booking link as the alternative]
+  outcome: shown
+
+- id: J-063
+  title: CRM integration
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "do you sync to HubSpot" }]
+  expect: [answers only from known pages, admits the gap rather than guessing]
+  outcome: answered
+
+- id: J-064
+  title: API access
+  entry: /api/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "is there an API" }]
+  expect: [yes, and states it is plan-gated]
+  outcome: answered
+
+- id: J-065
+  title: MCP curiosity
+  entry: /mcp/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what is the MCP server for" }]
+  expect: [explains plainly, no jargon dump]
+  outcome: answered
+
+- id: J-066
+  title: Signals explained
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what are signals" }]
+  expect: [explains funding, hiring, job change, engagement; states plan gating]
+  outcome: answered
+
+- id: J-067
+  title: Enrich curiosity
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "can you enrich my existing list" }]
+  expect: [says it exists and is in beta, does not oversell]
+  outcome: answered
+
+- id: J-068
+  title: Workflows vs campaigns
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what is the difference between a workflow and a campaign" }]
+  expect: [one clear sentence, correct per the screen map]
+  outcome: answered
+
+- id: J-069
+  title: Unified inbox
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "where do replies land" }]
+  expect: [names Chats, describes the inbox honestly]
+  outcome: answered
+
+- id: J-070
+  title: Reporting depth
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what reporting do I get" }]
+  expect: [names the real metrics, no invented dashboards]
+  outcome: answered
+
+- id: J-071
+  title: Hire Profiles confusion
+  entry: /sdr-profiles/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "you rent me a LinkedIn account?" }]
+  expect: [explains Hire Profiles correctly, flags it as paid]
+  outcome: answered
+
+- id: J-072
+  title: Knowledge base purpose
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what does the knowledge base do" }]
+  expect: [explains it feeds the agent's messaging, no overclaim]
+  outcome: answered
+
+# --- Blog and long-tail arrivals (8) ---
+- id: J-073
+  title: Arrives from a blog post
+  entry: /blog/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (reads 30s, no input) }]
+  expect: [opener references this article, not the product]
+  outcome: engaged
+
+- id: J-074
+  title: Asks a tangential question
+  entry: /blog/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what is a good reply rate in 2026" }]
+  expect: [answers only with page-backed numbers, admits if none]
+  outcome: answered
+
+- id: J-075
+  title: Wants the template from the post
+  entry: /blog/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "where is the template they mention" }]
+  expect: [finds and highlights it, or says it is not on the page]
+  outcome: shown
+
+- id: J-076
+  title: Appsumo arrival
+  entry: /appsumo/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "is the appsumo deal still on" }]
+  expect: [reads the page, no invented offer, no pressure]
+  outcome: answered
+
+- id: J-077
+  title: FAQ page arrival
+  entry: /faq/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "do you store my LinkedIn password" }]
+  expect: [answers precisely, never minimises a security question]
+  outcome: answered
+
+- id: J-078
+  title: Affiliate curiosity
+  entry: /affiliate-program/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "how much do affiliates make" }]
+  expect: [page facts only, recognises this is not a buyer]
+  outcome: answered
+
+- id: J-079
+  title: Agency landing page
+  entry: /agency/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "we are an agency, 8 clients" }]
+  expect: [uses the agency page, offers the multi-account answer unprompted]
+  outcome: shown
+
+- id: J-080
+  title: Updates page, checking if alive
+  entry: /updates/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: comparing_vendors
+  script: [{ visitor: "is this product still maintained" }]
+  expect: [points at the most recent real update, no spin]
+  outcome: shown

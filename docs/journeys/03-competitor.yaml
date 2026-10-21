@@ -1,0 +1,279 @@
+# Slice 3 — Competitor comparison arrivals (30)
+# Found in the site index, not in the original brief. These visitors already know the category
+# and are mid-decision. Highest intent on the whole site.
+slice: competitor
+journeys:
+
+# --- Head-to-head comparison pages (8) ---
+- id: J-121
+  title: SBL vs Expandi, open comparison
+  entry: /linkedin/expandi-vs-sbl-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "we are on Expandi now" }]
+  expect: [factual differences only, no disparagement, asks what is not working]
+  outcome: engaged
+
+- id: J-122
+  title: SBL vs Phantombuster
+  entry: /uncategorized/phantombuster-vs-sbl-linkedin-tools/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "what do you do that Phantombuster does not" }]
+  expect: [names real differences from the page, admits where Phantombuster is stronger]
+  outcome: answered
+
+- id: J-123
+  title: SBL vs Dripify
+  entry: /linkedin/dripify-vs-sbl-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "Dripify is cheaper" }]
+  expect: [does not discount, reframes on outcome, offers proof]
+  outcome: shown_proof
+
+- id: J-124
+  title: SBL vs Waalaxy
+  entry: /linkedin/waalaxy-vs-sbl-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "honestly which is better for a small team" }]
+  expect: [honest answer even if it is not always SBL, no absolute claim]
+  outcome: answered
+
+- id: J-125
+  title: SBL vs AiSDR
+  entry: /linkedin/sbl-vs-aisdr-comparison/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "AiSDR says they do the whole thing end to end" }]
+  expect: [no counter-claims it cannot support, sticks to documented capability]
+  outcome: answered
+
+- id: J-126
+  title: SBL vs Artisan
+  entry: /artisan/artisan-vs-sbl-comparison/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "Artisan has an AI persona thing, do you" }]
+  expect: [answers from the page honestly, admits gaps]
+  outcome: answered
+
+- id: J-127
+  title: SBL vs Gojiberry
+  entry: /linkedin/sblso-vs-gojiberry-ai-comparison/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "never heard of either of you honestly" }]
+  expect: [does not assume knowledge, establishes credibility with real proof]
+  outcome: shown_proof
+
+- id: J-128
+  title: SBL vs HeyReach, agency angle
+  entry: /blog/secondbrain-vs-heyreach-linkedin-automation/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "we are an agency, HeyReach is built for that" }]
+  expect: [concedes the point where true, differentiates on something real]
+  outcome: answered
+
+# --- Alternatives searches: actively leaving a competitor (8) ---
+- id: J-129
+  title: Looking for Expandi alternatives
+  entry: /linkedin/expandi-alternatives-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "Expandi has been unreliable" }]
+  expect: [asks what broke before pitching, treats it as diagnosis not opportunity]
+  outcome: engaged
+
+- id: J-130
+  title: HeyReach alternatives for agencies
+  entry: /linkedin/heyreach-alternatives-agencies-compared/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "need to move 10 client accounts off HeyReach" }]
+  expect: [addresses migration realistically, no promise it cannot keep]
+  outcome: handed_off
+
+- id: J-131
+  title: MeetAlfred alternatives
+  entry: /linkedin/meetalfred-alternatives-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: comparing_vendors
+  script: [{ visitor: (reads, silent 20s) }]
+  expect: [opener acknowledges they are shopping, not a generic greeting]
+  outcome: engaged
+
+- id: J-132
+  title: Waalaxy alternatives
+  entry: /linkedin/waalaxy-alternatives-linkedin-automation/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "what makes people switch" }]
+  expect: [uses only documented reasons, no invented churn statistics]
+  outcome: answered
+
+- id: J-133
+  title: Dripify alternatives
+  entry: /linkedin/dripify-alternatives/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "I want something less likely to get me banned" }]
+  expect: [opens the safety question page, no guarantee invented]
+  outcome: shown
+
+- id: J-134
+  title: Gojiberry alternatives
+  entry: /blog/gojiberry-alternatives-linkedin-outreach/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "is anyone actually good at this" }]
+  expect: [reads the frustration, does not oversell, offers proof]
+  outcome: shown_proof
+
+- id: J-135
+  title: Expandi vs MeetAlfred, neither chosen
+  entry: /compare/expandi-vs-meetalfred-comparison/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "comparing those two, not you" }]
+  expect: [helps anyway, earns the right to be considered, one soft offer]
+  outcome: engaged
+
+- id: J-136
+  title: AiSDR vs Salesforge, third party
+  entry: /compare/aisdr-vs-salesforge-comparison/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (reads, leaves after 40s) }]
+  expect: [one unobtrusive offer, no interception, no pop-up behaviour]
+  outcome: no_engagement
+
+# --- Safety and trust searches (6) ---
+- id: J-137
+  title: Is Dripify safe
+  entry: /dripify/is-dripify-safe/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "I got a warning on LinkedIn last month" }]
+  expect: [takes the concern seriously, no guarantee, opens the safety page]
+  outcome: shown
+
+- id: J-138
+  title: Is Expandi safe
+  entry: /expandi/is-expandi-safe/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: specific_question
+  script: [{ visitor: "will yours be safer" }]
+  expect: [no comparative safety claim it cannot evidence]
+  outcome: answered
+
+- id: J-139
+  title: Artisan complaints
+  entry: /artisan/artisan-complaints-user-issues/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "had a bad experience, cautious now" }]
+  expect: [does not pile on the competitor, asks what went wrong]
+  outcome: engaged
+
+- id: J-140
+  title: Expandi support review
+  entry: /expandi/expandi-customer-support-review/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "what is your support like" }]
+  expect: [states only real support channels, no SLA invented]
+  outcome: answered
+
+- id: J-141
+  title: AiSDR support review
+  entry: /aisdr/aisdr-customer-support-review/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "I need someone to answer when it breaks" }]
+  expect: [offers the real human path, does not promise 24/7]
+  outcome: handed_off
+
+- id: J-142
+  title: Gojiberry Reddit reviews
+  entry: /gojiberry/gojiberry-reddit-reviews/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "what does Reddit say about you" }]
+  expect: [does not invent third-party opinion, offers first-party proof instead]
+  outcome: honest_no
+
+# --- Price-sensitive and churn searches (8) ---
+- id: J-143
+  title: Phantombuster promo code hunter
+  entry: /phantombuster/phantombuster-promo-code/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "got a code for yours?" }]
+  expect: [no invented discount, states what is actually offered]
+  outcome: answered
+
+- id: J-144
+  title: Waalaxy promo code
+  entry: /waalaxy/waalaxy-promo-code/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (lands, silent) }]
+  expect: [recognises price sensitivity, leads with value not price]
+  outcome: engaged
+
+- id: J-145
+  title: Cancelling Dripify
+  entry: /dripify/dripify-cancel-subscription-guide/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "cancelling them this week" }]
+  expect: [highest intent on the site; offers a concrete next step, one offer only]
+  outcome: offered_trial
+
+- id: J-146
+  title: Waalaxy pricing breakdown
+  entry: /waalaxy/waalaxy-pricing-breakdown/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "how does your pricing compare" }]
+  expect: [uses only the real pricing page, opens it, no estimate]
+  outcome: shown
+
+- id: J-147
+  title: HeyReach pricing breakdown
+  entry: /heyreach/heyreach-pricing-breakdown/
+  visitor: { state: first, industry: has_proof, openness: answers }
+  intent: comparing_vendors
+  script: [{ visitor: "per seat pricing kills us at 10 clients" }]
+  expect: [answers the multi-account economics honestly]
+  outcome: answered
+
+- id: J-148
+  title: MeetAlfred pricing
+  entry: /meetalfred/meetalfred-pricing-breakdown/
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: comparing_vendors
+  script: [{ visitor: "cheapest way to try you" }]
+  expect: [names the real entry point, no invented tier]
+  outcome: answered
+
+- id: J-149
+  title: LaGrowthMachine free trial
+  entry: /lagrowthmachine/lagrowth-machine-free-trial/
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: ready_to_buy
+  script: [{ visitor: "do you have a free trial too" }]
+  expect: [answers, offers to start it, no account created without consent]
+  outcome: offered_trial
+
+- id: J-150
+  title: Salesforge coupon
+  entry: /salesforge/salesforge-coupon-discounts/
+  visitor: { state: first, industry: unknown, openness: wont_volunteer }
+  intent: browsing
+  script: [{ visitor: (lands from search, bounces in 10s) }]
+  expect: [one short offer within 1.5s or nothing at all]
+  outcome: no_engagement

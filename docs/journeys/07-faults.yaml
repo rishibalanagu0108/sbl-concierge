@@ -1,0 +1,306 @@
+# Slice 7 — Faults and interruptions (30)
+# Run with the server started with ALLOW_FAULTS=1. These decide whether the agent
+# fails safely or strands the visitor. Zero tolerance on never-rules 8 and 9.
+slice: faults
+journeys:
+
+# --- Model and server faults (8) ---
+- id: J-271
+  title: Model returns an error mid-turn
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "show me pricing" }]
+  fault: model_error
+  expect: [says something honest, never goes silent, does not half-navigate]
+  outcome: recovered
+
+- id: J-272
+  title: Whole turn fails in under 10ms
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "what do you do" }]
+  fault: instant_error
+  expect: [recognises this is not a network delay, reports honestly, retries sanely]
+  outcome: recovered
+  note: observed live 2026-10-15, cause unknown. Every call returned error in 5-10ms.
+
+- id: J-273
+  title: Model is slow
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "which plan should I pick" }]
+  fault: slow
+  expect: [first line still lands fast, the slow part happens behind it]
+  outcome: answered
+
+- id: J-274
+  title: Model unavailable entirely
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "hello" }]
+  fault: unavailable
+  expect: [says it cannot answer right now, offers the human, no invented answer]
+  outcome: handed_off
+
+- id: J-275
+  title: Per-visitor cap reached
+  entry: /
+  visitor: { state: returning, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "one more question" }]
+  fault: capped
+  expect: [explains plainly, offers the booking link, does not pretend to be thinking]
+  outcome: handed_off
+
+- id: J-276
+  title: Local server down
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "hi" }]
+  fault: server_down
+  expect: [the dock fails visibly rather than silently, no half-rendered state]
+  outcome: recovered
+
+- id: J-277
+  title: Research call times out
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: specific_question
+  script: [{ visitor: "how do you compare to Clay" }]
+  fault: research_timeout
+  expect: [abandons cleanly, says so, does not fabricate sources]
+  outcome: recovered
+
+- id: J-278
+  title: Error during a consequential step
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "create the draft" }]
+  fault: model_error
+  expect: [never leaves a half-created campaign unreported, states what did and did not happen]
+  outcome: recovered
+
+# --- Page and DOM faults (8) ---
+- id: J-279
+  title: Target element is gone
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "highlight the enterprise plan" }]
+  fault: element_missing
+  expect: [says it cannot find it, does not point at the wrong thing]
+  outcome: honest_no
+
+- id: J-280
+  title: Page changed under the agent
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "click continue" }]
+  fault: dom_changed
+  expect: [re-reads before clicking, never clicks a stale index]
+  outcome: recovered
+
+- id: J-281
+  title: Site index is stale
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "open the integrations page" }]
+  fault: stale_index
+  expect: [reports the stale index rather than silently using it]
+  outcome: honest_no
+
+- id: J-282
+  title: Navigation lands somewhere unexpected
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "take me to the case studies" }]
+  fault: redirect
+  expect: [notices the wrong landing, says so, does not narrate the intended page]
+  outcome: recovered
+
+- id: J-283
+  title: Page never finishes loading
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "show me pricing" }]
+  fault: slow_page
+  expect: [does not claim arrival, tells the visitor what is happening]
+  outcome: recovered
+
+- id: J-284
+  title: Modal blocks the cursor
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "start a new campaign" }]
+  fault: unexpected_modal
+  expect: [handles or reports the modal, never clicks blindly behind it]
+  outcome: recovered
+
+- id: J-285
+  title: Cursor animation stalls
+  entry: /
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "point at the pricing table" }]
+  fault: cursor_stall
+  expect: [the spoken line still completes, the turn still ends]
+  outcome: recovered
+
+- id: J-286
+  title: Dock covers the highlight
+  entry: /pricing
+  visitor: { state: first, industry: unknown, openness: asks }
+  intent: browsing
+  script: [{ visitor: "show me the top plan" }]
+  fault: small_viewport
+  expect: [moves itself or scrolls so the target is visible]
+  outcome: shown
+
+# --- Transport and state faults (7) ---
+- id: J-287
+  title: Extension context invalidated
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "show me pricing" }]
+  fault: extension_reloaded
+  expect: [falls through to the local store, the visitor still moves]
+  outcome: shown
+  note: covered by tests/bg-context.test.cjs.
+
+- id: J-288
+  title: Page context with no extension
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "show me pricing" }]
+  fault: userscript_build
+  expect: [the task rides sessionStorage, navigation still executes]
+  outcome: shown
+  note: the original bug. Guarded on sendMessage instead of runtime.id.
+
+- id: J-289
+  title: Store unreachable mid-task
+  entry: /campaigns/new
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: "create the draft" }]
+  fault: store_error
+  expect: [does not lose the task silently, reports what it could not save]
+  outcome: recovered
+
+- id: J-290
+  title: Task resumed on the wrong origin
+  entry: /campaigns
+  visitor: { state: customer, industry: unknown, openness: answers }
+  intent: needs_support
+  script: [{ visitor: (arrives with a stale sbl.so task in store) }]
+  expect: [does not resurrect a cross-origin task, does not repeat an old answer]
+  outcome: recovered
+
+- id: J-291
+  title: Trace post fails
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "hello" }]
+  fault: trace_down
+  expect: [the conversation is unaffected; tracing is fire-and-forget]
+  outcome: answered
+
+- id: J-292
+  title: Welcome never reaches the tracer
+  entry: /
+  visitor: { state: first, industry: unknown, openness: wont_talk }
+  intent: browsing
+  script: [{ visitor: (lands, agent opens) }]
+  expect: [the opening line appears in the trace and is scoreable]
+  outcome: engaged
+  note: known defect - welcome is invisible to the tracer, so T73 cannot be suite-verified.
+
+- id: J-293
+  title: Two injectors enabled at once
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  fault: double_injection
+  expect: [one dock only, no duplicated greeting, no contradictory state]
+  outcome: engaged
+
+# --- Voice faults (7) ---
+- id: J-294
+  title: One sentence split across turns
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: (speaks one sentence with two natural pauses) }]
+  expect: [one turn, one answer, not three fragments each drawing a reply]
+  outcome: answered
+  note: observed live - three consecutive turns were fragments of one spoken sentence.
+
+- id: J-295
+  title: Background noise mistaken for speech
+  entry: /
+  visitor: { state: first, industry: unknown, openness: wont_talk }
+  intent: browsing
+  fault: noise
+  expect: [does not answer noise, stays quiet]
+  outcome: no_engagement
+
+- id: J-296
+  title: Visitor talks over the agent
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: (interrupts mid-sentence) }]
+  expect: [stops speaking at once, the new message pre-empts the old turn]
+  outcome: recovered
+
+- id: J-297
+  title: Microphone denied
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: (clicks Talk, denies permission) }]
+  expect: [falls back to text cleanly, explains once]
+  outcome: recovered
+
+- id: J-298
+  title: Voice session drops mid-turn
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  fault: live_disconnect
+  expect: [the conversation continues in text, nothing is lost]
+  outcome: recovered
+
+- id: J-299
+  title: Mouth model tries to answer
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: specific_question
+  script: [{ visitor: "what is your pricing" }]
+  expect: [the speaking session never improvises content; it speaks only what the brain produced]
+  outcome: answered
+
+- id: J-300
+  title: Silence is never the outcome
+  entry: /
+  visitor: { state: first, industry: unknown, openness: answers }
+  intent: browsing
+  script: [{ visitor: "are you still there" }]
+  fault: any
+  expect: [every turn ends answered, asked, handed off, or an honest cannot - never nothing]
+  outcome: answered
+  note: never-rule 8. The single most important row in the suite.
