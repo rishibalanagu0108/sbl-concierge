@@ -70,8 +70,8 @@ export async function httpStatus(url, timeoutMs = 10_000) {
 
 // ---- the visitor --------------------------------------------------------
 export class Visitor {
-  static async start({ repo = DEFAULT_REPO, headed = false, start = "https://sbl.so/", outDir, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS } = {}) {
-    const v = new Visitor({ repo, headed, start, outDir, quietMs, maxWaitMs });
+  static async start({ repo = DEFAULT_REPO, headed = false, start = "https://sbl.so/", outDir, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS, authState = process.env.SBL_AUTH_STATE || null } = {}) {
+    const v = new Visitor({ repo, headed, start, outDir, quietMs, maxWaitMs, authState });
     await v.#launch();
     return v;
   }
@@ -86,7 +86,10 @@ export class Visitor {
     const { chromium } = createRequire(dirs[0])("playwright");
     const bundle = fs.readFileSync(path.join(repo, "sbl-agent.js"), "utf8");
     this.browser = await chromium.launch({ headless: !this.headed, args: this.headed ? [] : ["--headless=new"] });
-    const ctx = this.ctx = await this.browser.newContext({ viewport: { width: 1440, height: 900 } });
+    // A saved session (tools/experience/capture-login.mjs) lets the dashboard journeys run
+    // signed in. Without it they land on the login wall and every verdict is meaningless.
+    const auth = this.authState && fs.existsSync(this.authState) ? { storageState: this.authState } : {};
+    const ctx = this.ctx = await this.browser.newContext({ viewport: { width: 1440, height: 900 }, ...auth });
     await ctx.grantPermissions(["local-network-access"]).catch(async () => {
       for (const origin of ["https://sbl.so", "https://app.secondbrainlabs.com"]) await ctx.grantPermissions(["local-network-access"], { origin }).catch(() => {});
     });
