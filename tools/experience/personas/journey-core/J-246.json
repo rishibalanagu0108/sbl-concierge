@@ -1,0 +1,15 @@
+{
+ "id": "J-246",
+ "description": "Will not give an email [first/wont_volunteer/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "not giving you my email",
+   "tags": [
+    "J-246"
+   ],
+   "expect": {}
+  }
+ ]
+}

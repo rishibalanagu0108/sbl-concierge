@@ -1,0 +1,17 @@
+{
+ "id": "J-011",
+ "description": "Asks to be left alone [first/wont_talk/unknown] intent=browsing outcome=dismissed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "not interested, close this",
+   "tags": [
+    "J-011"
+   ],
+   "expect": {
+    "maxLines": 1
+   }
+  }
+ ]
+}

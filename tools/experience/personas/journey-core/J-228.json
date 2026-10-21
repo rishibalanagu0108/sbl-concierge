@@ -1,0 +1,15 @@
+{
+ "id": "J-228",
+ "description": "Buying credits is the visitor's click [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/billing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "top me up",
+   "tags": [
+    "J-228"
+   ],
+   "expect": {}
+  }
+ ]
+}

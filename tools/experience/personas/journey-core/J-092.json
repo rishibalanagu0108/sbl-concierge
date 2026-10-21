@@ -1,0 +1,15 @@
+{
+ "id": "J-092",
+ "description": "Refused, now asks for it themselves [returning_after_refusal/asks/has_proof] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "actually how do I start the trial",
+   "tags": [
+    "J-092"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-026",
+ "description": "Asks for own industry, proof exists [first/asks/has_proof] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "anything in healthcare?",
+   "tags": [
+    "J-026"
+   ],
+   "expect": {}
+  }
+ ]
+}

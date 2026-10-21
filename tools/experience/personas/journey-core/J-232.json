@@ -1,0 +1,15 @@
+{
+ "id": "J-232",
+ "description": "CRM screen, not mapped [customer/asks/unknown] intent=needs_support outcome=honest_no",
+ "start": "https://app.secondbrainlabs.com/crm",
+ "steps": [
+  {
+   "do": "say",
+   "text": "set up the CRM sync",
+   "tags": [
+    "J-232"
+   ],
+   "expect": {}
+  }
+ ]
+}

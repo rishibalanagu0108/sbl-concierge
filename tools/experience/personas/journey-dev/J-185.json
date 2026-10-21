@@ -1,0 +1,15 @@
+{
+ "id": "J-185",
+ "description": "Asks to launch, must stop [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "and launch it",
+   "tags": [
+    "J-185"
+   ],
+   "expect": {}
+  }
+ ]
+}

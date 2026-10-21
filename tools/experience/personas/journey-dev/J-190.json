@@ -1,0 +1,15 @@
+{
+ "id": "J-190",
+ "description": "Hire Profile is not the skip button [customer/answers/unknown] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I do not have a LinkedIn account connected",
+   "tags": [
+    "J-190"
+   ],
+   "expect": {}
+  }
+ ]
+}

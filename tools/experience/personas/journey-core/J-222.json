@@ -1,0 +1,15 @@
+{
+ "id": "J-222",
+ "description": "Drafts a reply, does not send [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/chat",
+ "steps": [
+  {
+   "do": "say",
+   "text": "reply to that one saying we can do Thursday",
+   "tags": [
+    "J-222"
+   ],
+   "expect": {}
+  }
+ ]
+}

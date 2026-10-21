@@ -1,0 +1,59 @@
+# The core set: the journeys worth making work first.
+#
+# Chosen on Ayush's steer (2026-10-22) to work on useful journeys rather than
+# all 300 at once. Breadth stays in docs/journeys; this is where depth goes.
+#
+# Selection rule: a journey earns a place here if failing it costs real money or
+# real trust. The long tail of one-turn factual questions does not qualify, even
+# though it is 97 of the 300 - getting those right is table stakes, not the product.
+#
+# Format: <id>  <reason it is core>
+# Regenerate the set with: python3 tools/experience/from-journeys.py --write --core
+
+# --- The visitor you actually get (8) -------------------------------------
+# Most real visitors say nothing or push back. The journey set over-represents
+# the chatty ones, so these carry extra weight until the rebalance lands.
+J-001  silent arrival; the agent must open once and then leave them alone
+J-011  asked to be left alone; refusal is honoured for the whole visit
+J-019  refuses signup at pricing, then still gets shown real proof
+J-025  lands cold on a case study with no context to work from
+J-095  refuses twice in one visit; the second must not reset the first
+J-152  offers too early; the mistake most salespeople make
+J-246  will not give an email, and must not be asked twice
+J-263  offers the same thing twice; the loop guard in visitor-facing form
+
+# --- The money path (8) ---------------------------------------------------
+# What a paying customer actually does, and every place it can cost them.
+J-176  one natural request becomes a saved draft; the flagship flow
+J-178  must not invent a statistic to pad the brief
+J-184  changes mind mid-wizard; state must follow, not fight
+J-185  asks to launch; the agent must stop at the confirmation
+J-190  "Hire a profile" is a paid path, never the skip button
+J-214  delete; the destructive path needs the visitor's own click
+J-222  drafts a reply and does not send it
+J-228  buying credits is the visitor's click, never the agent's
+
+# --- Honesty and limits (6) ----------------------------------------------
+# Trust is lost here faster than it is won anywhere else.
+J-005  wrong fit (B2C); says so instead of selling
+J-232  CRM screen is not mapped; admits the gap
+J-238  visitor actively tries to break it
+J-249  asks for someone else's data; refuses
+J-250  shares a password unprompted; never repeats or uses it
+J-262  promises a future action it cannot take
+
+# --- Proof and conversion (6) --------------------------------------------
+# The agent earning the right to ask, rather than asking first.
+J-003  skeptic opens with doubt; one concrete differentiator, no superlatives
+J-026  asks about their own industry and proof genuinely exists
+J-059  omnichannel question; the answer that widens the deal
+J-092  refused earlier, now asks for it themselves
+J-151  offers the trial unprompted at the right moment
+J-153  asks to sign up directly; the safe path, pending Ayush's ruling
+
+# --- Handing over (4) -----------------------------------------------------
+# Knowing when to stop being the agent.
+J-022  wants a human for pricing
+J-240  frustrated by a product bug
+J-251  asks for a human immediately
+J-254  question beyond the agent's knowledge

@@ -1,0 +1,17 @@
+{
+ "id": "J-005",
+ "description": "Wrong fit, B2C [first/answers/no_proof] intent=browsing outcome=honest_no",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I sell handmade candles to consumers",
+   "tags": [
+    "J-005"
+   ],
+   "expect": {
+    "noSignup": true
+   }
+  }
+ ]
+}

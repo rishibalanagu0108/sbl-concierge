@@ -1,0 +1,33 @@
+{
+ "id": "J-019",
+ "description": "Refuses signup at the pricing page [first/wont_volunteer/no_proof] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 8000,
+   "tags": [
+    "J-019"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "just looking, not ready to sign up",
+   "tags": [
+    "J-019"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "yeah go on",
+   "tags": [
+    "J-019"
+   ],
+   "expect": {
+    "noSignup": true
+   }
+  }
+ ]
+}

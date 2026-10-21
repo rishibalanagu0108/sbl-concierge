@@ -1,0 +1,23 @@
+{
+ "id": "J-263",
+ "description": "Offers the same thing twice [first/wont_volunteer/unknown] intent=browsing outcome=no_engagement",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-263"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-263"
+   ],
+   "expect": {}
+  }
+ ]
+}
