@@ -1,6 +1,7 @@
 const test = require("node:test");
 const assert = require("node:assert/strict");
 const { createMemory } = require("../core/memory.js");
+const Task = require("../core/task.js");
 
 function clock(start = 1000) {
   let value = start;
@@ -265,4 +266,36 @@ test("a return after ten days is flagged with a note saying when they were last 
   const soon = createMemory({ now: () => 1_000_000 + 60_000 });
   soon.hydrate(stored);
   assert.equal(soon.contextForModel().returning, null, "a reload in the same sitting is not a return");
+});
+
+test("a visitor reply clears the asked-question memory, so the follow-up is not a re-ask", () => {
+  // Live (trace def8b81f-yzcx-20, 2026-10-21): the agent asked one compound question -
+  // "What offer should this WhatsApp campaign promote, what should interested agents do,
+  // and what campaign name would you like?" - the visitor answered only the offer, and the
+  // correct follow-up for the remaining two overlapped the original by more than 0.6. The
+  // ask-once guard refused it twice and the turn ended "failed" on "Sorry, I lost my thread
+  // there." Campaign creation died on a partial answer, which is how people actually answer.
+  const compound = "What offer should this promote, what should agents do, and what name?";
+  const task = Task.newTask("create a whatsapp campaign");
+  Task.said(task, compound);
+  Task.said(task, "I am opening a new WhatsApp campaign.");
+  task.question = compound;
+
+  Task.answered(task);
+
+  assert.strictEqual(task.question, null, "the answered question is forgotten");
+  assert.deepStrictEqual(task.said, ["I am opening a new WhatsApp campaign."],
+    "questions drop out, plain statements stay so the agent still does not repeat itself");
+});
+
+test("answered() does not excuse repeating a question the visitor never replied to", () => {
+  // The case the guard exists for: the same question over and over with the visitor silent.
+  // Nothing calls answered() in that stretch, so the question stays in memory and stays blocked.
+  const q = "What is your company website?";
+  const task = Task.newTask("collect the website");
+  Task.said(task, q);
+  task.question = q;
+  assert.strictEqual(task.question, q);
+  assert.ok(task.said.includes(q));
+  assert.strictEqual(Task.answered(undefined), undefined, "no task is not an error");
 });

@@ -967,6 +967,11 @@
         if (Turn.bareRefusal(raw ?? text)) Turn.declined(visit, stamp()); // a bare "no" / "stop" / "not yet" is a refusal whatever the model marks
         keepVisit();
       }
+      // A reply answers whatever was asked, so the follow-up question is not a re-ask.
+      // Without this, a compound question ("the offer, the call to action and the name?")
+      // that the visitor answers in part makes the correct follow-up look like a repeat:
+      // ask-once refuses it twice and the turn dies on "Sorry, I lost my thread there."
+      if (!system && !askingSecret && task) Task.answered(task);
       if (waiter) trace.end("asked", nowUrl()); else if (running) trace.end(turn?.ended ? turn.kind || "failed" : "preempted", nowUrl());
       noteTurn(turn, waiter ? "asked" : "preempted");
       trace.open(askingSecret ? "[hidden]" : text, mode || (system ? "system" : "typed"), nowUrl());

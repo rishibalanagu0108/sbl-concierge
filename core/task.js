@@ -22,6 +22,18 @@
   // The barrier log entry is what resets it: repeats() counts consecutive same-key failures, and the
   // visitor's entry has a different key, so whatever the agent was stuck on starts from zero.
   // The words are kept (bounded) so a page move cannot lose them: the continuation preface carries
+  /** The visitor has replied, so every question put to them has been answered - even if only
+   *  in part. Asking for the REST of a partial answer is not a re-ask, and the ask-once guard
+   *  must stop treating it as one. Repeats with no reply in between are still blocked, which is
+   *  the case that guard was built for (the founder session: the same question eight times,
+   *  ~2.4 s apart, with the visitor saying nothing). */
+  function answered(task) {
+    if (!task) return task;
+    task.question = null;
+    if (Array.isArray(task.said)) task.said = task.said.filter((s) => !/\?\s*$/.test(String(s).trim()));
+    return task;
+  }
+
   // what the visitor said since the last step (pushObservation dies with the page; this survives it).
   const heard = (task, text = "", now = Date.now()) => {
     if (!task) return;
@@ -90,5 +102,5 @@
     ].filter(Boolean).join("\n");
   }
 
-  return { newTask, heard, step, resumed, awaitingAnswer, shouldResume, expired, record, said, repeats, loopVerdict, preface, TTL_MS, BUDGET, MAX_RESUMES, SAME_WARN, SAME_STOP, NO_PROGRESS };
+  return { newTask, heard, answered, step, resumed, awaitingAnswer, shouldResume, expired, record, said, repeats, loopVerdict, preface, TTL_MS, BUDGET, MAX_RESUMES, SAME_WARN, SAME_STOP, NO_PROGRESS };
 });
