@@ -70,8 +70,8 @@ export async function httpStatus(url, timeoutMs = 10_000) {
 
 // ---- the visitor --------------------------------------------------------
 export class Visitor {
-  static async start({ repo = DEFAULT_REPO, headed = false, start = "https://sbl.so/", outDir, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS, authState = process.env.SBL_AUTH_STATE || null } = {}) {
-    const v = new Visitor({ repo, headed, start, outDir, quietMs, maxWaitMs, authState });
+  static async start({ repo = DEFAULT_REPO, headed = false, start = "https://sbl.so/", outDir, quietMs = QUIET_MS, maxWaitMs = MAX_WAIT_MS, profile = process.env.SBL_PROFILE ? path.join(DEFAULT_REPO, ".browser-profile/suite") : null } = {}) {
+    const v = new Visitor({ repo, headed, start, outDir, quietMs, maxWaitMs, profile });
     await v.#launch();
     return v;
   }
@@ -85,11 +85,22 @@ export class Visitor {
     const dirs = [repo, DEFAULT_REPO].map((r) => path.join(r, "tools/capture/package.json")).filter((p) => fs.existsSync(p));
     const { chromium } = createRequire(dirs[0])("playwright");
     const bundle = fs.readFileSync(path.join(repo, "sbl-agent.js"), "utf8");
-    this.browser = await chromium.launch({ headless: !this.headed, args: this.headed ? [] : ["--headless=new"] });
-    // A saved session (tools/experience/capture-login.mjs) lets the dashboard journeys run
-    // signed in. Without it they land on the login wall and every verdict is meaningless.
-    const auth = this.authState && fs.existsSync(this.authState) ? { storageState: this.authState } : {};
-    const ctx = this.ctx = await this.browser.newContext({ viewport: { width: 1440, height: 900 }, ...auth });
+    // SBL_PROFILE reuses the signed-in profile from tools/experience/capture-login.mjs, so
+    // the dashboard journeys run authenticated instead of bouncing off the login wall.
+    // A profile rather than a cookie file because the app's credential lives in web storage,
+    // which storageState does not fully capture.
+    const opts = { viewport: { width: 1440, height: 900 } };
+    let ctx;
+    if (this.profile && fs.existsSync(this.profile)) {
+      ctx = this.ctx = await chromium.launchPersistentContext(this.profile, {
+        headless: !this.headed, args: this.headed ? [] : ["--headless=new"], ...opts,
+      });
+      this.browser = ctx.browser();
+      this.persistent = true;
+    } else {
+      this.browser = await chromium.launch({ headless: !this.headed, args: this.headed ? [] : ["--headless=new"] });
+      ctx = this.ctx = await this.browser.newContext(opts);
+    }
     await ctx.grantPermissions(["local-network-access"]).catch(async () => {
       for (const origin of ["https://sbl.so", "https://app.secondbrainlabs.com"]) await ctx.grantPermissions(["local-network-access"], { origin }).catch(() => {});
     });
@@ -112,7 +123,7 @@ export class Visitor {
     ctx.on("requestfinished", (r) => done(r, "ok"));
     ctx.on("requestfailed", (r) => done(r, "failed"));
 
-    const page = this.page = await ctx.newPage();
+    const page = this.page = this.persistent ? (ctx.pages()[0] || await ctx.newPage()) : await ctx.newPage();
     page.on("pageerror", (e) => this.#ev("pageerror", { text: String(e).slice(0, 300) }));
     page.on("console", (m) => { if (m.type() === "error" && /sbl-agent/.test(m.text())) this.#ev("pageerror", { text: m.text().slice(0, 300) }); });
     page.on("framenavigated", (f) => {
@@ -221,5 +232,6 @@ export class Visitor {
   goto(url) { return this.#watch("goto", { meta: { to: url }, fresh: true, before: () => this.page.goto(url, { waitUntil: "domcontentloaded" }).catch(() => {}) }, { minMs: 6000 }); }
   reload() { return this.#watch("reload", { meta: {}, fresh: true, before: async () => { await this.page.reload({ waitUntil: "domcontentloaded" }).catch(() => {}); await sleep(3000); } }, { minMs: 6000 }); }
   scroll(y = 600) { return this.#watch("scroll", { meta: { y }, before: async () => { await this.page.mouse.move(700, 450); await this.page.mouse.wheel(0, y); await sleep(1500); } }, { minMs: 2000 }); }
-  async close() { await this.browser?.close().catch(() => {}); }
+  // A persistent context owns its browser: closing the context is what releases the profile.
+  async close() { if (this.persistent) await this.ctx?.close().catch(() => {}); else await this.browser?.close().catch(() => {}); }
 }

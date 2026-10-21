@@ -1,64 +1,73 @@
-// Save an authenticated browser session for the suite to reuse.
-//   node tools/experience/capture-login.mjs [--out var/auth-state.json]
+// Sign in once into a browser profile the suite reuses.
+//   node tools/experience/capture-login.mjs            # opens the profile to sign in
+//   node tools/experience/capture-login.mjs --check     # reports whether it is still signed in
 //
-// Opens a VISIBLE browser on the SBL login page and waits. You sign in yourself; this
-// script never reads, types or stores a password. When it sees you land on the app it
-// saves the session cookies to a local file and exits.
+// Opens a VISIBLE browser on a dedicated profile directory and waits while you sign in.
+// This script never reads, types or stores a password - it only keeps the browser profile
+// the login leaves behind.
 //
-// The file is a live session. var/ is gitignored - keep it there, never commit it, never
-// paste it anywhere. Delete it when you are done: rm var/auth-state.json
+// Why a profile rather than a saved cookie file: the app keeps its credential in web
+// storage, which playwright's storageState does not fully capture (it never saves
+// sessionStorage). A persistent profile keeps cookies and storage together, which is what
+// actually signs you in.
+//
+// The profile is a live session. .browser-profile/ is gitignored. Delete it when you are
+// done: rm -rf .browser-profile/suite
 import fs from "node:fs";
 import path from "node:path";
 import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const arg = (n, d) => { const i = process.argv.indexOf(`--${n}`); return i < 0 ? d : process.argv[i + 1]; };
-const out = path.resolve(arg("out", path.join(REPO, "var/auth-state.json")));
+export const PROFILE_DIR = path.join(REPO, ".browser-profile/suite");
 const { chromium } = createRequire(path.join(REPO, "tools/capture/package.json"))("playwright");
 
-const browser = await chromium.launch({ headless: false });
-const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
-const page = await ctx.newPage();
-await page.goto("https://app.secondbrainlabs.com/", { waitUntil: "domcontentloaded" });
+const check = process.argv.includes("--check");
+fs.mkdirSync(PROFILE_DIR, { recursive: true });
 
-console.log("\nA browser window is open. Sign in there yourself.");
-console.log("This browser is EMPTY - being signed in elsewhere in Chrome does not count.");
-console.log("Waiting for real credentials (up to 5 minutes)...\n");
+const ctx = await chromium.launchPersistentContext(PROFILE_DIR, {
+  headless: check,
+  viewport: { width: 1440, height: 900 },
+  args: check ? ["--headless=new"] : [],
+});
+const page = ctx.pages()[0] || (await ctx.newPage());
 
-// A URL match is not proof: the app can show a public shell before auth lands. Wait for an
-// actual credential - a cookie on the SBL domain, or a token in the app origin's storage.
-const credentialed = async () => {
-  const cookies = await ctx.cookies();
-  if (cookies.some((c) => /secondbrainlabs/.test(c.domain))) return "cookie";
-  const st = await ctx.storageState();
-  const origin = (st.origins || []).find((o) => /secondbrainlabs/.test(o.origin || ""));
-  if (origin && (origin.localStorage || []).some((i) => /token|auth|session|jwt|supabase|sb-/i.test(i.name))) return "storage";
-  return null;
+const signedIn = async () => {
+  await page.goto("https://app.secondbrainlabs.com/campaigns", { waitUntil: "domcontentloaded" }).catch(() => {});
+  await page.waitForTimeout(6000);
+  const text = await page.evaluate(() => document.body.innerText).catch(() => "");
+  return !/\/login|unauthorized|sign in to/i.test(page.url() + " " + text.slice(0, 400));
 };
 
+if (check) {
+  const ok = await signedIn();
+  console.log(ok ? "SIGNED IN - the suite can run the dashboard journeys." : "SIGNED OUT - run this without --check and sign in.");
+  await ctx.close();
+  process.exit(ok ? 0 : 1);
+}
+
+if (await signedIn()) {
+  console.log("Already signed in. Nothing to do.");
+  await ctx.close();
+  process.exit(0);
+}
+
+console.log("\nA browser window is open on the SBL login page. Sign in THERE.");
+console.log("That window is the one the tests will use, so being signed in elsewhere does not count.");
+console.log("Waiting up to 5 minutes...\n");
+
 const deadline = Date.now() + 5 * 60_000;
-let how = null;
+let ok = false;
 while (Date.now() < deadline) {
-  await page.waitForTimeout(2000);
-  try { how = await credentialed(); } catch { /* page navigating */ }
-  if (how) break;
+  await page.waitForTimeout(3000);
+  const url = page.url();
+  const text = await page.evaluate(() => document.body.innerText).catch(() => "");
+  if (/app\.secondbrainlabs\.com\/(campaigns|leads|signals|chat|analytics|settings|users)/.test(url)
+      && !/unauthorized|sign in to/i.test(text.slice(0, 400))) { ok = true; break; }
 }
 
-if (!how) {
-  console.error("No SBL credential appeared, so nothing was saved.");
-  console.error("Make sure you completed sign-in IN THAT WINDOW and reached the dashboard.");
-  await browser.close();
-  process.exit(1);
-}
-
-fs.mkdirSync(path.dirname(out), { recursive: true });
-await ctx.storageState({ path: out });
-const saved = JSON.parse(fs.readFileSync(out, "utf8"));
-const sbl = (saved.cookies || []).filter((c) => /secondbrainlabs/.test(c.domain)).length;
-const origins = (saved.origins || []).filter((o) => /secondbrainlabs/.test(o.origin || "")).length;
-console.log(`Saved to ${out}`);
-console.log(`  credential found via: ${how}`);
-console.log(`  SBL cookies: ${sbl}   SBL storage origins: ${origins}`);
-console.log("This is a live session. It is gitignored. Delete it when you are done.");
-await browser.close();
+console.log(ok
+  ? `Signed in. The profile is kept at ${PROFILE_DIR}\nRun the suite with SBL_PROFILE=1, or just tell Claude it is done.`
+  : "No signed-in dashboard appeared, so nothing was kept.");
+await ctx.close();
+process.exit(ok ? 0 : 1);
