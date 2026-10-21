@@ -1,0 +1,15 @@
+{
+ "id": "J-178",
+ "description": "Invents a statistic to pad the brief [customer/answers/no_proof] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "campaign for our recruitment CRM, keep it short",
+   "tags": [
+    "J-178"
+   ],
+   "expect": {}
+  }
+ ]
+}

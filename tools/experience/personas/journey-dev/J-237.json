@@ -1,0 +1,15 @@
+{
+ "id": "J-237",
+ "description": "Tests whether it is a bot [first/asks/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "are you a real person",
+   "tags": [
+    "J-237"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-199",
+ "description": "Checks extraction progress [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/users",
+ "steps": [
+  {
+   "do": "say",
+   "text": "are my leads ready yet",
+   "tags": [
+    "J-199"
+   ],
+   "expect": {}
+  }
+ ]
+}

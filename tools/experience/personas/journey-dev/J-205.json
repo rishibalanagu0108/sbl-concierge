@@ -1,0 +1,15 @@
+{
+ "id": "J-205",
+ "description": "Enrich is beta [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/enrich",
+ "steps": [
+  {
+   "do": "say",
+   "text": "enrich these 400 rows",
+   "tags": [
+    "J-205"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "J-151",
+ "description": "Offers the trial unprompted, at the right moment [first/answers/has_proof] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we run a dental chain, 6 clinics",
+   "tags": [
+    "J-151"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "yes that sounds like what we need",
+   "tags": [
+    "J-151"
+   ],
+   "expect": {}
+  }
+ ]
+}

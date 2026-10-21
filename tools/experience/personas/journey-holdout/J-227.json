@@ -1,0 +1,15 @@
+{
+ "id": "J-227",
+ "description": "Account and plan question [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/billing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how many credits do I have left",
+   "tags": [
+    "J-227"
+   ],
+   "expect": {}
+  }
+ ]
+}

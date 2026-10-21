@@ -1,0 +1,15 @@
+{
+ "id": "J-193",
+ "description": "Sales Navigator URL [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "here is my sales nav search link",
+   "tags": [
+    "J-193"
+   ],
+   "expect": {}
+  }
+ ]
+}

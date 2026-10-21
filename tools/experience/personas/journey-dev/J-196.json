@@ -1,0 +1,15 @@
+{
+ "id": "J-196",
+ "description": "No previous audiences [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "reuse my last list",
+   "tags": [
+    "J-196"
+   ],
+   "expect": {}
+  }
+ ]
+}

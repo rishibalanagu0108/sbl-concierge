@@ -1,0 +1,15 @@
+{
+ "id": "J-020",
+ "description": "Per-seat or per-account [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is it per user or per LinkedIn account",
+   "tags": [
+    "J-020"
+   ],
+   "expect": {}
+  }
+ ]
+}

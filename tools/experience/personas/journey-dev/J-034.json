@@ -1,0 +1,15 @@
+{
+ "id": "J-034",
+ "description": "Converts straight from the case study [first/answers/has_proof] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "ok I want this for my clinic",
+   "tags": [
+    "J-034"
+   ],
+   "expect": {}
+  }
+ ]
+}

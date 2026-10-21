@@ -1,0 +1,15 @@
+{
+ "id": "J-158",
+ "description": "Wants a trial extension [returning/asks/unknown] intent=ready_to_buy outcome=handed_off",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "my trial ran out, can I get more time",
+   "tags": [
+    "J-158"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-056",
+ "description": "Opt-out handling [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/whatsapp/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do people unsubscribe",
+   "tags": [
+    "J-056"
+   ],
+   "expect": {}
+  }
+ ]
+}

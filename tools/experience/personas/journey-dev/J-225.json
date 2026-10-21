@@ -1,0 +1,15 @@
+{
+ "id": "J-225",
+ "description": "Bad numbers, asks why [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/analytics",
+ "steps": [
+  {
+   "do": "say",
+   "text": "2% reply rate, what is wrong",
+   "tags": [
+    "J-225"
+   ],
+   "expect": {}
+  }
+ ]
+}

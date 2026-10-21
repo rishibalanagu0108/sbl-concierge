@@ -1,0 +1,15 @@
+{
+ "id": "J-014",
+ "description": "Which plan fits me [first/answers/has_proof] intent=ready_to_buy outcome=shown",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "healthcare, ~2000 contacts a month, which plan",
+   "tags": [
+    "J-014"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-128",
+ "description": "SBL vs HeyReach, agency angle [first/answers/has_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/blog/secondbrain-vs-heyreach-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are an agency, HeyReach is built for that",
+   "tags": [
+    "J-128"
+   ],
+   "expect": {}
+  }
+ ]
+}

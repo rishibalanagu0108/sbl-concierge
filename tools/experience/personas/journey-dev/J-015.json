@@ -1,0 +1,15 @@
+{
+ "id": "J-015",
+ "description": "Asks for a discount [first/asks/unknown] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "any discount for annual",
+   "tags": [
+    "J-015"
+   ],
+   "expect": {}
+  }
+ ]
+}

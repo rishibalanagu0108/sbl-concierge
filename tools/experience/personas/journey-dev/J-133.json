@@ -1,0 +1,15 @@
+{
+ "id": "J-133",
+ "description": "Dripify alternatives [first/answers/unknown] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/linkedin/dripify-alternatives/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I want something less likely to get me banned",
+   "tags": [
+    "J-133"
+   ],
+   "expect": {}
+  }
+ ]
+}

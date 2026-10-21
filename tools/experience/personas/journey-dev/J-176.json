@@ -1,0 +1,15 @@
+{
+ "id": "J-176",
+ "description": "One natural request, draft only [customer/answers/no_proof] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "create a LinkedIn draft called Flow test. We sell CRM to small US recruitment agencies and want demos. Leave leads and sender empty.",
+   "tags": [
+    "J-176"
+   ],
+   "expect": {}
+  }
+ ]
+}

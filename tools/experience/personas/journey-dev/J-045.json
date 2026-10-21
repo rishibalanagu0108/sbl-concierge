@@ -1,0 +1,15 @@
+{
+ "id": "J-045",
+ "description": "Fastest path to meetings [first/answers/unknown] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/questions/fastest-way-book-linkedin-meetings-without-cold-calling",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how fast can I see a booking",
+   "tags": [
+    "J-045"
+   ],
+   "expect": {}
+  }
+ ]
+}

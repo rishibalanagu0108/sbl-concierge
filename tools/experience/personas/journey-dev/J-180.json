@@ -1,0 +1,15 @@
+{
+ "id": "J-180",
+ "description": "Empty workspace, different button [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "set up my first campaign",
+   "tags": [
+    "J-180"
+   ],
+   "expect": {}
+  }
+ ]
+}

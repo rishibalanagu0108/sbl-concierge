@@ -1,0 +1,15 @@
+{
+ "id": "J-153",
+ "description": "Visitor asks to sign up directly [first/asks/unknown] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do I create an account",
+   "tags": [
+    "J-153"
+   ],
+   "expect": {}
+  }
+ ]
+}

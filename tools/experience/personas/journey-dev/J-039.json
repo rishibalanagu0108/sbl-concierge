@@ -1,0 +1,15 @@
+{
+ "id": "J-039",
+ "description": "Agency safety [first/asks/has_proof] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/questions/best-linkedin-automation-tool-safe-agencies",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is it safe to run this across client accounts",
+   "tags": [
+    "J-039"
+   ],
+   "expect": {}
+  }
+ ]
+}

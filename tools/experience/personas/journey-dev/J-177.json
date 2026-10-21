@@ -1,0 +1,15 @@
+{
+ "id": "J-177",
+ "description": "Brief too thin to reach 200 characters [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "make me a campaign",
+   "tags": [
+    "J-177"
+   ],
+   "expect": {}
+  }
+ ]
+}

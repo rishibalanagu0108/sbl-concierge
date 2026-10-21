@@ -1,0 +1,15 @@
+{
+ "id": "J-191",
+ "description": "Describes an ICP in plain words [customer/answers/no_proof] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "SaaS companies, 11 to 50 people, founders",
+   "tags": [
+    "J-191"
+   ],
+   "expect": {}
+  }
+ ]
+}

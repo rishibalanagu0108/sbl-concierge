@@ -1,0 +1,15 @@
+{
+ "id": "J-280",
+ "description": "Page changed under the agent [customer/answers/unknown] intent=needs_support outcome=recovered",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "click continue",
+   "tags": [
+    "J-280"
+   ],
+   "expect": {}
+  }
+ ]
+}

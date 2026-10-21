@@ -1,0 +1,15 @@
+{
+ "id": "J-156",
+ "description": "Asks what signup commits them to [first/asks/unknown] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "does this charge me straight away",
+   "tags": [
+    "J-156"
+   ],
+   "expect": {}
+  }
+ ]
+}

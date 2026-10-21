@@ -1,0 +1,15 @@
+{
+ "id": "J-055",
+ "description": "Message templates [first/answers/no_proof] intent=browsing outcome=answered",
+ "start": "https://sbl.so/linkedin/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "give me a message that works for SaaS",
+   "tags": [
+    "J-055"
+   ],
+   "expect": {}
+  }
+ ]
+}

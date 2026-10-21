@@ -1,0 +1,15 @@
+{
+ "id": "J-254",
+ "description": "Question beyond the agent's knowledge [first/asks/unknown] intent=specific_question outcome=handed_off",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is your uptime SLA",
+   "tags": [
+    "J-254"
+   ],
+   "expect": {}
+  }
+ ]
+}

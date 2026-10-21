@@ -1,0 +1,15 @@
+{
+ "id": "J-164",
+ "description": "Work email vs personal [first/asks/has_proof] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I use my gmail",
+   "tags": [
+    "J-164"
+   ],
+   "expect": {}
+  }
+ ]
+}

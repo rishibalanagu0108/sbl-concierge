@@ -10,12 +10,39 @@ test("every persona file validates (known keys, regexes compile, hard limits)", 
   for (const set of SETS) for (const p of loadPersonas(set)) {
     n++;
     assert.deepStrictEqual(validatePersona(p), [], `${set}/${p.file}`);
-    if (set !== "replay") assert.ok(p.steps.length >= 6 && p.steps.length <= 10, `${p.id}: ${p.steps.length} steps`);
+    // The hand-written personas are long visits (6-10 turns). The generated journey
+    // personas are short, single-situation scenarios, so the length rule does not apply.
+    if (set === "replay" || set.startsWith("journey-")) assert.ok(p.steps.length >= 1, `${p.id}: no steps`);
+    else assert.ok(p.steps.length >= 6 && p.steps.length <= 10, `${p.id}: ${p.steps.length} steps`);
   }
   assert.strictEqual(loadPersonas("dev").length, 6);
   assert.strictEqual(loadPersonas("holdout").length, 4);
   assert.strictEqual(loadPersonas("replay").length, 1);
   assert.ok(n >= 11);
+});
+
+test("generated journey personas: ids are J-NNN, unique, and dev/holdout do not overlap", async () => {
+  const { loadPersonas } = await P();
+  const dev = loadPersonas("journey-dev"), hold = loadPersonas("journey-holdout");
+  assert.ok(dev.length > 0 && hold.length > 0);
+  const ids = [...dev, ...hold].map((p) => p.id);
+  for (const id of ids) assert.match(id, /^J-\d{3}$/);
+  assert.strictEqual(new Set(ids).size, ids.length, "duplicate journey id");
+  const devIds = new Set(dev.map((p) => p.id));
+  for (const p of hold) assert.ok(!devIds.has(p.id), `${p.id} is in both sets`);
+});
+
+test("probe exempts only its own step, and only a say step", async () => {
+  const { validatePersona } = await P();
+  const mk = (step) => ({ id: "x", description: "d", start: "https://sbl.so/", steps: [{ do: "say", text: "hi", tags: [], expect: {}, ...step }] });
+  // a declared probe allows the banned wording ...
+  assert.deepStrictEqual(validatePersona(mk({ text: "my password is hunter2", probe: "proves refusal" })), []);
+  // ... but an empty or non-string reason is not a probe
+  assert.ok(validatePersona(mk({ text: "my password is hunter2", probe: "  " })).some((m) => /non-empty reason/.test(m)));
+  assert.ok(validatePersona(mk({ text: "my password is hunter2", probe: true })).some((m) => /non-empty reason/.test(m)));
+  // ... and it never applies to a non-say step, nor excuses a signup goto
+  assert.ok(validatePersona(mk({ do: "goto", url: "https://sbl.so/signup", probe: "x" })).some((m) => /probe only on say/.test(m)));
+  assert.ok(validatePersona(mk({ do: "goto", url: "https://sbl.so/signup", probe: "x" })).some((m) => /signup/.test(m)));
 });
 
 test("validator rejects unknown keys, bad regexes, hard-limit wording, foreign emails", async () => {

@@ -1,0 +1,15 @@
+{
+ "id": "J-080",
+ "description": "Updates page, checking if alive [first/wont_volunteer/unknown] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/updates/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is this product still maintained",
+   "tags": [
+    "J-080"
+   ],
+   "expect": {}
+  }
+ ]
+}

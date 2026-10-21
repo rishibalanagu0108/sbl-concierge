@@ -1,0 +1,15 @@
+{
+ "id": "J-195",
+ "description": "Plan-gated source requested [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "message everyone who liked that post",
+   "tags": [
+    "J-195"
+   ],
+   "expect": {}
+  }
+ ]
+}

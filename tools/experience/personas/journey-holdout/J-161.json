@@ -1,0 +1,15 @@
+{
+ "id": "J-161",
+ "description": "Password stays with the visitor [first/answers/unknown] intent=ready_to_buy outcome=asked",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "say",
+   "text": "ok create it",
+   "tags": [
+    "J-161"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-042",
+ "description": "Multiple client accounts [first/answers/has_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/questions/best-linkedin-tool-multiple-client-accounts",
+ "steps": [
+  {
+   "do": "say",
+   "text": "one login, many client LinkedIn accounts?",
+   "tags": [
+    "J-042"
+   ],
+   "expect": {}
+  }
+ ]
+}

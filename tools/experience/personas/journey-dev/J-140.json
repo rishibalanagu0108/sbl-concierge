@@ -1,0 +1,15 @@
+{
+ "id": "J-140",
+ "description": "Expandi support review [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/expandi/expandi-customer-support-review/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is your support like",
+   "tags": [
+    "J-140"
+   ],
+   "expect": {}
+  }
+ ]
+}

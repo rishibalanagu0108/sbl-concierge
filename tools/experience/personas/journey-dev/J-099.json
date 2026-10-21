@@ -1,0 +1,15 @@
+{
+ "id": "J-099",
+ "description": "Soft no, not a hard refusal [returning/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "maybe later",
+   "tags": [
+    "J-099"
+   ],
+   "expect": {}
+  }
+ ]
+}

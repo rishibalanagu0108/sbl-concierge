@@ -1,0 +1,15 @@
+{
+ "id": "J-213",
+ "description": "Archive a campaign [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "archive the old one",
+   "tags": [
+    "J-213"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-281",
+ "description": "Site index is stale [first/asks/unknown] intent=browsing outcome=honest_no",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "open the integrations page",
+   "tags": [
+    "J-281"
+   ],
+   "expect": {}
+  }
+ ]
+}

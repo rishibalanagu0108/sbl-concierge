@@ -1,0 +1,15 @@
+{
+ "id": "J-072",
+ "description": "Knowledge base purpose [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what does the knowledge base do",
+   "tags": [
+    "J-072"
+   ],
+   "expect": {}
+  }
+ ]
+}

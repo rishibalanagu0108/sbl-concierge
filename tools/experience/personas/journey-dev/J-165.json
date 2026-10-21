@@ -1,0 +1,15 @@
+{
+ "id": "J-165",
+ "description": "Submission needs the visitor's click [first/answers/unknown] intent=ready_to_buy outcome=awaiting_confirmation",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "say",
+   "text": "go ahead",
+   "tags": [
+    "J-165"
+   ],
+   "expect": {}
+  }
+ ]
+}

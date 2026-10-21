@@ -1,0 +1,15 @@
+{
+ "id": "J-090",
+ "description": "Asks what it knows about them [returning/asks/has_proof] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what do you actually know about me",
+   "tags": [
+    "J-090"
+   ],
+   "expect": {}
+  }
+ ]
+}

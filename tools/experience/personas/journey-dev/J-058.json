@@ -1,0 +1,15 @@
+{
+ "id": "J-058",
+ "description": "Comment-to-DM curiosity [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/linkedin-comment-to-dm/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how does comment to DM work",
+   "tags": [
+    "J-058"
+   ],
+   "expect": {}
+  }
+ ]
+}

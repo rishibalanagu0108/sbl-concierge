@@ -1,0 +1,15 @@
+{
+ "id": "J-292",
+ "description": "Welcome never reaches the tracer [first/wont_talk/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-292"
+   ],
+   "expect": {}
+  }
+ ]
+}

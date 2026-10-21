@@ -1,0 +1,15 @@
+{
+ "id": "J-282",
+ "description": "Navigation lands somewhere unexpected [first/asks/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "take me to the case studies",
+   "tags": [
+    "J-282"
+   ],
+   "expect": {}
+  }
+ ]
+}

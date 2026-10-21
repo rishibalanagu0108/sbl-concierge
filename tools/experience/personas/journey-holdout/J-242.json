@@ -1,0 +1,15 @@
+{
+ "id": "J-242",
+ "description": "Says the agent is wrong [first/answers/unknown] intent=comparing_vendors outcome=corrected",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "that is not what your pricing page says",
+   "tags": [
+    "J-242"
+   ],
+   "expect": {}
+  }
+ ]
+}

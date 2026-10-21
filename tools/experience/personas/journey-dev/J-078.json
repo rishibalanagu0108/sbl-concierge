@@ -1,0 +1,15 @@
+{
+ "id": "J-078",
+ "description": "Affiliate curiosity [first/asks/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/affiliate-program/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how much do affiliates make",
+   "tags": [
+    "J-078"
+   ],
+   "expect": {}
+  }
+ ]
+}

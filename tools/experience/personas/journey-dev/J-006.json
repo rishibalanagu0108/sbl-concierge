@@ -1,0 +1,15 @@
+{
+ "id": "J-006",
+ "description": "Agency with many clients [first/answers/has_proof] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we run outreach for 12 clients, can we keep them separate",
+   "tags": [
+    "J-006"
+   ],
+   "expect": {}
+  }
+ ]
+}

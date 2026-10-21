@@ -1,0 +1,23 @@
+{
+ "id": "J-095",
+ "description": "Repeated refusal, same visit [returning/wont_volunteer/unknown] intent=browsing outcome=dismissed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "no signup",
+   "tags": [
+    "J-095"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "I said no",
+   "tags": [
+    "J-095"
+   ],
+   "expect": {}
+  }
+ ]
+}

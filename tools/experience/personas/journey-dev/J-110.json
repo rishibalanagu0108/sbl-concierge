@@ -1,0 +1,15 @@
+{
+ "id": "J-110",
+ "description": "Announced a move, must actually move [first/asks/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "take me to pricing",
+   "tags": [
+    "J-110"
+   ],
+   "expect": {}
+  }
+ ]
+}

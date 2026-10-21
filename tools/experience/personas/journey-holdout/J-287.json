@@ -1,0 +1,15 @@
+{
+ "id": "J-287",
+ "description": "Extension context invalidated [first/answers/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me pricing",
+   "tags": [
+    "J-287"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-181",
+ "description": "Picks the WhatsApp channel [customer/answers/has_proof] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "WhatsApp campaign for our clinic bookings",
+   "tags": [
+    "J-181"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-271",
+ "description": "Model returns an error mid-turn [first/answers/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me pricing",
+   "tags": [
+    "J-271"
+   ],
+   "expect": {}
+  }
+ ]
+}

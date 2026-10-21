@@ -1,0 +1,15 @@
+{
+ "id": "J-129",
+ "description": "Looking for Expandi alternatives [first/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/linkedin/expandi-alternatives-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "Expandi has been unreliable",
+   "tags": [
+    "J-129"
+   ],
+   "expect": {}
+  }
+ ]
+}

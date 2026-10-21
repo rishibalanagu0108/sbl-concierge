@@ -1,0 +1,17 @@
+{
+ "id": "J-152",
+ "description": "Offers too early, must not [first/wont_volunteer/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 10000,
+   "tags": [
+    "J-152"
+   ],
+   "expect": {
+    "noSignup": true
+   }
+  }
+ ]
+}

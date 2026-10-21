@@ -1,0 +1,15 @@
+{
+ "id": "J-137",
+ "description": "Is Dripify safe [first/asks/unknown] intent=specific_question outcome=shown",
+ "start": "https://sbl.so/dripify/is-dripify-safe/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I got a warning on LinkedIn last month",
+   "tags": [
+    "J-137"
+   ],
+   "expect": {}
+  }
+ ]
+}

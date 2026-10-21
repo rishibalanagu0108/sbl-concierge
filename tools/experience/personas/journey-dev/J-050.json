@@ -1,0 +1,15 @@
+{
+ "id": "J-050",
+ "description": "Best tool for Sales Nav, comparison framing [first/asks/unknown] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/questions/best-linkedin-tool-import-sales-navigator-leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "better than Phantombuster for this?",
+   "tags": [
+    "J-050"
+   ],
+   "expect": {}
+  }
+ ]
+}

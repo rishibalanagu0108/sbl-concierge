@@ -101,7 +101,7 @@ journeys:
   entry: /linkedin/meetalfred-alternatives-linkedin-automation/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: comparing_vendors
-  script: [{ visitor: (reads, silent 20s) }]
+  script: [{ visitor: "(reads, silent 20s)" }]
   expect: [opener acknowledges they are shopping, not a generic greeting]
   outcome: engaged
 
@@ -146,7 +146,7 @@ journeys:
   entry: /compare/aisdr-vs-salesforge-comparison/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (reads, leaves after 40s) }]
+  script: [{ visitor: "(reads, leaves after 40s)" }]
   expect: [one unobtrusive offer, no interception, no pop-up behaviour]
   outcome: no_engagement
 
@@ -220,7 +220,7 @@ journeys:
   entry: /waalaxy/waalaxy-promo-code/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (lands, silent) }]
+  script: [{ visitor: "(lands, silent)" }]
   expect: [recognises price sensitivity, leads with value not price]
   outcome: engaged
 
@@ -274,6 +274,6 @@ journeys:
   entry: /salesforge/salesforge-coupon-discounts/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (lands from search, bounces in 10s) }]
+  script: [{ visitor: "(lands from search, bounces in 10s)" }]
   expect: [one short offer within 1.5s or nothing at all]
   outcome: no_engagement

@@ -1,0 +1,15 @@
+{
+ "id": "J-114",
+ "description": "Agent's own claim is not a visitor decision [returning/answers/no_proof] intent=browsing outcome=corrected",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "why do you keep offering that example",
+   "tags": [
+    "J-114"
+   ],
+   "expect": {}
+  }
+ ]
+}

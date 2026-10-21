@@ -205,7 +205,7 @@ journeys:
   entry: /campaigns
   visitor: { state: customer, industry: unknown, openness: answers }
   intent: needs_support
-  script: [{ visitor: (arrives with a stale sbl.so task in store) }]
+  script: [{ visitor: "(arrives with a stale sbl.so task in store)" }]
   expect: [does not resurrect a cross-origin task, does not repeat an old answer]
   outcome: recovered
 
@@ -224,7 +224,7 @@ journeys:
   entry: /
   visitor: { state: first, industry: unknown, openness: wont_talk }
   intent: browsing
-  script: [{ visitor: (lands, agent opens) }]
+  script: [{ visitor: "(lands, agent opens)" }]
   expect: [the opening line appears in the trace and is scoreable]
   outcome: engaged
   note: known defect - welcome is invisible to the tracer, so T73 cannot be suite-verified.
@@ -244,7 +244,7 @@ journeys:
   entry: /
   visitor: { state: first, industry: unknown, openness: answers }
   intent: browsing
-  script: [{ visitor: (speaks one sentence with two natural pauses) }]
+  script: [{ visitor: "(speaks one sentence with two natural pauses)" }]
   expect: [one turn, one answer, not three fragments each drawing a reply]
   outcome: answered
   note: observed live - three consecutive turns were fragments of one spoken sentence.
@@ -263,7 +263,7 @@ journeys:
   entry: /
   visitor: { state: first, industry: unknown, openness: answers }
   intent: browsing
-  script: [{ visitor: (interrupts mid-sentence) }]
+  script: [{ visitor: "(interrupts mid-sentence)" }]
   expect: [stops speaking at once, the new message pre-empts the old turn]
   outcome: recovered
 
@@ -272,7 +272,7 @@ journeys:
   entry: /
   visitor: { state: first, industry: unknown, openness: answers }
   intent: browsing
-  script: [{ visitor: (clicks Talk, denies permission) }]
+  script: [{ visitor: "(clicks Talk, denies permission)" }]
   expect: [falls back to text cleanly, explains once]
   outcome: recovered
 

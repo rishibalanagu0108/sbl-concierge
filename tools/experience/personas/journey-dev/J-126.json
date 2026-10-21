@@ -1,0 +1,15 @@
+{
+ "id": "J-126",
+ "description": "SBL vs Artisan [first/asks/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/artisan/artisan-vs-sbl-comparison/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "Artisan has an AI persona thing, do you",
+   "tags": [
+    "J-126"
+   ],
+   "expect": {}
+  }
+ ]
+}

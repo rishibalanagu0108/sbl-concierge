@@ -1,0 +1,15 @@
+{
+ "id": "J-224",
+ "description": "Reads campaign analytics [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/analytics",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how is the dentist campaign doing",
+   "tags": [
+    "J-224"
+   ],
+   "expect": {}
+  }
+ ]
+}

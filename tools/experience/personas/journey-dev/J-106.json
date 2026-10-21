@@ -1,0 +1,15 @@
+{
+ "id": "J-106",
+ "description": "Closes the tab mid-task, returns [returning/answers/has_proof] intent=ready_to_buy outcome=resumed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "where did we get to",
+   "tags": [
+    "J-106"
+   ],
+   "expect": {}
+  }
+ ]
+}

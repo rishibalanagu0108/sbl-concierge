@@ -1,0 +1,15 @@
+{
+ "id": "J-122",
+ "description": "SBL vs Phantombuster [first/asks/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/uncategorized/phantombuster-vs-sbl-linkedin-tools/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what do you do that Phantombuster does not",
+   "tags": [
+    "J-122"
+   ],
+   "expect": {}
+  }
+ ]
+}

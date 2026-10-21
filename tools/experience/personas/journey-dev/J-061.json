@@ -1,0 +1,15 @@
+{
+ "id": "J-061",
+ "description": "Show me the product [first/asks/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "walk me through the main features",
+   "tags": [
+    "J-061"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-240",
+ "description": "Frustrated by a product bug [customer/answers/unknown] intent=needs_support outcome=handed_off",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "this has been broken for three days",
+   "tags": [
+    "J-240"
+   ],
+   "expect": {}
+  }
+ ]
+}

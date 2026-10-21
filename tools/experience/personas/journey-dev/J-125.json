@@ -1,0 +1,15 @@
+{
+ "id": "J-125",
+ "description": "SBL vs AiSDR [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/linkedin/sbl-vs-aisdr-comparison/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "AiSDR says they do the whole thing end to end",
+   "tags": [
+    "J-125"
+   ],
+   "expect": {}
+  }
+ ]
+}

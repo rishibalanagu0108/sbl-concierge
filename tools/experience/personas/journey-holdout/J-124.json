@@ -1,0 +1,15 @@
+{
+ "id": "J-124",
+ "description": "SBL vs Waalaxy [first/asks/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/linkedin/waalaxy-vs-sbl-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "honestly which is better for a small team",
+   "tags": [
+    "J-124"
+   ],
+   "expect": {}
+  }
+ ]
+}

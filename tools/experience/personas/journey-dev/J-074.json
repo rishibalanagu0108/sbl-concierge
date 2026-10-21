@@ -1,0 +1,15 @@
+{
+ "id": "J-074",
+ "description": "Asks a tangential question [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/blog/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is a good reply rate in 2026",
+   "tags": [
+    "J-074"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-076",
+ "description": "Appsumo arrival [first/answers/unknown] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/appsumo/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is the appsumo deal still on",
+   "tags": [
+    "J-076"
+   ],
+   "expect": {}
+  }
+ ]
+}

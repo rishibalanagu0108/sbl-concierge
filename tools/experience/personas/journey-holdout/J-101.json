@@ -1,0 +1,22 @@
+{
+ "id": "J-101",
+ "description": "Reload mid-answer [first/answers/has_proof] intent=specific_question outcome=resumed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "which plan for 2000 contacts",
+   "tags": [
+    "J-101"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "reload",
+   "tags": [
+    "J-101"
+   ],
+   "expect": {}
+  }
+ ]
+}

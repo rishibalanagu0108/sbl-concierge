@@ -1,0 +1,15 @@
+{
+ "id": "J-100",
+ "description": "Withdraws an earlier yes [returning/answers/has_proof] intent=browsing outcome=updated",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "forget what I said about starting a trial",
+   "tags": [
+    "J-100"
+   ],
+   "expect": {}
+  }
+ ]
+}

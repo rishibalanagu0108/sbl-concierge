@@ -1,0 +1,15 @@
+{
+ "id": "J-204",
+ "description": "Bulk export [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/users",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I get my contacts out",
+   "tags": [
+    "J-204"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-136",
+ "description": "AiSDR vs Salesforge, third party [first/wont_volunteer/unknown] intent=browsing outcome=no_engagement",
+ "start": "https://sbl.so/compare/aisdr-vs-salesforge-comparison/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 40000,
+   "tags": [
+    "J-136"
+   ],
+   "expect": {}
+  }
+ ]
+}

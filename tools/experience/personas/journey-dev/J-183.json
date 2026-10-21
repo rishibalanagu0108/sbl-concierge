@@ -1,0 +1,15 @@
+{
+ "id": "J-183",
+ "description": "Uses Enhance on the brief [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "improve the wording",
+   "tags": [
+    "J-183"
+   ],
+   "expect": {}
+  }
+ ]
+}

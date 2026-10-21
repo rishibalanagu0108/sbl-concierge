@@ -1,0 +1,23 @@
+{
+ "id": "J-118",
+ "description": "Repeats a question already answered [first/answers/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we sell to hospitals",
+   "tags": [
+    "J-118"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "wait",
+   "ms": 30000,
+   "tags": [
+    "J-118"
+   ],
+   "expect": {}
+  }
+ ]
+}

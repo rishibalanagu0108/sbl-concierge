@@ -1,0 +1,15 @@
+{
+ "id": "J-166",
+ "description": "Email verification is a human step [first/answers/unknown] intent=ready_to_buy outcome=awaiting_human",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-166"
+   ],
+   "expect": {}
+  }
+ ]
+}

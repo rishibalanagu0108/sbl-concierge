@@ -1,0 +1,15 @@
+{
+ "id": "J-171",
+ "description": "Campaign promised during signup gets built [customer/answers/no_proof] intent=needs_support outcome=resumed",
+ "start": "https://sbl.so/get-started",
+ "steps": [
+  {
+   "do": "say",
+   "text": "you said you would set up the campaign",
+   "tags": [
+    "J-171"
+   ],
+   "expect": {}
+  }
+ ]
+}

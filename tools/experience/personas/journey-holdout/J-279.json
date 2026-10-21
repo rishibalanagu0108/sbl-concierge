@@ -1,0 +1,15 @@
+{
+ "id": "J-279",
+ "description": "Target element is gone [first/asks/unknown] intent=browsing outcome=honest_no",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "highlight the enterprise plan",
+   "tags": [
+    "J-279"
+   ],
+   "expect": {}
+  }
+ ]
+}

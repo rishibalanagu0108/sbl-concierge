@@ -4,9 +4,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), "personas");
-export const SETS = ["dev", "holdout", "replay", "faults"];
+export const SETS = ["dev", "holdout", "replay", "faults", "journey-dev", "journey-holdout"];
 const PERSONA_KEYS = ["id", "description", "start", "steps"];
-const STEP_KEYS = ["do", "text", "ms", "url", "y", "code", "tags", "expect"];
+const STEP_KEYS = ["do", "text", "ms", "url", "y", "code", "tags", "expect", "probe"];
 const EXPECT_KEYS = ["mustReply", "landsOn", "noNav", "noSignup", "maxLines", "class", "recalls", "noQuestion", "decisionGroup", "decisionPattern", "stop", "honest", "replyWithinMs"];
 const DOS = ["say", "wait", "goto", "reload", "scroll", "fault"];
 export const FAULT_CODES = ["unavailable", "capped", "down", "slow"]; // server fault injection (ALLOW_FAULTS=1); null clears
@@ -42,9 +42,18 @@ export function validatePersona(p) {
     if (!Array.isArray(s.tags)) bad.push(`${w}: tags must be an array`);
     // hard limits: never a password, never a form submit, never a purchase, only the test email
     const text = `${s.text || ""} ${s.url || ""}`;
-    if (/pass(word|wd)|\bcvv\b|card number|credit card|\bpay\b|\bbuy\b|purchase|checkout|subscribe now/i.test(text)) bad.push(`${w}: hard limit (password/payment/purchase wording)`);
+    // `probe` is a written justification for a step that must contain wording the hard
+    // limits otherwise ban, because the step exists to prove the agent REFUSES it (a
+    // visitor offering a password in chat, a mistyped email). It exempts the wording and
+    // email checks for that one step and nothing else: a probe still may not navigate to
+    // signup/login, and the agent-side mechanisms are unaffected. Only `say` steps
+    // qualify — the driver must never type banned wording into a page field.
+    const probed = typeof s.probe === "string" && s.probe.trim().length > 0;
+    if (s.probe !== undefined && !probed) bad.push(`${w}: probe must be a non-empty reason`);
+    if (probed && s.do !== "say") bad.push(`${w}: probe only on say`);
+    if (!probed && /pass(word|wd)|\bcvv\b|card number|credit card|\bpay\b|\bbuy\b|purchase|checkout|subscribe now/i.test(text)) bad.push(`${w}: hard limit (password/payment/purchase wording)`);
     if (/signup|sign-up|login/i.test(s.url || "")) bad.push(`${w}: goto to signup/login`);
-    for (const e of text.match(/[\w.+-]+@[\w-]+\.[\w.]+/g) || []) if (e !== TEST_EMAIL) bad.push(`${w}: email other than ${TEST_EMAIL}`);
+    if (!probed) for (const e of text.match(/[\w.+-]+@[\w-]+\.[\w.]+/g) || []) if (e !== TEST_EMAIL) bad.push(`${w}: email other than ${TEST_EMAIL}`);
     const ex = s.expect || {};
     unknown(ex, EXPECT_KEYS, `${w} expect`);
     if (ex.class && !CLASSES.includes(ex.class)) bad.push(`${w}: bad class`);

@@ -1,0 +1,15 @@
+{
+ "id": "J-007",
+ "description": "Solo founder, no sales team [first/answers/no_proof] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I am a solo founder, no sales team at all",
+   "tags": [
+    "J-007"
+   ],
+   "expect": {}
+  }
+ ]
+}

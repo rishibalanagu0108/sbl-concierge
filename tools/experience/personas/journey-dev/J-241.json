@@ -1,0 +1,15 @@
+{
+ "id": "J-241",
+ "description": "Repeats themselves, agent not listening [first/answers/unknown] intent=browsing outcome=corrected",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I already told you that",
+   "tags": [
+    "J-241"
+   ],
+   "expect": {}
+  }
+ ]
+}

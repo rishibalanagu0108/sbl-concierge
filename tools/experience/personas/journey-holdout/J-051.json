@@ -1,0 +1,15 @@
+{
+ "id": "J-051",
+ "description": "WhatsApp outreach interest [first/answers/has_proof] intent=browsing outcome=shown_proof",
+ "start": "https://sbl.so/whatsapp/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "does WhatsApp outreach actually work",
+   "tags": [
+    "J-051"
+   ],
+   "expect": {}
+  }
+ ]
+}

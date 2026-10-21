@@ -1,0 +1,15 @@
+{
+ "id": "J-182",
+ "description": "Asks which channel to use [customer/asks/has_proof] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "LinkedIn or WhatsApp for hospital admins?",
+   "tags": [
+    "J-182"
+   ],
+   "expect": {}
+  }
+ ]
+}

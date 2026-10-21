@@ -1,0 +1,15 @@
+{
+ "id": "J-201",
+ "description": "Import leads into a campaign [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "put those into my dentist campaign",
+   "tags": [
+    "J-201"
+   ],
+   "expect": {}
+  }
+ ]
+}

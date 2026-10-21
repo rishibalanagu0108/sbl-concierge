@@ -1,0 +1,15 @@
+{
+ "id": "J-067",
+ "description": "Enrich curiosity [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can you enrich my existing list",
+   "tags": [
+    "J-067"
+   ],
+   "expect": {}
+  }
+ ]
+}

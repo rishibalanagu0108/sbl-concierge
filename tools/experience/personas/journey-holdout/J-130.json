@@ -1,0 +1,15 @@
+{
+ "id": "J-130",
+ "description": "HeyReach alternatives for agencies [first/answers/has_proof] intent=comparing_vendors outcome=handed_off",
+ "start": "https://sbl.so/linkedin/heyreach-alternatives-agencies-compared/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "need to move 10 client accounts off HeyReach",
+   "tags": [
+    "J-130"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-216",
+ "description": "Funding signal [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/signals",
+ "steps": [
+  {
+   "do": "say",
+   "text": "find companies that just raised",
+   "tags": [
+    "J-216"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-209",
+ "description": "Persona setup [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/settings?tab=persona",
+ "steps": [
+  {
+   "do": "say",
+   "text": "make it sound like me",
+   "tags": [
+    "J-209"
+   ],
+   "expect": {}
+  }
+ ]
+}

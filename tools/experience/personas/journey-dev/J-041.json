@@ -1,0 +1,15 @@
+{
+ "id": "J-041",
+ "description": "Post-engagement leads [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/questions/best-linkedin-tool-post-engagement-sales-leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I message people who engaged with a post",
+   "tags": [
+    "J-041"
+   ],
+   "expect": {}
+  }
+ ]
+}

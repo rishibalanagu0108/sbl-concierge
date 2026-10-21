@@ -1,0 +1,15 @@
+{
+ "id": "J-064",
+ "description": "API access [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/api/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is there an API",
+   "tags": [
+    "J-064"
+   ],
+   "expect": {}
+  }
+ ]
+}

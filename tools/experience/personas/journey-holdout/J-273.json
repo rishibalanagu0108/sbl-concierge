@@ -1,0 +1,15 @@
+{
+ "id": "J-273",
+ "description": "Model is slow [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "which plan should I pick",
+   "tags": [
+    "J-273"
+   ],
+   "expect": {}
+  }
+ ]
+}

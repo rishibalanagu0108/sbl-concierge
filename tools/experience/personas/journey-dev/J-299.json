@@ -1,0 +1,15 @@
+{
+ "id": "J-299",
+ "description": "Mouth model tries to answer [first/answers/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is your pricing",
+   "tags": [
+    "J-299"
+   ],
+   "expect": {}
+  }
+ ]
+}

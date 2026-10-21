@@ -1,0 +1,23 @@
+{
+ "id": "J-084",
+ "description": "False premise about forgetting [returning/answers/has_proof] intent=browsing outcome=corrected",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do you remember my business?",
+   "tags": [
+    "J-084"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "then why did you say earlier you did not know my business?",
+   "tags": [
+    "J-084"
+   ],
+   "expect": {}
+  }
+ ]
+}

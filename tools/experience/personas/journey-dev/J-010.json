@@ -1,0 +1,15 @@
+{
+ "id": "J-010",
+ "description": "Competitor employee poking around [first/wont_volunteer/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how does your pricing compare to Expandi",
+   "tags": [
+    "J-010"
+   ],
+   "expect": {}
+  }
+ ]
+}

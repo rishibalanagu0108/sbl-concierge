@@ -1,0 +1,15 @@
+{
+ "id": "J-267",
+ "description": "Very long message [first/answers/no_proof] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-267"
+   ],
+   "expect": {}
+  }
+ ]
+}

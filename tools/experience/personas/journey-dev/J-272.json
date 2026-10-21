@@ -1,0 +1,15 @@
+{
+ "id": "J-272",
+ "description": "Whole turn fails in under 10ms [first/answers/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what do you do",
+   "tags": [
+    "J-272"
+   ],
+   "expect": {}
+  }
+ ]
+}

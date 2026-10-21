@@ -1,0 +1,17 @@
+{
+ "id": "J-257",
+ "description": "Navigates without being asked [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is the cheapest plan",
+   "tags": [
+    "J-257"
+   ],
+   "expect": {
+    "noNav": true
+   }
+  }
+ ]
+}

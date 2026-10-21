@@ -1,0 +1,15 @@
+{
+ "id": "J-027",
+ "description": "Asks for own industry, no proof [first/asks/no_proof] intent=comparing_vendors outcome=honest_miss",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "any recruitment agencies?",
+   "tags": [
+    "J-027"
+   ],
+   "expect": {}
+  }
+ ]
+}

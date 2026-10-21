@@ -1,0 +1,15 @@
+{
+ "id": "J-098",
+ "description": "Refusal recorded but record empty [returning_after_refusal/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "did I say no to signup before?",
+   "tags": [
+    "J-098"
+   ],
+   "expect": {}
+  }
+ ]
+}

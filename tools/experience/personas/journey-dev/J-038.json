@@ -1,0 +1,15 @@
+{
+ "id": "J-038",
+ "description": "Ban safety [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/questions/safest-linkedin-outreach-tool-avoid-ban",
+ "steps": [
+  {
+   "do": "say",
+   "text": "will my LinkedIn get banned",
+   "tags": [
+    "J-038"
+   ],
+   "expect": {}
+  }
+ ]
+}

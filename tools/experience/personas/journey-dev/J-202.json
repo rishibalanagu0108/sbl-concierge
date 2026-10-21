@@ -1,0 +1,15 @@
+{
+ "id": "J-202",
+ "description": "Exclude list [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/users",
+ "steps": [
+  {
+   "do": "say",
+   "text": "never message our existing customers",
+   "tags": [
+    "J-202"
+   ],
+   "expect": {}
+  }
+ ]
+}

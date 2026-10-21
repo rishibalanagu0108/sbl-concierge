@@ -1,0 +1,15 @@
+{
+ "id": "J-052",
+ "description": "WhatsApp compliance [first/asks/unknown] intent=specific_question outcome=handed_off",
+ "start": "https://sbl.so/whatsapp/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is cold WhatsApp even legal",
+   "tags": [
+    "J-052"
+   ],
+   "expect": {}
+  }
+ ]
+}

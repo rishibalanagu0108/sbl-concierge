@@ -1,0 +1,15 @@
+{
+ "id": "J-143",
+ "description": "Phantombuster promo code hunter [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/phantombuster/phantombuster-promo-code/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "got a code for yours?",
+   "tags": [
+    "J-143"
+   ],
+   "expect": {}
+  }
+ ]
+}

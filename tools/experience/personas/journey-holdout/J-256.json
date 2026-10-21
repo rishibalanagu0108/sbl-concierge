@@ -1,0 +1,15 @@
+{
+ "id": "J-256",
+ "description": "Stuck after five identical attempts [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "keep trying",
+   "tags": [
+    "J-256"
+   ],
+   "expect": {}
+  }
+ ]
+}

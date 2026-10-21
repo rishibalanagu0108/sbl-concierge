@@ -1,0 +1,15 @@
+{
+ "id": "J-121",
+ "description": "SBL vs Expandi, open comparison [first/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/linkedin/expandi-vs-sbl-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are on Expandi now",
+   "tags": [
+    "J-121"
+   ],
+   "expect": {}
+  }
+ ]
+}

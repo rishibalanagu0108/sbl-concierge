@@ -1,0 +1,15 @@
+{
+ "id": "J-144",
+ "description": "Waalaxy promo code [first/wont_volunteer/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/waalaxy/waalaxy-promo-code/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-144"
+   ],
+   "expect": {}
+  }
+ ]
+}

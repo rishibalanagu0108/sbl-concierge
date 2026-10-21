@@ -1,0 +1,15 @@
+{
+ "id": "J-179",
+ "description": "Saved draft prompt on arrival [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "new campaign please",
+   "tags": [
+    "J-179"
+   ],
+   "expect": {}
+  }
+ ]
+}

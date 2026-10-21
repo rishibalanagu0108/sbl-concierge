@@ -1,0 +1,15 @@
+{
+ "id": "J-258",
+ "description": "Talks too long [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what does SBL do",
+   "tags": [
+    "J-258"
+   ],
+   "expect": {}
+  }
+ ]
+}

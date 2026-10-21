@@ -1,0 +1,15 @@
+{
+ "id": "J-234",
+ "description": "API integration, plan-gated and unmapped [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/api-integration",
+ "steps": [
+  {
+   "do": "say",
+   "text": "give me an API key",
+   "tags": [
+    "J-234"
+   ],
+   "expect": {}
+  }
+ ]
+}

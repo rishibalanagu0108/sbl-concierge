@@ -1,0 +1,15 @@
+{
+ "id": "J-017",
+ "description": "Money-back guarantee [first/asks/unknown] intent=ready_to_buy outcome=shown",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what if it does not work for us",
+   "tags": [
+    "J-017"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-155",
+ "description": "Declines the offer [first/answers/unknown] intent=comparing_vendors outcome=dismissed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "not yet",
+   "tags": [
+    "J-155"
+   ],
+   "expect": {}
+  }
+ ]
+}

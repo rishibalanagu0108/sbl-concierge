@@ -1,0 +1,15 @@
+{
+ "id": "J-003",
+ "description": "Skeptic opens with doubt [first/answers/unknown] intent=browsing outcome=shown_proof",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "another AI outreach tool, why is this different",
+   "tags": [
+    "J-003"
+   ],
+   "expect": {}
+  }
+ ]
+}

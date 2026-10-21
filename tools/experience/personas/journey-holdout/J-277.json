@@ -1,0 +1,15 @@
+{
+ "id": "J-277",
+ "description": "Research call times out [first/asks/unknown] intent=specific_question outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do you compare to Clay",
+   "tags": [
+    "J-277"
+   ],
+   "expect": {}
+  }
+ ]
+}

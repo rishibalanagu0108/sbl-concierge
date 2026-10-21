@@ -1,0 +1,15 @@
+{
+ "id": "J-253",
+ "description": "Handoff card sends nothing [first/answers/has_proof] intent=ready_to_buy outcome=handed_off",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "yes book me in",
+   "tags": [
+    "J-253"
+   ],
+   "expect": {}
+  }
+ ]
+}

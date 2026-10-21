@@ -1,0 +1,15 @@
+{
+ "id": "J-288",
+ "description": "Page context with no extension [first/answers/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me pricing",
+   "tags": [
+    "J-288"
+   ],
+   "expect": {}
+  }
+ ]
+}

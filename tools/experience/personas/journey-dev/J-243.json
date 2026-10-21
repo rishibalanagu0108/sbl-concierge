@@ -1,0 +1,15 @@
+{
+ "id": "J-243",
+ "description": "Asks what data is collected [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what are you storing about me right now",
+   "tags": [
+    "J-243"
+   ],
+   "expect": {}
+  }
+ ]
+}

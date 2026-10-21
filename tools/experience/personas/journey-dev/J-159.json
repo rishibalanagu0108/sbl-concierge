@@ -1,0 +1,15 @@
+{
+ "id": "J-159",
+ "description": "Email asked only with the visitor's own words [first/answers/unknown] intent=ready_to_buy outcome=asked",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "set up the account for me",
+   "tags": [
+    "J-159"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-047",
+ "description": "Integrations and lead quality [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/questions/best-integrations-sdr-targeting-lead-quality-conversion",
+ "steps": [
+  {
+   "do": "say",
+   "text": "does it plug into our CRM",
+   "tags": [
+    "J-047"
+   ],
+   "expect": {}
+  }
+ ]
+}

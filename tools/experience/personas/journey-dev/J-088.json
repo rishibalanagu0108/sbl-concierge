@@ -1,0 +1,15 @@
+{
+ "id": "J-088",
+ "description": "Corrects a stored fact [returning/answers/no_proof] intent=browsing outcome=updated",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are not recruitment, we are staffing software",
+   "tags": [
+    "J-088"
+   ],
+   "expect": {}
+  }
+ ]
+}

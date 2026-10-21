@@ -1,0 +1,15 @@
+{
+ "id": "J-049",
+ "description": "Guarantee seeker [first/answers/unknown] intent=ready_to_buy outcome=answered",
+ "start": "https://sbl.so/questions/best-linkedin-outreach-tool-money-back-guarantee",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is the catch on the guarantee",
+   "tags": [
+    "J-049"
+   ],
+   "expect": {}
+  }
+ ]
+}

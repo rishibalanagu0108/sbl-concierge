@@ -1,0 +1,15 @@
+{
+ "id": "J-023",
+ "description": "Currency question [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is that USD or INR",
+   "tags": [
+    "J-023"
+   ],
+   "expect": {}
+  }
+ ]
+}

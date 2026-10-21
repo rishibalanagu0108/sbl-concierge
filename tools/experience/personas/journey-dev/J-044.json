@@ -1,0 +1,15 @@
+{
+ "id": "J-044",
+ "description": "Booking meetings from cold [first/answers/unknown] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/questions/best-linkedin-tool-booking-meetings-cold-prospects",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I just want meetings booked",
+   "tags": [
+    "J-044"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-070",
+ "description": "Reporting depth [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what reporting do I get",
+   "tags": [
+    "J-070"
+   ],
+   "expect": {}
+  }
+ ]
+}

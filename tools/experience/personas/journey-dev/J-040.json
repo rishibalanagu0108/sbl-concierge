@@ -1,0 +1,15 @@
+{
+ "id": "J-040",
+ "description": "Sales Navigator import [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/questions/linkedin-tool-import-sales-navigator-leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I bring my Sales Nav list in",
+   "tags": [
+    "J-040"
+   ],
+   "expect": {}
+  }
+ ]
+}

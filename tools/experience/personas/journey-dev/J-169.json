@@ -1,0 +1,23 @@
+{
+ "id": "J-169",
+ "description": "Abandons mid-signup [first/answers/unknown] intent=ready_to_buy outcome=dismissed",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "say",
+   "text": "actually hold on",
+   "tags": [
+    "J-169"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "goto",
+   "url": "https://sbl.so/pricing",
+   "tags": [
+    "J-169"
+   ],
+   "expect": {}
+  }
+ ]
+}

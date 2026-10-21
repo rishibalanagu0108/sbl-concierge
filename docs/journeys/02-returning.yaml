@@ -18,7 +18,7 @@ journeys:
   entry: /pricing
   visitor: { state: returning, industry: has_proof, openness: wont_volunteer }
   intent: ready_to_buy
-  script: [{ visitor: (lands, silent 10s) }]
+  script: [{ visitor: "(lands, silent 10s)" }]
   expect: [opener references the prior visit, one line, no full recap]
   outcome: engaged
 
@@ -134,6 +134,7 @@ journeys:
   visitor: { state: returning_after_refusal, industry: has_proof, openness: answers }
   intent: ready_to_buy
   script: [{ visitor: "I am ready to buy now" }]
+  probe: "states buying intent in words; no payment is performed"
   expect: [a new visit plus a buying signal allows one offer, not a push]
   outcome: offered_trial
 
@@ -153,7 +154,7 @@ journeys:
   entry: /case-study/
   visitor: { state: returning_after_refusal, industry: has_proof, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (browses three pages, silent) }]
+  script: [{ visitor: "(browses three pages, silent)" }]
   expect: [stays useful without selling, offers content not accounts]
   outcome: engaged
 
@@ -202,7 +203,7 @@ journeys:
   intent: specific_question
   script:
     - visitor: "which plan for 2000 contacts"
-    - visitor: (reloads the page)
+    - visitor: "(reloads the page)"
   expect: [picks up the same thread, does not restart, does not repeat the whole answer]
   outcome: resumed
 
@@ -213,7 +214,7 @@ journeys:
   intent: browsing
   script:
     - visitor: "show me pricing"
-    - visitor: (clicks a different link while the agent is moving)
+    - visitor: "(clicks a different link while the agent is moving)"
   expect: [abandons cleanly, no stale narration on the new page]
   outcome: recovered
 
@@ -235,7 +236,7 @@ journeys:
   intent: browsing
   script:
     - visitor: "show me a case study"
-    - visitor: (presses browser Back)
+    - visitor: "(presses browser Back)"
   expect: [notices the move, does not re-narrate the old page]
   outcome: recovered
 
@@ -244,7 +245,7 @@ journeys:
   entry: /pricing
   visitor: { state: returning, industry: unknown, openness: answers }
   intent: comparing_vendors
-  script: [{ visitor: (opens a second tab on /case-study/ and talks there) }]
+  script: [{ visitor: "(opens a second tab on /case-study/ and talks there)" }]
   expect: [no duplicated greeting, no contradictory state between tabs]
   outcome: engaged
 
@@ -378,7 +379,7 @@ journeys:
   intent: browsing
   script:
     - visitor: "we sell to hospitals"
-    - visitor: (says nothing for 30s)
+    - visitor: "(says nothing for 30s)"
   expect: [does not re-ask who they sell to]
   outcome: engaged
   note: founder session asked the same question eight times, 2.4s apart.
@@ -399,6 +400,6 @@ journeys:
   entry: /pricing
   visitor: { state: returning, industry: has_proof, openness: wont_volunteer }
   intent: ready_to_buy
-  script: [{ visitor: (lands, silent) }]
+  script: [{ visitor: "(lands, silent)" }]
   expect: [uses the stored goal in the opener, does not list everything it remembers]
   outcome: engaged

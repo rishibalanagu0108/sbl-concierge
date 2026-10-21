@@ -1,0 +1,15 @@
+{
+ "id": "J-081",
+ "description": "Comes back next day, same cookie [returning/answers/has_proof] intent=browsing outcome=resumed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "hi again",
+   "tags": [
+    "J-081"
+   ],
+   "expect": {}
+  }
+ ]
+}

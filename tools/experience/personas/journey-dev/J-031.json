@@ -1,0 +1,15 @@
+{
+ "id": "J-031",
+ "description": "Different company size [first/answers/has_proof] intent=comparing_vendors outcome=honest_miss",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "that is a big company, we are 4 people",
+   "tags": [
+    "J-031"
+   ],
+   "expect": {}
+  }
+ ]
+}

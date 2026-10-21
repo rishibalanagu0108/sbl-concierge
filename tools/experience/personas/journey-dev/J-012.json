@@ -1,0 +1,15 @@
+{
+ "id": "J-012",
+ "description": "Types gibberish [first/answers/unknown] intent=browsing outcome=asked",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "asdkjhasd",
+   "tags": [
+    "J-012"
+   ],
+   "expect": {}
+  }
+ ]
+}

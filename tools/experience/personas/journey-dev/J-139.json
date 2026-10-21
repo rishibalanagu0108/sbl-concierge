@@ -1,0 +1,15 @@
+{
+ "id": "J-139",
+ "description": "Artisan complaints [first/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/artisan/artisan-complaints-user-issues/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "had a bad experience, cautious now",
+   "tags": [
+    "J-139"
+   ],
+   "expect": {}
+  }
+ ]
+}

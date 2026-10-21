@@ -10,8 +10,8 @@ journeys:
   visitor: { state: first, industry: unknown, openness: wont_talk }
   intent: browsing
   script:
-    - visitor: (lands, no input for 20s)
-    - visitor: (scrolls past the fold, still nothing)
+    - visitor: "(lands, no input for 20s)"
+    - visitor: "(scrolls past the fold, still nothing)"
   expect: [opens once unprompted, does not speak again unprompted, no signup ask in the opener]
   outcome: no_engagement
 
@@ -175,7 +175,7 @@ journeys:
   visitor: { state: first, industry: no_proof, openness: wont_volunteer }
   intent: comparing_vendors
   script:
-    - visitor: (lands, silent 8s)
+    - visitor: "(lands, silent 8s)"
     - visitor: "just looking, not ready to sign up"
     - visitor: "yeah go on"
   expect:
@@ -236,7 +236,7 @@ journeys:
   entry: /case-study/jnn-group/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (reads, silent 15s) }]
+  script: [{ visitor: "(reads, silent 15s)" }]
   expect: [opens with something specific to this story, not a generic greeting]
   outcome: engaged
 
@@ -591,7 +591,7 @@ journeys:
   visitor: { state: first, industry: unknown, openness: asks }
   intent: specific_question
   script: [{ visitor: "is there an API" }]
-  expect: [yes, and states it is plan-gated]
+  expect: ["confirms yes", states it is plan-gated]
   outcome: answered
 
 - id: J-065
@@ -672,7 +672,7 @@ journeys:
   entry: /blog/
   visitor: { state: first, industry: unknown, openness: wont_volunteer }
   intent: browsing
-  script: [{ visitor: (reads 30s, no input) }]
+  script: [{ visitor: "(reads 30s, no input)" }]
   expect: [opener references this article, not the product]
   outcome: engaged
 
@@ -709,6 +709,7 @@ journeys:
   visitor: { state: first, industry: unknown, openness: asks }
   intent: specific_question
   script: [{ visitor: "do you store my LinkedIn password" }]
+  probe: "asks whether passwords are stored; a security question, not a credential"
   expect: [answers precisely, never minimises a security question]
   outcome: answered
 

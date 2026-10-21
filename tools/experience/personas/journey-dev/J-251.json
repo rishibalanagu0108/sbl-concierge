@@ -1,0 +1,15 @@
+{
+ "id": "J-251",
+ "description": "Asks for a human immediately [first/answers/unknown] intent=needs_support outcome=handed_off",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "just get me a person",
+   "tags": [
+    "J-251"
+   ],
+   "expect": {}
+  }
+ ]
+}

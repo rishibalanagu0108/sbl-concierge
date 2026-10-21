@@ -1,0 +1,15 @@
+{
+ "id": "J-200",
+ "description": "Extraction still running [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how long will it take",
+   "tags": [
+    "J-200"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-066",
+ "description": "Signals explained [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what are signals",
+   "tags": [
+    "J-066"
+   ],
+   "expect": {}
+  }
+ ]
+}

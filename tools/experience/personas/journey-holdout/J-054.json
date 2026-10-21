@@ -1,0 +1,15 @@
+{
+ "id": "J-054",
+ "description": "Account warmup [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/linkedin/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do I need to warm the account up",
+   "tags": [
+    "J-054"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-022",
+ "description": "Wants a human for pricing [first/answers/unknown] intent=ready_to_buy outcome=handed_off",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I speak to someone about enterprise",
+   "tags": [
+    "J-022"
+   ],
+   "expect": {}
+  }
+ ]
+}

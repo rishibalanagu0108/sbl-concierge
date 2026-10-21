@@ -1,0 +1,15 @@
+{
+ "id": "J-160",
+ "description": "Email never asked without a reason [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what does it cost",
+   "tags": [
+    "J-160"
+   ],
+   "expect": {}
+  }
+ ]
+}

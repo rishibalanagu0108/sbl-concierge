@@ -1,0 +1,15 @@
+{
+ "id": "J-009",
+ "description": "Job seeker, not a buyer [first/answers/unknown] intent=browsing outcome=honest_no",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "are you hiring SDRs",
+   "tags": [
+    "J-009"
+   ],
+   "expect": {}
+  }
+ ]
+}

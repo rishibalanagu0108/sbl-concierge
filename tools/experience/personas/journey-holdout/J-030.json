@@ -1,0 +1,15 @@
+{
+ "id": "J-030",
+ "description": "Asks how long it took [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how long before they saw results",
+   "tags": [
+    "J-030"
+   ],
+   "expect": {}
+  }
+ ]
+}

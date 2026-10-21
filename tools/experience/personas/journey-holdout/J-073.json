@@ -1,0 +1,15 @@
+{
+ "id": "J-073",
+ "description": "Arrives from a blog post [first/wont_volunteer/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/blog/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 30000,
+   "tags": [
+    "J-073"
+   ],
+   "expect": {}
+  }
+ ]
+}

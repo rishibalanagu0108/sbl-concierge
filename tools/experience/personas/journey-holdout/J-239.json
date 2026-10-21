@@ -1,0 +1,15 @@
+{
+ "id": "J-239",
+ "description": "Abusive language [first/answers/unknown] intent=browsing outcome=dismissed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-239"
+   ],
+   "expect": {}
+  }
+ ]
+}

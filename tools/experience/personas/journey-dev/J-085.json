@@ -1,0 +1,15 @@
+{
+ "id": "J-085",
+ "description": "Cookie cleared, genuine stranger [first/answers/has_proof] intent=browsing outcome=honest_no",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we talked yesterday",
+   "tags": [
+    "J-085"
+   ],
+   "expect": {}
+  }
+ ]
+}

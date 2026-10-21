@@ -1,0 +1,15 @@
+{
+ "id": "J-203",
+ "description": "Lead quality complaint [customer/answers/unknown] intent=needs_support outcome=engaged",
+ "start": "https://app.secondbrainlabs.com/leads",
+ "steps": [
+  {
+   "do": "say",
+   "text": "half these leads are wrong",
+   "tags": [
+    "J-203"
+   ],
+   "expect": {}
+  }
+ ]
+}

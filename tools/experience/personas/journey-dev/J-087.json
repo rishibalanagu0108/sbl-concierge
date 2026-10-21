@@ -1,0 +1,15 @@
+{
+ "id": "J-087",
+ "description": "Long gap, stale facts [returning/answers/has_proof] intent=browsing outcome=updated",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we moved into a different market since",
+   "tags": [
+    "J-087"
+   ],
+   "expect": {}
+  }
+ ]
+}

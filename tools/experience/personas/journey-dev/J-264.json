@@ -1,0 +1,15 @@
+{
+ "id": "J-264",
+ "description": "Writes in Hindi [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "yeh kaise kaam karta hai",
+   "tags": [
+    "J-264"
+   ],
+   "expect": {}
+  }
+ ]
+}

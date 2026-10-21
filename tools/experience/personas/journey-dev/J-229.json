@@ -1,0 +1,15 @@
+{
+ "id": "J-229",
+ "description": "Connect a LinkedIn account [customer/answers/unknown] intent=needs_support outcome=awaiting_human",
+ "start": "https://app.secondbrainlabs.com/settings?tab=communication",
+ "steps": [
+  {
+   "do": "say",
+   "text": "connect my LinkedIn",
+   "tags": [
+    "J-229"
+   ],
+   "expect": {}
+  }
+ ]
+}

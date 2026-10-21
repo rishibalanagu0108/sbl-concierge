@@ -1,0 +1,15 @@
+{
+ "id": "J-135",
+ "description": "Expandi vs MeetAlfred, neither chosen [first/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/compare/expandi-vs-meetalfred-comparison/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "comparing those two, not you",
+   "tags": [
+    "J-135"
+   ],
+   "expect": {}
+  }
+ ]
+}

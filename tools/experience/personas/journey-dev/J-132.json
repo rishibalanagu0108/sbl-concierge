@@ -1,0 +1,15 @@
+{
+ "id": "J-132",
+ "description": "Waalaxy alternatives [first/asks/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/linkedin/waalaxy-alternatives-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what makes people switch",
+   "tags": [
+    "J-132"
+   ],
+   "expect": {}
+  }
+ ]
+}

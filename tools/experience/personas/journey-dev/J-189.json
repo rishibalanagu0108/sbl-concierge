@@ -1,0 +1,15 @@
+{
+ "id": "J-189",
+ "description": "Custom instruction field [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "tell it never to mention price in the first message",
+   "tags": [
+    "J-189"
+   ],
+   "expect": {}
+  }
+ ]
+}

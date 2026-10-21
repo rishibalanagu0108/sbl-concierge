@@ -1,0 +1,16 @@
+{
+ "id": "J-094",
+ "description": "Refusal expires with the visit, not forever [returning_after_refusal/answers/has_proof] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I am ready to buy now",
+   "probe": "states buying intent in words; no payment is performed",
+   "tags": [
+    "J-094"
+   ],
+   "expect": {}
+  }
+ ]
+}

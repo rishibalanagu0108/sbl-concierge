@@ -1,0 +1,15 @@
+{
+ "id": "J-174",
+ "description": "Asks to cancel immediately [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/billing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do I cancel",
+   "tags": [
+    "J-174"
+   ],
+   "expect": {}
+  }
+ ]
+}

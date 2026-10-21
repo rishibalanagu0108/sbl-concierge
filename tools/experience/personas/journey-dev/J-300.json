@@ -1,0 +1,15 @@
+{
+ "id": "J-300",
+ "description": "Silence is never the outcome [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "are you still there",
+   "tags": [
+    "J-300"
+   ],
+   "expect": {}
+  }
+ ]
+}

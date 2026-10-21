@@ -1,0 +1,15 @@
+{
+ "id": "J-168",
+ "description": "Straight into onboarding [customer/answers/has_proof] intent=needs_support outcome=shown",
+ "start": "https://sbl.so/onboarding",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what now",
+   "tags": [
+    "J-168"
+   ],
+   "expect": {}
+  }
+ ]
+}

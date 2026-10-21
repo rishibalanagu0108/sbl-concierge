@@ -1,0 +1,15 @@
+{
+ "id": "J-138",
+ "description": "Is Expandi safe [first/answers/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/expandi/is-expandi-safe/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "will yours be safer",
+   "tags": [
+    "J-138"
+   ],
+   "expect": {}
+  }
+ ]
+}

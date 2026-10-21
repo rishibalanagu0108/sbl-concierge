@@ -1,0 +1,15 @@
+{
+ "id": "J-048",
+ "description": "Solo founder AI outreach [first/answers/no_proof] intent=browsing outcome=answered",
+ "start": "https://sbl.so/questions/best-ai-outreach-tool-solo-founders-sales",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I do everything myself, will this add work",
+   "tags": [
+    "J-048"
+   ],
+   "expect": {}
+  }
+ ]
+}

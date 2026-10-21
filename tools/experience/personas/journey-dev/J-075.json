@@ -1,0 +1,15 @@
+{
+ "id": "J-075",
+ "description": "Wants the template from the post [first/asks/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/blog/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "where is the template they mention",
+   "tags": [
+    "J-075"
+   ],
+   "expect": {}
+  }
+ ]
+}

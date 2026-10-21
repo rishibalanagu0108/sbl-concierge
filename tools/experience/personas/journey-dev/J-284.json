@@ -1,0 +1,15 @@
+{
+ "id": "J-284",
+ "description": "Modal blocks the cursor [customer/answers/unknown] intent=needs_support outcome=recovered",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "start a new campaign",
+   "tags": [
+    "J-284"
+   ],
+   "expect": {}
+  }
+ ]
+}

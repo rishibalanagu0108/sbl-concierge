@@ -1,0 +1,15 @@
+{
+ "id": "J-220",
+ "description": "Push signal leads into a campaign [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/signals",
+ "steps": [
+  {
+   "do": "say",
+   "text": "send those into the new campaign",
+   "tags": [
+    "J-220"
+   ],
+   "expect": {}
+  }
+ ]
+}

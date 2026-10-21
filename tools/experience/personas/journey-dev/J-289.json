@@ -1,0 +1,15 @@
+{
+ "id": "J-289",
+ "description": "Store unreachable mid-task [customer/answers/unknown] intent=needs_support outcome=recovered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "create the draft",
+   "tags": [
+    "J-289"
+   ],
+   "expect": {}
+  }
+ ]
+}

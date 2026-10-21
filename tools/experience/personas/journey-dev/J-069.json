@@ -1,0 +1,15 @@
+{
+ "id": "J-069",
+ "description": "Unified inbox [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "where do replies land",
+   "tags": [
+    "J-069"
+   ],
+   "expect": {}
+  }
+ ]
+}

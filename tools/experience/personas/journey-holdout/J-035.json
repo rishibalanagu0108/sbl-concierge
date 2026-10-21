@@ -1,0 +1,15 @@
+{
+ "id": "J-035",
+ "description": "Recruiting agency automation [first/answers/no_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/questions/best-linkedin-automation-tool-recruiting-agencies",
+ "steps": [
+  {
+   "do": "say",
+   "text": "does this work for a recruitment agency",
+   "tags": [
+    "J-035"
+   ],
+   "expect": {}
+  }
+ ]
+}

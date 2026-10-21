@@ -1,0 +1,15 @@
+{
+ "id": "J-065",
+ "description": "MCP curiosity [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/mcp/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is the MCP server for",
+   "tags": [
+    "J-065"
+   ],
+   "expect": {}
+  }
+ ]
+}

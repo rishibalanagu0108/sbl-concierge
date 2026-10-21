@@ -1,0 +1,15 @@
+{
+ "id": "J-083",
+ "description": "Tests whether it remembers [returning/asks/has_proof] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do you remember what we do?",
+   "tags": [
+    "J-083"
+   ],
+   "expect": {}
+  }
+ ]
+}

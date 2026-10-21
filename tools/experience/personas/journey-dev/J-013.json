@@ -1,0 +1,15 @@
+{
+ "id": "J-013",
+ "description": "Price shock [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "that is expensive",
+   "tags": [
+    "J-013"
+   ],
+   "expect": {}
+  }
+ ]
+}

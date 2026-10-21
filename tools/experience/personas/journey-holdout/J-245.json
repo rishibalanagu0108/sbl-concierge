@@ -1,0 +1,15 @@
+{
+ "id": "J-245",
+ "description": "Suspicious of the cursor moving [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "why is my mouse moving by itself",
+   "tags": [
+    "J-245"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-268",
+ "description": "Keyboard-only visitor [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-268"
+   ],
+   "expect": {}
+  }
+ ]
+}

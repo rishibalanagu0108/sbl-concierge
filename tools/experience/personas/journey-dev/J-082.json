@@ -1,0 +1,17 @@
+{
+ "id": "J-082",
+ "description": "Returns without greeting [returning/wont_volunteer/has_proof] intent=ready_to_buy outcome=engaged",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 10000,
+   "tags": [
+    "J-082"
+   ],
+   "expect": {
+    "maxLines": 1
+   }
+  }
+ ]
+}

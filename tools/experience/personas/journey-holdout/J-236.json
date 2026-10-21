@@ -1,0 +1,15 @@
+{
+ "id": "J-236",
+ "description": "Openly hostile [first/answers/unknown] intent=browsing outcome=dismissed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I hate these AI popups",
+   "tags": [
+    "J-236"
+   ],
+   "expect": {}
+  }
+ ]
+}

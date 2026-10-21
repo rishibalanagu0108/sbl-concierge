@@ -1,0 +1,15 @@
+{
+ "id": "J-046",
+ "description": "High-intent leads [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/questions/best-tool-high-intent-leads-linkedin",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do you find people actually in market",
+   "tags": [
+    "J-046"
+   ],
+   "expect": {}
+  }
+ ]
+}

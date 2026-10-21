@@ -1,0 +1,15 @@
+{
+ "id": "J-233",
+ "description": "Knowledge Base, not mapped [customer/answers/unknown] intent=needs_support outcome=honest_no",
+ "start": "https://app.secondbrainlabs.com/second-brain-manager",
+ "steps": [
+  {
+   "do": "say",
+   "text": "upload our sales deck here",
+   "tags": [
+    "J-233"
+   ],
+   "expect": {}
+  }
+ ]
+}

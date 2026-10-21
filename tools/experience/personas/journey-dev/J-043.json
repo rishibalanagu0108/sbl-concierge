@@ -1,0 +1,15 @@
+{
+ "id": "J-043",
+ "description": "AI SDR vs human SDR [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/questions/best-ai-sdr-alternative-human-sdr",
+ "steps": [
+  {
+   "do": "say",
+   "text": "why not just hire an SDR",
+   "tags": [
+    "J-043"
+   ],
+   "expect": {}
+  }
+ ]
+}

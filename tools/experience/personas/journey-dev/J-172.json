@@ -1,0 +1,15 @@
+{
+ "id": "J-172",
+ "description": "Channel not connected yet [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://sbl.so/get-started",
+ "steps": [
+  {
+   "do": "say",
+   "text": "why can I not send anything",
+   "tags": [
+    "J-172"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "J-116",
+ "description": "Note lag across turns [first/answers/has_proof] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are a dental clinic chain",
+   "tags": [
+    "J-116"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "so what would you suggest for us",
+   "tags": [
+    "J-116"
+   ],
+   "expect": {}
+  }
+ ]
+}

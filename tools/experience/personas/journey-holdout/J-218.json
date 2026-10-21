@@ -1,0 +1,15 @@
+{
+ "id": "J-218",
+ "description": "Job change signal [customer/answers/unknown] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/signals",
+ "steps": [
+  {
+   "do": "say",
+   "text": "people who just became VP Sales",
+   "tags": [
+    "J-218"
+   ],
+   "expect": {}
+  }
+ ]
+}

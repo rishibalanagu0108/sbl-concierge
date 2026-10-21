@@ -1,0 +1,15 @@
+{
+ "id": "J-131",
+ "description": "MeetAlfred alternatives [first/wont_volunteer/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/linkedin/meetalfred-alternatives-linkedin-automation/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 20000,
+   "tags": [
+    "J-131"
+   ],
+   "expect": {}
+  }
+ ]
+}

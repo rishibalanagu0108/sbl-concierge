@@ -1,0 +1,15 @@
+{
+ "id": "J-032",
+ "description": "Asks about the channel used [first/asks/unknown] intent=specific_question outcome=shown",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "was that LinkedIn or WhatsApp",
+   "tags": [
+    "J-032"
+   ],
+   "expect": {}
+  }
+ ]
+}

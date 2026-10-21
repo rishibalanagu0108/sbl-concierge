@@ -1,0 +1,15 @@
+{
+ "id": "J-108",
+ "description": "Slow page, agent waits [first/answers/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "open the healthcare one",
+   "tags": [
+    "J-108"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-252",
+ "description": "Offered a human, declines [first/answers/unknown] intent=comparing_vendors outcome=engaged",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "no calls, I just want to read",
+   "tags": [
+    "J-252"
+   ],
+   "expect": {}
+  }
+ ]
+}

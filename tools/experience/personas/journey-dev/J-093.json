@@ -1,0 +1,15 @@
+{
+ "id": "J-093",
+ "description": "Refused contact details, asked again [returning_after_refusal/answers/unknown] intent=browsing outcome=handed_off",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can someone call me about this",
+   "tags": [
+    "J-093"
+   ],
+   "expect": {}
+  }
+ ]
+}

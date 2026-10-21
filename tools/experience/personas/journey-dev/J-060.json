@@ -1,0 +1,15 @@
+{
+ "id": "J-060",
+ "description": "Deliverability doubt [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/email/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "email deliverability is always terrible",
+   "tags": [
+    "J-060"
+   ],
+   "expect": {}
+  }
+ ]
+}

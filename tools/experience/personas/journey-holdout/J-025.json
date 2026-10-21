@@ -1,0 +1,15 @@
+{
+ "id": "J-025",
+ "description": "Lands on a case study cold [first/wont_volunteer/unknown] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/case-study/jnn-group/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-025"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "J-119",
+ "description": "Visitor contradicts themselves [first/answers/unknown] intent=browsing outcome=updated",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are B2B",
+   "tags": [
+    "J-119"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "actually we sell to consumers",
+   "tags": [
+    "J-119"
+   ],
+   "expect": {}
+  }
+ ]
+}

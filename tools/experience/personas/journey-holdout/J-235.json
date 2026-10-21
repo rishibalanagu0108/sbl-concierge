@@ -1,0 +1,15 @@
+{
+ "id": "J-235",
+ "description": "MCP server screen [customer/asks/unknown] intent=needs_support outcome=honest_no",
+ "start": "https://app.secondbrainlabs.com/mcp-server",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how do I connect this to Claude",
+   "tags": [
+    "J-235"
+   ],
+   "expect": {}
+  }
+ ]
+}

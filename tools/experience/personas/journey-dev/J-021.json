@@ -1,0 +1,15 @@
+{
+ "id": "J-021",
+ "description": "Hidden costs worry [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what else will I end up paying for",
+   "tags": [
+    "J-021"
+   ],
+   "expect": {}
+  }
+ ]
+}

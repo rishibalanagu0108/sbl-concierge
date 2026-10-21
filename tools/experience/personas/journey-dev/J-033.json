@@ -1,0 +1,15 @@
+{
+ "id": "J-033",
+ "description": "Wants more examples [first/asks/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me two more",
+   "tags": [
+    "J-033"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "id": "J-077",
+ "description": "FAQ page arrival [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/faq/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do you store my LinkedIn password",
+   "probe": "asks whether passwords are stored; a security question, not a credential",
+   "tags": [
+    "J-077"
+   ],
+   "expect": {}
+  }
+ ]
+}

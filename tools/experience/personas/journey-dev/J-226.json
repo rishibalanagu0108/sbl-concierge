@@ -1,0 +1,15 @@
+{
+ "id": "J-226",
+ "description": "Compares two campaigns [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/analytics",
+ "steps": [
+  {
+   "do": "say",
+   "text": "which campaign is better",
+   "tags": [
+    "J-226"
+   ],
+   "expect": {}
+  }
+ ]
+}

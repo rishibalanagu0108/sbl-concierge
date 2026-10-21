@@ -1,0 +1,15 @@
+{
+ "id": "J-259",
+ "description": "Keeps talking after the answer [first/answers/unknown] intent=browsing outcome=dismissed",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "thanks",
+   "tags": [
+    "J-259"
+   ],
+   "expect": {}
+  }
+ ]
+}

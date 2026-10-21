@@ -1,0 +1,15 @@
+{
+ "id": "J-149",
+ "description": "LaGrowthMachine free trial [first/answers/unknown] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/lagrowthmachine/lagrowth-machine-free-trial/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do you have a free trial too",
+   "tags": [
+    "J-149"
+   ],
+   "expect": {}
+  }
+ ]
+}

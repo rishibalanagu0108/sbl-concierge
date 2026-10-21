@@ -1,0 +1,15 @@
+{
+ "id": "J-265",
+ "description": "Mixes languages [first/answers/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "pricing dikha do please",
+   "tags": [
+    "J-265"
+   ],
+   "expect": {}
+  }
+ ]
+}

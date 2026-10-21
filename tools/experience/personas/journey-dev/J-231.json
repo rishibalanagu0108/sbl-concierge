@@ -1,0 +1,15 @@
+{
+ "id": "J-231",
+ "description": "Hire Profiles, owner only [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/hire-affiliates",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is hire profiles",
+   "tags": [
+    "J-231"
+   ],
+   "expect": {}
+  }
+ ]
+}

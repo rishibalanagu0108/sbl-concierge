@@ -1,0 +1,15 @@
+{
+ "id": "J-115",
+ "description": "Contradiction caught by the visitor [first/answers/unknown] intent=comparing_vendors outcome=corrected",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "you said something different a minute ago",
+   "tags": [
+    "J-115"
+   ],
+   "expect": {}
+  }
+ ]
+}

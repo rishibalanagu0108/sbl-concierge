@@ -1,0 +1,15 @@
+{
+ "id": "J-029",
+ "description": "Wants a reference call [first/asks/has_proof] intent=ready_to_buy outcome=handed_off",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I talk to that customer",
+   "tags": [
+    "J-029"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-120",
+ "description": "Memory used to persuade, not to recite [returning/wont_volunteer/has_proof] intent=ready_to_buy outcome=engaged",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-120"
+   ],
+   "expect": {}
+  }
+ ]
+}

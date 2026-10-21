@@ -1,0 +1,15 @@
+{
+ "id": "J-274",
+ "description": "Model unavailable entirely [first/answers/unknown] intent=browsing outcome=handed_off",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "hello",
+   "tags": [
+    "J-274"
+   ],
+   "expect": {}
+  }
+ ]
+}

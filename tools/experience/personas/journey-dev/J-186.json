@@ -1,0 +1,15 @@
+{
+ "id": "J-186",
+ "description": "Validation message appears [customer/answers/unknown] intent=needs_support outcome=recovered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "continue",
+   "tags": [
+    "J-186"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-194",
+ "description": "Lead count out of range [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "pull 5000 leads",
+   "tags": [
+    "J-194"
+   ],
+   "expect": {}
+  }
+ ]
+}

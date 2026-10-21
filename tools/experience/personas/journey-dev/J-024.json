@@ -1,0 +1,15 @@
+{
+ "id": "J-024",
+ "description": "Compares two plans side by side [first/asks/unknown] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "difference between the middle and top plan",
+   "tags": [
+    "J-024"
+   ],
+   "expect": {}
+  }
+ ]
+}

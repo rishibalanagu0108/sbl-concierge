@@ -1,0 +1,15 @@
+{
+ "id": "J-063",
+ "description": "CRM integration [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "do you sync to HubSpot",
+   "tags": [
+    "J-063"
+   ],
+   "expect": {}
+  }
+ ]
+}

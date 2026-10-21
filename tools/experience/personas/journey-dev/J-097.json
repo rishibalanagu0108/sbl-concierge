@@ -1,0 +1,15 @@
+{
+ "id": "J-097",
+ "description": "Declined a call, offered content instead [returning_after_refusal/answers/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "no calls please",
+   "tags": [
+    "J-097"
+   ],
+   "expect": {}
+  }
+ ]
+}

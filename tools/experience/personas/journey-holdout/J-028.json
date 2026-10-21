@@ -1,0 +1,15 @@
+{
+ "id": "J-028",
+ "description": "Doubts the numbers [first/answers/unknown] intent=comparing_vendors outcome=handed_off",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "these results look made up",
+   "tags": [
+    "J-028"
+   ],
+   "expect": {}
+  }
+ ]
+}

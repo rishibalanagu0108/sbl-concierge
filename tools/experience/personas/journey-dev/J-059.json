@@ -1,0 +1,15 @@
+{
+ "id": "J-059",
+ "description": "Omnichannel question [first/answers/has_proof] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/whatsapp/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I run LinkedIn and WhatsApp together",
+   "tags": [
+    "J-059"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-221",
+ "description": "Inbox triage [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/chat",
+ "steps": [
+  {
+   "do": "say",
+   "text": "anything I need to reply to",
+   "tags": [
+    "J-221"
+   ],
+   "expect": {}
+  }
+ ]
+}

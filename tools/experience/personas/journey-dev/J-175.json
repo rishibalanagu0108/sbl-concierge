@@ -1,0 +1,15 @@
+{
+ "id": "J-175",
+ "description": "Wrong workspace [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "this is not my company's workspace",
+   "tags": [
+    "J-175"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-141",
+ "description": "AiSDR support review [first/answers/unknown] intent=comparing_vendors outcome=handed_off",
+ "start": "https://sbl.so/aisdr/aisdr-customer-support-review/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I need someone to answer when it breaks",
+   "tags": [
+    "J-141"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-244",
+ "description": "Asks to be forgotten [returning/answers/has_proof] intent=browsing outcome=updated",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "delete what you know about me",
+   "tags": [
+    "J-244"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-062",
+ "description": "Asks for a live demo [first/asks/unknown] intent=ready_to_buy outcome=shown",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can I see a demo",
+   "tags": [
+    "J-062"
+   ],
+   "expect": {}
+  }
+ ]
+}

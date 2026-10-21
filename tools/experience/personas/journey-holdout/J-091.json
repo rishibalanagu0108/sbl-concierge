@@ -1,0 +1,17 @@
+{
+ "id": "J-091",
+ "description": "Refused signup last visit [returning_after_refusal/answers/no_proof] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "hey",
+   "tags": [
+    "J-091"
+   ],
+   "expect": {
+    "noSignup": true
+   }
+  }
+ ]
+}

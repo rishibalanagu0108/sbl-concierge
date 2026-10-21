@@ -1,0 +1,15 @@
+{
+ "id": "J-016",
+ "description": "Credits confusion [first/asks/unknown] intent=specific_question outcome=shown",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what counts as a credit",
+   "tags": [
+    "J-016"
+   ],
+   "expect": {}
+  }
+ ]
+}

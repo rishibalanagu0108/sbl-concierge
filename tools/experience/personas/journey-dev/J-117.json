@@ -1,0 +1,15 @@
+{
+ "id": "J-117",
+ "description": "Facts survive the record clip [returning/asks/has_proof] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what industry did I say we are in",
+   "tags": [
+    "J-117"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,25 @@
+{
+ "id": "J-001",
+ "description": "Silent arrival, never speaks [first/wont_talk/unknown] intent=browsing outcome=no_engagement",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 20000,
+   "tags": [
+    "J-001"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "scroll",
+   "y": 900,
+   "tags": [
+    "J-001"
+   ],
+   "expect": {
+    "noSignup": true
+   }
+  }
+ ]
+}

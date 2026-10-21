@@ -1,0 +1,15 @@
+{
+ "id": "J-223",
+ "description": "Negative reply handling [customer/answers/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/chat",
+ "steps": [
+  {
+   "do": "say",
+   "text": "this guy told us to get lost",
+   "tags": [
+    "J-223"
+   ],
+   "expect": {}
+  }
+ ]
+}

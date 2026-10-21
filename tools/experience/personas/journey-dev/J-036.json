@@ -1,0 +1,15 @@
+{
+ "id": "J-036",
+ "description": "B2B SaaS fit [first/answers/no_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/questions/best-linkedin-automation-tool-b2b-saas-companies",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are a B2B SaaS, 20 people",
+   "tags": [
+    "J-036"
+   ],
+   "expect": {}
+  }
+ ]
+}

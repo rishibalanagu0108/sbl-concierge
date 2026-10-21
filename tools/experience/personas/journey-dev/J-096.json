@@ -1,0 +1,15 @@
+{
+ "id": "J-096",
+ "description": "Refused but keeps browsing [returning_after_refusal/wont_volunteer/has_proof] intent=browsing outcome=engaged",
+ "start": "https://sbl.so/case-study/",
+ "steps": [
+  {
+   "do": "wait",
+   "ms": 15000,
+   "tags": [
+    "J-096"
+   ],
+   "expect": {}
+  }
+ ]
+}

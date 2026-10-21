@@ -1,0 +1,15 @@
+{
+ "id": "J-037",
+ "description": "Early-stage, no sales team [first/answers/no_proof] intent=browsing outcome=offered_trial",
+ "start": "https://sbl.so/questions/best-ai-sdr-tool-early-stage-startups-no-sales-team",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we have no sales people at all yet",
+   "tags": [
+    "J-037"
+   ],
+   "expect": {}
+  }
+ ]
+}

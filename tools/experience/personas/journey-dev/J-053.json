@@ -1,0 +1,15 @@
+{
+ "id": "J-053",
+ "description": "LinkedIn sending limits [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/linkedin/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how many invites a day",
+   "tags": [
+    "J-053"
+   ],
+   "expect": {}
+  }
+ ]
+}

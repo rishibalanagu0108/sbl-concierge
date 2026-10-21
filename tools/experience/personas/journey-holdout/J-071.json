@@ -1,0 +1,15 @@
+{
+ "id": "J-071",
+ "description": "Hire Profiles confusion [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/sdr-profiles/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "you rent me a LinkedIn account?",
+   "tags": [
+    "J-071"
+   ],
+   "expect": {}
+  }
+ ]
+}

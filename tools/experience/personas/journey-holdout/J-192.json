@@ -1,0 +1,15 @@
+{
+ "id": "J-192",
+ "description": "Asks which lead source to use [customer/asks/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I have a spreadsheet of contacts",
+   "tags": [
+    "J-192"
+   ],
+   "expect": {}
+  }
+ ]
+}

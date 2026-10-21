@@ -1,0 +1,15 @@
+{
+ "id": "J-219",
+ "description": "Signals locked on this plan [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/signals",
+ "steps": [
+  {
+   "do": "say",
+   "text": "run that signal",
+   "tags": [
+    "J-219"
+   ],
+   "expect": {}
+  }
+ ]
+}

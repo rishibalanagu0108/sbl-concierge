@@ -1,0 +1,23 @@
+{
+ "id": "J-184",
+ "description": "Changes mind mid-wizard [customer/answers/unknown] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "LinkedIn campaign for dentists",
+   "tags": [
+    "J-184"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "actually make it WhatsApp",
+   "tags": [
+    "J-184"
+   ],
+   "expect": {}
+  }
+ ]
+}

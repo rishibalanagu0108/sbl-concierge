@@ -1,0 +1,15 @@
+{
+ "id": "J-285",
+ "description": "Cursor animation stalls [first/asks/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "point at the pricing table",
+   "tags": [
+    "J-285"
+   ],
+   "expect": {}
+  }
+ ]
+}

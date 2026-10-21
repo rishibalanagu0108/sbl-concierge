@@ -1,0 +1,18 @@
+{
+ "id": "J-004",
+ "description": "In a hurry [first/answers/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "30 seconds - what do you do",
+   "tags": [
+    "J-004"
+   ],
+   "expect": {
+    "maxLines": 2,
+    "noNav": true
+   }
+  }
+ ]
+}

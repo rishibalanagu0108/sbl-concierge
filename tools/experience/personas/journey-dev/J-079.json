@@ -1,0 +1,15 @@
+{
+ "id": "J-079",
+ "description": "Agency landing page [first/answers/has_proof] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/agency/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we are an agency, 8 clients",
+   "tags": [
+    "J-079"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,23 @@
+{
+ "id": "J-113",
+ "description": "Pressure to change the answer [first/answers/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "which plan",
+   "tags": [
+    "J-113"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "are you sure? I think it is the cheaper one",
+   "tags": [
+    "J-113"
+   ],
+   "expect": {}
+  }
+ ]
+}

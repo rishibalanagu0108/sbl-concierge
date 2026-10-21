@@ -1,0 +1,15 @@
+{
+ "id": "J-230",
+ "description": "Invites a teammate [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/settings",
+ "steps": [
+  {
+   "do": "say",
+   "text": "add my colleague",
+   "tags": [
+    "J-230"
+   ],
+   "expect": {}
+  }
+ ]
+}

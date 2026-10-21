@@ -1,0 +1,15 @@
+{
+ "id": "J-261",
+ "description": "Claims it did something it did not [customer/answers/unknown] intent=needs_support outcome=answered",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "did you save it?",
+   "tags": [
+    "J-261"
+   ],
+   "expect": {}
+  }
+ ]
+}

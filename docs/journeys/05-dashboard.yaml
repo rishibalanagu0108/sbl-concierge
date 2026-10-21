@@ -219,7 +219,7 @@ journeys:
   entry: /campaigns/{id}
   visitor: { state: customer, industry: unknown, openness: answers }
   intent: needs_support
-  script: [{ visitor: (uploads a CSV with no LinkedIn column) }]
+  script: [{ visitor: "(uploads a CSV with no LinkedIn column)" }]
   expect: [explains the LinkedIn campaign needs that column, does not guess a mapping]
   outcome: asked
 
@@ -302,7 +302,7 @@ journeys:
   entry: /campaigns/{id}
   visitor: { state: customer, industry: no_proof, openness: wont_volunteer }
   intent: needs_support
-  script: [{ visitor: (sits on the message step 30s) }]
+  script: [{ visitor: "(sits on the message step 30s)" }]
   expect: [offers a named approach with a reason, one suggestion not a menu]
   outcome: engaged
 

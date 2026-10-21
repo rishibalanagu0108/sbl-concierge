@@ -1,0 +1,15 @@
+{
+ "id": "J-187",
+ "description": "Narrates every click, must not [customer/answers/unknown] intent=needs_support outcome=draft_saved",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "create the draft",
+   "tags": [
+    "J-187"
+   ],
+   "expect": {}
+  }
+ ]
+}

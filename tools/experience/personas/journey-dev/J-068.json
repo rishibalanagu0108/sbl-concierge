@@ -1,0 +1,15 @@
+{
+ "id": "J-068",
+ "description": "Workflows vs campaigns [first/asks/unknown] intent=specific_question outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is the difference between a workflow and a campaign",
+   "tags": [
+    "J-068"
+   ],
+   "expect": {}
+  }
+ ]
+}

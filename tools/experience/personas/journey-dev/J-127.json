@@ -1,0 +1,15 @@
+{
+ "id": "J-127",
+ "description": "SBL vs Gojiberry [first/answers/unknown] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/linkedin/sblso-vs-gojiberry-ai-comparison/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "never heard of either of you honestly",
+   "tags": [
+    "J-127"
+   ],
+   "expect": {}
+  }
+ ]
+}

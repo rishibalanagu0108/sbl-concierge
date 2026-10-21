@@ -1,0 +1,15 @@
+{
+ "id": "J-123",
+ "description": "SBL vs Dripify [first/answers/unknown] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/linkedin/dripify-vs-sbl-linkedin-automation/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "Dripify is cheaper",
+   "tags": [
+    "J-123"
+   ],
+   "expect": {}
+  }
+ ]
+}

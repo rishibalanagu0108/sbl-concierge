@@ -1,0 +1,23 @@
+{
+ "id": "J-266",
+ "description": "Very short messages [first/wont_volunteer/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "price",
+   "tags": [
+    "J-266"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "k",
+   "tags": [
+    "J-266"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+{
+ "id": "J-163",
+ "description": "Typo in the email [first/answers/unknown] intent=ready_to_buy outcome=asked",
+ "start": "https://sbl.so/signup",
+ "steps": [
+  {
+   "do": "say",
+   "text": "rishi@gmial.com",
+   "probe": "a deliberately mistyped address, to prove the typo is flagged not corrected",
+   "tags": [
+    "J-163"
+   ],
+   "expect": {}
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "J-278",
+ "description": "Error during a consequential step [customer/answers/unknown] intent=needs_support outcome=recovered",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "create the draft",
+   "tags": [
+    "J-278"
+   ],
+   "expect": {}
+  }
+ ]
+}

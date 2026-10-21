@@ -1,0 +1,15 @@
+{
+ "id": "J-154",
+ "description": "Campaign sketched before the account [first/answers/no_proof] intent=ready_to_buy outcome=offered_trial",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "we sell CRM to small recruitment agencies, want demos",
+   "tags": [
+    "J-154"
+   ],
+   "expect": {}
+  }
+ ]
+}

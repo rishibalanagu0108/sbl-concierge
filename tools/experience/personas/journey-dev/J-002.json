@@ -1,0 +1,17 @@
+{
+ "id": "J-002",
+ "description": "Asks the blunt question [first/asks/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what is this?",
+   "tags": [
+    "J-002"
+   ],
+   "expect": {
+    "maxLines": 1
+   }
+  }
+ ]
+}

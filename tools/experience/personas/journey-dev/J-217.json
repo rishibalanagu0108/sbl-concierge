@@ -1,0 +1,15 @@
+{
+ "id": "J-217",
+ "description": "Hiring signal for a recruiter [customer/answers/no_proof] intent=needs_support outcome=asked",
+ "start": "https://app.secondbrainlabs.com/signals",
+ "steps": [
+  {
+   "do": "say",
+   "text": "companies hiring sales roles in the UK",
+   "tags": [
+    "J-217"
+   ],
+   "expect": {}
+  }
+ ]
+}

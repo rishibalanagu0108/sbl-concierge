@@ -1,0 +1,15 @@
+{
+ "id": "J-148",
+ "description": "MeetAlfred pricing [first/asks/unknown] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/meetalfred/meetalfred-pricing-breakdown/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "cheapest way to try you",
+   "tags": [
+    "J-148"
+   ],
+   "expect": {}
+  }
+ ]
+}

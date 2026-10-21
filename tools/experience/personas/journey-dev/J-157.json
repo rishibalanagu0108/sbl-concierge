@@ -1,0 +1,15 @@
+{
+ "id": "J-157",
+ "description": "Already has an account [customer/answers/has_proof] intent=needs_support outcome=resumed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I already have an account",
+   "tags": [
+    "J-157"
+   ],
+   "expect": {}
+  }
+ ]
+}

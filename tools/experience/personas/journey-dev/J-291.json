@@ -1,0 +1,15 @@
+{
+ "id": "J-291",
+ "description": "Trace post fails [first/answers/unknown] intent=browsing outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "hello",
+   "tags": [
+    "J-291"
+   ],
+   "expect": {}
+  }
+ ]
+}

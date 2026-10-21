@@ -1,0 +1,15 @@
+{
+ "id": "J-089",
+ "description": "Returns mid-decision [returning/answers/has_proof] intent=ready_to_buy outcome=resumed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "ok I think we are ready",
+   "tags": [
+    "J-089"
+   ],
+   "expect": {}
+  }
+ ]
+}

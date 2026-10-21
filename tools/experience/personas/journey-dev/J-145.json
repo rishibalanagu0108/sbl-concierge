@@ -1,0 +1,15 @@
+{
+ "id": "J-145",
+ "description": "Cancelling Dripify [first/answers/unknown] intent=comparing_vendors outcome=offered_trial",
+ "start": "https://sbl.so/dripify/dripify-cancel-subscription-guide/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "cancelling them this week",
+   "tags": [
+    "J-145"
+   ],
+   "expect": {}
+  }
+ ]
+}

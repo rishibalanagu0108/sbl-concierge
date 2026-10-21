@@ -1,0 +1,15 @@
+{
+ "id": "J-147",
+ "description": "HeyReach pricing breakdown [first/answers/has_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/heyreach/heyreach-pricing-breakdown/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "per seat pricing kills us at 10 clients",
+   "tags": [
+    "J-147"
+   ],
+   "expect": {}
+  }
+ ]
+}

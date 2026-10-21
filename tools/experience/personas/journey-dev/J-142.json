@@ -1,0 +1,15 @@
+{
+ "id": "J-142",
+ "description": "Gojiberry Reddit reviews [first/asks/unknown] intent=comparing_vendors outcome=honest_no",
+ "start": "https://sbl.so/gojiberry/gojiberry-reddit-reviews/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "what does Reddit say about you",
+   "tags": [
+    "J-142"
+   ],
+   "expect": {}
+  }
+ ]
+}

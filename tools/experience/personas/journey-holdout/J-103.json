@@ -1,0 +1,23 @@
+{
+ "id": "J-103",
+ "description": "Site to dashboard crossing [customer/answers/has_proof] intent=needs_support outcome=resumed",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "take me to my campaigns",
+   "tags": [
+    "J-103"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "what were we saying",
+   "tags": [
+    "J-103"
+   ],
+   "expect": {}
+  }
+ ]
+}

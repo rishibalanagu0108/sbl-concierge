@@ -1,0 +1,23 @@
+{
+ "id": "J-260",
+ "description": "Interrupted mid-action [first/answers/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me the case studies",
+   "tags": [
+    "J-260"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "actually no, pricing",
+   "tags": [
+    "J-260"
+   ],
+   "expect": {}
+  }
+ ]
+}
