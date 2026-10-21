@@ -63,7 +63,7 @@ export class Visitor {
     await v.#launch();
     return v;
   }
-  constructor(o) { Object.assign(this, o); this.events = []; this.inflight = new Map(); this.shotN = 0; this.log = null; }
+  constructor(o) { Object.assign(this, o); this.events = []; this.inflight = new Map(); this.shotN = 0; this.log = null; this.stepsRun = 0; }
   #ev(kind, d = {}) { this.events.push({ t: Date.now(), kind, ...d }); }
 
   async #launch() {
@@ -136,7 +136,17 @@ export class Visitor {
   async #watch(kind, extra, { minMs = 0, maxMs = this.maxWaitMs } = {}) {
     const sentAt = Date.now(), evStart = this.events.length;
     const before0 = await this.#read();
-    const seen = extra.fresh ? 0 : (before0?.lines || []).length; // after a page load the transcript is rebuilt: anything shown counts as new
+    // After a page load the transcript is rebuilt: anything shown counts as new.
+    // On the visit's FIRST step there is no history yet, so a line already on screen is
+    // something the agent said on its own (the first-visit welcome, which fires on a timer
+    // during page load). Counting it as history made the agent look silent on every
+    // wait-only journey - it greeted, and the harness sliced the greeting away. Only lines
+    // the dock marks as restored are real history at that point.
+    const base = before0?.lines || [];
+    const seen = extra.fresh ? 0
+      : this.stepsRun === 0 ? base.filter((l) => l.restored).length
+      : base.length;
+    this.stepsRun++;
     if (extra.before) await extra.before();
     const lines = []; let wordsAt = null, lastLineAt = Date.now(), lastBusyAt = 0, s = null, timedOut = false;
     for (;;) {
