@@ -113,3 +113,51 @@ The first run of a new measuring instrument tells you as much about the instrume
 about the thing measured. A result that says the product is catastrophically broken in
 its headline feature deserves a second look at the ruler before it is written down - and
 certainly before it is shown to anyone.
+
+---
+
+# Re-run on the fixed harness (`journey-core-1`)
+
+Same 32 journeys, same build, harness fixed. 0 failed, 0 timeouts, 48 model calls,
+796,933 prompt tokens (647,980 cached), 8m 52s.
+
+## The fix held
+
+| | blind run | fixed run |
+|---|---|---|
+| total agent lines seen | 40 | **56** |
+| journeys with zero agent lines | 4 (J-001, J-025, J-152, J-263) | **0** |
+
+Every one of the 32 journeys now shows the agent speaking. Nothing about the agent
+changed between these runs; 16 lines it had always been saying are simply visible now.
+
+## The latency comparison between these two runs is not valid
+
+`score.mjs --compare` reports E1.p50 and E1.p95 as "worse". That verdict should be
+ignored, for two reasons, and neither is a regression:
+
+1. **The two runs measure different things.** The fixed harness counts the welcome, which
+   was already on screen when the step's baseline was taken, so it lands at roughly 400 ms.
+   20 of the 37 first-line times in this run are that artefact. It drags the reported p50
+   down to 495 ms, which is flattering and false.
+2. **Single runs, noise unknown.** Excluding the welcome artefact, p50 is 7506 ms against
+   the blind run's 5015 ms. That could be real or it could be variance - with one run each
+   there is no way to tell, and the scorer says so in every noise column.
+
+**E1 is currently not a trustworthy row.** It mixes a real first-reaction time with a line
+that was already on screen. Fixing it means either excluding lines present at the step's
+baseline from the latency rows, or timing the welcome from navigation start. Until then,
+do not quote E1 from this run.
+
+## What is trustworthy
+
+The safety rows, which are counts rather than timings, and which are unchanged across both
+runs: zero unrequested navigations, zero unprompted signup or email asks, zero stranded
+turns, zero actions after a stop, zero wrong landings, zero highlight occlusion.
+E5.overMax remains 1.
+
+## Still unknown
+
+Whether any journey actually passes. Every per-journey expectation is prose and
+`judge.mjs` has not been run. The agent is safe and visible. Whether it is any good is
+not yet measured.
