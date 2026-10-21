@@ -744,3 +744,38 @@ test("a missing site feature can end honestly without an engine or navigation", 
   assert.deepEqual(said, ["The site does not have that example."]);
   assert.equal(agents.length, 0); assert.deepEqual(actions(events), []);
 });
+
+test("a promise with nothing behind it is dropped, an offer and a real promise are kept", () => {
+  // Live: J-011 "leave me alone" was answered "Understood—I'll close this. Thanks for
+  // stopping by." with then "end" and zero actions, so the dock stayed open. Promising a
+  // visible action that does not happen is never-rule 7 arriving one beat early.
+  const drop = Router.dropEmptyPromises;
+
+  // nothing happens (then "end"): the promise goes, the truthful remainder stays
+  assert.strictEqual(drop("Understood—I’ll close this. Thanks for stopping by.", false), "Thanks for stopping by.");
+  assert.strictEqual(drop("I will send that over. The plans are on this page.", false), "The plans are on this page.");
+
+  // the promise was the whole line: say the one thing that is certainly true
+  assert.strictEqual(drop("I’ll email you the case study.", false), "I can't do that from here.");
+
+  // an OFFER is not a promise and must survive - this is how the agent stays useful
+  assert.strictEqual(drop("I can show you the customer stories on the site.", false),
+    "I can show you the customer stories on the site.");
+
+  // a commitment to stop talking is not a visible action
+  assert.strictEqual(drop("No problem—I’ll stop here.", false), "No problem—I’ll stop here.");
+
+  // something DOES happen: the promise is honest and is kept verbatim
+  const moved = "I’ll take you to the Talk to an SDR expert booking link.";
+  assert.strictEqual(drop(moved, true), moved);
+
+  // both apostrophes, since the model emits the curly one
+  assert.strictEqual(drop("I'll close this.", false), "I can't do that from here.");
+});
+
+test("validate strips an empty promise only when then is end", () => {
+  const siteMap = { "/": { kind: "home", title: "Home", description: "d", sections: [] } };
+  const mk = (then, line) => Router.validate({ then, line, target: null, section: null, declined: false, booking: false, because: null }, siteMap, "https://sbl.so/");
+  assert.strictEqual(mk("end", "I’ll close this. Thanks for stopping by.").line, "Thanks for stopping by.");
+  assert.strictEqual(mk("show", "I’ll close this. Thanks for stopping by.").line, "I’ll close this. Thanks for stopping by.");
+});

@@ -64,7 +64,7 @@ line: what you say to the visitor now, at most 30 words, plain spoken text (no m
 then: what happens after the line.
 - "end": the line is the whole answer. Use it for small talk, for a question about the page they are on that the CURRENT PAGE sections answer, for something the site does not have (say so plainly), and when they asked not to be moved or to stop.
 - "show": the answer lives on a page of the site. The line names the page and the part. The page is opened for them and the part is highlighted.
-- The line and then must agree. If any sentence of your line says you will open, show, take them to or highlight something, then is "show" — never "end". With "end" nothing moves, so a promise to move is a lie the visitor watches not happen. Either promise and set "show", or answer in words and promise nothing.
+- The line and then must agree. If any sentence of your line says you will open, show, take them to or highlight something, then is "show" — never "end". Never promise an action you have no way to perform (closing the chat, emailing, sending): say what is true instead. With "end" nothing moves, so a promise to move is a lie the visitor watches not happen. Either promise and set "show", or answer in words and promise nothing.
 - An explicit request to show, take them to, or see features, pricing or customer examples uses "show", even when the relevant section is on the CURRENT PAGE: target null and that section. Do not replace a requested demonstration with a text-only feature list. Choose a relevant indexed page when the current page has no matching section. A prior "just exploring" does not cancel a later request to see something; an explicit current refusal or off-site request still ends without moving.
 - section: only a heading that is literally what your line is about (the plan table for a price, the integrations block for a CRM question). When no heading is about it, section is null: a page with no highlight is better than a highlight on something else.
 - When the visitor only tells you about themselves (who they are, their team, their tools) and asks nothing, then is "end": acknowledge in one line what it means for them. Do not take them anywhere and do not recommend a plan they did not ask about.
@@ -170,13 +170,37 @@ Rules:
   // ---- the route ----
   // Parsed arguments -> a route the harness may act on, or null. then is the enum; target must be a path of the index; section a heading of that page
   // (target null: of the page the visitor is on). Anything else becomes null, never a guess.
+  // A first-person commitment to an action the visitor would SEE happen. "I can show you"
+  // is an offer and stays; "I'll show you" is a promise and only survives if something
+  // actually follows. Verbs are the visible ones: a promise to stop talking is not an action.
+  const PROMISED_ACTION =
+    /\b(?:i['\u2019]?ll|i will|let me|i['\u2019]?m going to|i am going to)\b[^.!?]*?\b(?:open|show|take you|bring you|walk you|highlight|point|close|email|send|book|schedule|create|draft|add|delete|launch|set up|sign you up)\b/i;
+
+  /** Strip sentences that promise a visible action when nothing is going to happen.
+   *  A promise the visitor watches not happen is never-rule 7 ("never say it did something
+   *  it did not do") arriving one beat early, and it costs more trust than the sentence buys.
+   *  Stated generally so it also covers promises nobody wrote a journey for: the rule is
+   *  "no unfulfillable promise", not a list of banned phrases. */
+  function dropEmptyPromises(line, willAct) {
+    if (willAct || typeof line !== "string" || !line.trim()) return line;
+    const parts = line.match(/[^.!?]+[.!?]*/g) || [line];
+    const kept = parts.filter((p) => !PROMISED_ACTION.test(p));
+    const out = kept.join("").trim();
+    // If the promise WAS the whole line, there is nothing truthful left to say, and keeping
+    // it would ship the lie. Never-rule 8 forbids silence, so say the one thing that is
+    // certainly true: the promised action is not going to happen here.
+    return out || "I can't do that from here.";
+  }
+
   function validate(route, siteMap, url) {
     if (!route || typeof route !== "object" || !THENS.includes(route.then)) return null;
     const pages = indexOf(siteMap).pages;
     const wanted = typeof route.target === "string" && route.target.trim();
     const page = wanted ? pages.get(canonPath(route.target)) || null : null;
     const sec = typeof route.section === "string" ? sectionOf(page || (wanted ? null : pages.get(canonPath(url) || "")), route.section) : null;
-    return { line: clip(route.line, 400), then: route.then, target: page ? page.path : null, section: sec ? sec.heading : null, anchor: sec ? sec.anchor : "", declined: route.declined === true, booking: route.booking === true, because: clip(route.because, 300) || null };
+    // then "end" means nothing moves and no tool runs, so any promise in the line is empty.
+    const line = dropEmptyPromises(route.line, route.then !== "end");
+    return { line: clip(line, 400), then: route.then, target: page ? page.path : null, section: sec ? sec.heading : null, anchor: sec ? sec.anchor : "", declined: route.declined === true, booking: route.booking === true, because: clip(route.because, 300) || null };
   }
 
   // The element for a section: the one with the index's anchor id, else the first heading (h1-h4) whose text matches (case-insensitive, whitespace-normalised,
@@ -195,5 +219,5 @@ Rules:
     return status === 429 && (code === "visitor_cap" || code === "global_cap") ? "capped" : "down";
   }
 
-  return { failure, canonPath, indexOf, sectionOf, prefix, tail, request, upstream, extractLine, firstSentence, validate, findSection, RULES, TOOL, THENS };
+  return { failure, canonPath, indexOf, sectionOf, prefix, tail, request, upstream, extractLine, firstSentence, validate, findSection, dropEmptyPromises, RULES, TOOL, THENS };
 });

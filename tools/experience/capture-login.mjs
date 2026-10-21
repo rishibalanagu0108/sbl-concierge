@@ -23,25 +23,42 @@ const page = await ctx.newPage();
 await page.goto("https://app.secondbrainlabs.com/", { waitUntil: "domcontentloaded" });
 
 console.log("\nA browser window is open. Sign in there yourself.");
-console.log("Waiting for you to reach the app (up to 5 minutes)...\n");
+console.log("This browser is EMPTY - being signed in elsewhere in Chrome does not count.");
+console.log("Waiting for real credentials (up to 5 minutes)...\n");
+
+// A URL match is not proof: the app can show a public shell before auth lands. Wait for an
+// actual credential - a cookie on the SBL domain, or a token in the app origin's storage.
+const credentialed = async () => {
+  const cookies = await ctx.cookies();
+  if (cookies.some((c) => /secondbrainlabs/.test(c.domain))) return "cookie";
+  const st = await ctx.storageState();
+  const origin = (st.origins || []).find((o) => /secondbrainlabs/.test(o.origin || ""));
+  if (origin && (origin.localStorage || []).some((i) => /token|auth|session|jwt|supabase|sb-/i.test(i.name))) return "storage";
+  return null;
+};
 
 const deadline = Date.now() + 5 * 60_000;
-let ok = false;
+let how = null;
 while (Date.now() < deadline) {
-  await page.waitForTimeout(1500);
-  const url = page.url();
-  if (/app\.secondbrainlabs\.com\/(campaigns|leads|signals|chat|analytics|settings|users)/.test(url)) { ok = true; break; }
+  await page.waitForTimeout(2000);
+  try { how = await credentialed(); } catch { /* page navigating */ }
+  if (how) break;
 }
 
-if (!ok) {
-  console.error("Did not reach a signed-in page in time. Nothing saved.");
+if (!how) {
+  console.error("No SBL credential appeared, so nothing was saved.");
+  console.error("Make sure you completed sign-in IN THAT WINDOW and reached the dashboard.");
   await browser.close();
   process.exit(1);
 }
 
 fs.mkdirSync(path.dirname(out), { recursive: true });
 await ctx.storageState({ path: out });
-const n = JSON.parse(fs.readFileSync(out, "utf8")).cookies?.length ?? 0;
-console.log(`Saved a session with ${n} cookies to ${out}`);
+const saved = JSON.parse(fs.readFileSync(out, "utf8"));
+const sbl = (saved.cookies || []).filter((c) => /secondbrainlabs/.test(c.domain)).length;
+const origins = (saved.origins || []).filter((o) => /secondbrainlabs/.test(o.origin || "")).length;
+console.log(`Saved to ${out}`);
+console.log(`  credential found via: ${how}`);
+console.log(`  SBL cookies: ${sbl}   SBL storage origins: ${origins}`);
 console.log("This is a live session. It is gitignored. Delete it when you are done.");
 await browser.close();
