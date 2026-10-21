@@ -1,0 +1,15 @@
+{
+ "id": "J-283",
+ "description": "Page never finishes loading [first/asks/unknown] intent=browsing outcome=recovered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me pricing",
+   "tags": [
+    "J-283"
+   ],
+   "expect": {}
+  }
+ ]
+}

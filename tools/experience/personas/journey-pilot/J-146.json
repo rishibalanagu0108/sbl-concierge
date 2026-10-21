@@ -1,0 +1,15 @@
+{
+ "id": "J-146",
+ "description": "Waalaxy pricing breakdown [first/asks/unknown] intent=comparing_vendors outcome=shown",
+ "start": "https://sbl.so/waalaxy/waalaxy-pricing-breakdown/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "how does your pricing compare",
+   "tags": [
+    "J-146"
+   ],
+   "expect": {}
+  }
+ ]
+}

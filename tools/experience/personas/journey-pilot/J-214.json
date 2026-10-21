@@ -1,0 +1,15 @@
+{
+ "id": "J-214",
+ "description": "Delete, the destructive path [customer/answers/unknown] intent=needs_support outcome=awaiting_confirmation",
+ "start": "https://app.secondbrainlabs.com/campaigns",
+ "steps": [
+  {
+   "do": "say",
+   "text": "delete that campaign",
+   "tags": [
+    "J-214"
+   ],
+   "expect": {}
+  }
+ ]
+}

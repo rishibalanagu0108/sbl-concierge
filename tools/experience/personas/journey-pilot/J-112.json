@@ -1,0 +1,31 @@
+{
+ "id": "J-112",
+ "description": "Same question after navigating [first/asks/has_proof] intent=comparing_vendors outcome=answered",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "which plan do you recommend",
+   "tags": [
+    "J-112"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "show me pricing",
+   "tags": [
+    "J-112"
+   ],
+   "expect": {}
+  },
+  {
+   "do": "say",
+   "text": "and the plan again?",
+   "tags": [
+    "J-112"
+   ],
+   "expect": {}
+  }
+ ]
+}

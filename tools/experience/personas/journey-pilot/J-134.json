@@ -1,0 +1,15 @@
+{
+ "id": "J-134",
+ "description": "Gojiberry alternatives [first/answers/unknown] intent=comparing_vendors outcome=shown_proof",
+ "start": "https://sbl.so/blog/gojiberry-alternatives-linkedin-outreach/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "is anyone actually good at this",
+   "tags": [
+    "J-134"
+   ],
+   "expect": {}
+  }
+ ]
+}

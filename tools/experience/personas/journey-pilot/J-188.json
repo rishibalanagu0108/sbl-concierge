@@ -1,0 +1,15 @@
+{
+ "id": "J-188",
+ "description": "Language option [customer/asks/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/campaigns/new",
+ "steps": [
+  {
+   "do": "say",
+   "text": "can it write in Hindi",
+   "tags": [
+    "J-188"
+   ],
+   "expect": {}
+  }
+ ]
+}

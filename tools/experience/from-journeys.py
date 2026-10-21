@@ -108,6 +108,9 @@ def expect_from(prose, is_last):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--write", action="store_true")
+    ap.add_argument("--pilot", type=int, default=0,
+                    help="also emit a journey-pilot set of N journeys, stratified, "
+                         "drawn only from dev so the holdout stays sealed")
     args = ap.parse_args()
 
     personas, blocked, judge_rows, machine_checks = [], [], 0, 0
@@ -221,6 +224,31 @@ def main():
         for jid, sl, reason in sorted(blocked):
             f.write("- `%s` (%s) — %s\n" % (jid, sl, reason))
     print("\nwrote personas to %s/journey-{dev,holdout}" % PERSONAS)
+
+    if args.pilot:
+        # A cheap, representative slice for measuring what a full run costs before
+        # committing to one. Never drawn from the holdout.
+        d = os.path.join(PERSONAS, "journey-pilot")
+        shutil.rmtree(d, ignore_errors=True)
+        os.makedirs(d)
+        dev = [p for p in personas if p["persona"]["id"] not in holdout]
+        per_slice = {}
+        for p in dev:
+            per_slice.setdefault(p["slice"], []).append(p)
+        picked, quota = [], max(1, args.pilot // len(per_slice))
+        for name, group in sorted(per_slice.items()):
+            ranked = sorted(group, key=lambda p: hashlib.sha256(
+                ("pilot" + p["persona"]["id"]).encode()).hexdigest())
+            picked.extend(ranked[:quota])
+        rest = sorted((p for p in dev if p not in picked),
+                      key=lambda p: hashlib.sha256(("pilot2" + p["persona"]["id"]).encode()).hexdigest())
+        picked.extend(rest[:max(0, args.pilot - len(picked))])
+        for p in picked:
+            with open(os.path.join(d, p["persona"]["id"] + ".json"), "w") as f:
+                json.dump(p["persona"], f, indent=1)
+                f.write("\n")
+        says = sum(1 for p in picked for st in p["persona"]["steps"] if st["do"] == "say")
+        print("wrote %d pilot personas (%d say steps) to %s" % (len(picked), says, d))
 
 if __name__ == "__main__":
     main()

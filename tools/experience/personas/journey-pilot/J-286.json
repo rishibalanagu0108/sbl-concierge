@@ -1,0 +1,15 @@
+{
+ "id": "J-286",
+ "description": "Dock covers the highlight [first/asks/unknown] intent=browsing outcome=shown",
+ "start": "https://sbl.so/pricing",
+ "steps": [
+  {
+   "do": "say",
+   "text": "show me the top plan",
+   "tags": [
+    "J-286"
+   ],
+   "expect": {}
+  }
+ ]
+}

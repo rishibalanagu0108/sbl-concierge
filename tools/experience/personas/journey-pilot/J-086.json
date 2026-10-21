@@ -1,0 +1,15 @@
+{
+ "id": "J-086",
+ "description": "Different device, no memory [first/answers/unknown] intent=ready_to_buy outcome=honest_no",
+ "start": "https://sbl.so/",
+ "steps": [
+  {
+   "do": "say",
+   "text": "continue where we left off",
+   "tags": [
+    "J-086"
+   ],
+   "expect": {}
+  }
+ ]
+}

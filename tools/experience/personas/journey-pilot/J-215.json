@@ -1,0 +1,15 @@
+{
+ "id": "J-215",
+ "description": "Workflow instead of a campaign [customer/asks/unknown] intent=needs_support outcome=shown",
+ "start": "https://app.secondbrainlabs.com/workflows",
+ "steps": [
+  {
+   "do": "say",
+   "text": "I need branching logic",
+   "tags": [
+    "J-215"
+   ],
+   "expect": {}
+  }
+ ]
+}

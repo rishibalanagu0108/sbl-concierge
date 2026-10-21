@@ -4,7 +4,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), "personas");
-export const SETS = ["dev", "holdout", "replay", "faults", "journey-dev", "journey-holdout"];
+export const SETS = ["dev", "holdout", "replay", "faults", "journey-dev", "journey-holdout", "journey-pilot"];
 const PERSONA_KEYS = ["id", "description", "start", "steps"];
 const STEP_KEYS = ["do", "text", "ms", "url", "y", "code", "tags", "expect", "probe"];
 const EXPECT_KEYS = ["mustReply", "landsOn", "noNav", "noSignup", "maxLines", "class", "recalls", "noQuestion", "decisionGroup", "decisionPattern", "stop", "honest", "replyWithinMs"];
